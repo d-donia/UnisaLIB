@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_weight="1">
+
+    <ImageButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp"
+        android:src="@drawable/account"
+        android:backgroundTint="@color/white"
+        />
+
+    <FrameLayout
+        android:layout_width="wrap_content"
+        android:layout_height="50dp"/>
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:src="@drawable/logounisa"
+        />
+
+    <FrameLayout
+        android:layout_width="wrap_content"
+        android:layout_height="160dp"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+
+        <Button
+            android:layout_width="fill_parent"
+            android:layout_height="150dp"
+            android:layout_margin="5dp"
+            android:layout_weight="1"
+            android:backgroundTint="#146DDA"
+            android:drawableLeft="@drawable/bookstack"
+            android:text="Prestito Libri"
+            android:textSize="13sp" />
+
+        <Button
+            android:layout_width="fill_parent"
+            android:layout_height="150dp"
+            android:layout_margin="5dp"
+            android:layout_weight="1"
+            android:backgroundTint="#146DDA"
+            android:drawableLeft="@drawable/desk"
+            android:text="Prenota Postazioni"
+            android:textSize="13sp" />
+
+    </LinearLayout>
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
+        android:backgroundTint="#D9364F"
+        android:text="Chiedi al Bibliotecario"
+        android:textSize="13sp" />
+
+</LinearLayout>

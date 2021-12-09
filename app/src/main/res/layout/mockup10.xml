@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_weight="1">
+
+    <ImageButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp"
+        android:src="@drawable/logout"
+        android:backgroundTint="@color/white"
+        />
+
+    <FrameLayout
+        android:layout_width="wrap_content"
+        android:layout_height="20dp"/>
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:src="@drawable/logounisa"
+        />
+
+    <FrameLayout
+        android:layout_width="wrap_content"
+        android:layout_height="120dp"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+
+        <Button
+            android:layout_width="0dp"
+            android:layout_height="120dp"
+            android:layout_margin="5dp"
+            android:layout_weight="1"
+            android:backgroundTint="#146DDA"
+            android:drawableLeft="@drawable/plus"
+            android:text="Aggiungi Postazioni"
+            android:textSize="13sp" />
+
+        <Button
+            android:layout_width="0dp"
+            android:layout_height="120dp"
+            android:layout_margin="5dp"
+            android:layout_weight="1"
+            android:backgroundTint="#146DDA"
+            android:drawableLeft="@drawable/paintbrush"
+            android:text="Modifica Postazioni"
+            android:textSize="13sp" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:orientation="horizontal">
+
+        <Button
+            android:layout_width="200dp"
+            android:layout_height="120dp"
+            android:layout_margin="5dp"
+            android:layout_weight="2"
+            android:backgroundTint="#146DDA"
+            android:drawableLeft="@drawable/delete"
+            android:text="Cancella Postazioni"
+            android:textSize="13sp" />
+
+    </LinearLayout>
+
+
+
+</LinearLayout>
