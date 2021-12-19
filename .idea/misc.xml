@@ -3,23 +3,12 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
-        <entry key="..\:/Users/Saba/AndroidStudioProjects/UnisaLIB/app/src/main/res/layout/activity_main.xml" value="0.15217391304347827" />
-        <entry key="..\:/Users/Saba/AndroidStudioProjects/UnisaLIB/app/src/main/res/layout/mockup01.xml" value="0.20520833333333333" />
-        <entry key="..\:/Users/Saba/AndroidStudioProjects/UnisaLIB/app/src/main/res/layout/mockup02.xml" value="0.36666666666666664" />
-        <entry key="..\:/Users/Saba/AndroidStudioProjects/UnisaLIB/app/src/main/res/layout/mockup03.xml" value="0.36666666666666664" />
-        <entry key="..\:/Users/Saba/AndroidStudioProjects/UnisaLIB/app/src/main/res/layout/mockup04.xml" value="0.22" />
-        <entry key="..\:/Users/Saba/AndroidStudioProjects/UnisaLIB/app/src/main/res/layout/mockup05.xml" value="0.12" />
-        <entry key="..\:/Users/Saba/AndroidStudioProjects/UnisaLIB/app/src/main/res/layout/mockup06.xml" value="0.15" />
-        <entry key="..\:/Users/Saba/AndroidStudioProjects/UnisaLIB/app/src/main/res/layout/mockup07.xml" value="0.33" />
-        <entry key="..\:/Users/Saba/AndroidStudioProjects/UnisaLIB/app/src/main/res/layout/mockup08.xml" value="0.36666666666666664" />
-        <entry key="..\:/Users/Saba/AndroidStudioProjects/UnisaLIB/app/src/main/res/layout/mockup09.xml" value="0.33" />
-        <entry key="..\:/Users/Saba/AndroidStudioProjects/UnisaLIB/app/src/main/res/layout/mockup10.xml" value="0.36666666666666664" />
-        <entry key="..\:/Users/Saba/AndroidStudioProjects/UnisaLIB/app/src/main/res/layout/mockup11.xml" value="0.36666666666666664" />
-        <entry key="..\:/Users/Saba/AndroidStudioProjects/UnisaLIB/app/src/main/res/layout/mockup12.xml" value="0.25" />
-        <entry key="..\:/Users/Saba/AndroidStudioProjects/UnisaLIB/app/src/main/res/layout/mockup12_2.xml" value="0.36666666666666664" />
-        <entry key="..\:/Users/Saba/AndroidStudioProjects/UnisaLIB/app/src/main/res/layout/mockup13.xml" value="0.25" />
-        <entry key="..\:/Users/Saba/AndroidStudioProjects/UnisaLIB/app/src/main/res/layout/mockup14.xml" value="0.22" />
-        <entry key="..\:/Users/Saba/AndroidStudioProjects/UnisaLIB/app/src/main/res/layout/mockup15.xml" value="0.25" />
+        <entry key="..\:/Android/UnisaLIB/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.26614583333333336" />
+        <entry key="..\:/Android/UnisaLIB/app/src/main/res/drawable/ic_launcher_background.xml" value="0.26614583333333336" />
+        <entry key="..\:/Android/UnisaLIB/app/src/main/res/layout/mockup01.xml" value="0.12760416666666666" />
+        <entry key="..\:/Android/UnisaLIB/app/src/main/res/layout/mockup02.xml" value="0.25" />
+        <entry key="..\:/Android/UnisaLIB/app/src/main/res/layout/mockup12.xml" value="0.25" />
+        <entry key="..\:/Android/UnisaLIB/app/src/main/res/layout/utente_dettagli_libro.xml" value="0.22826086956521738" />
         <entry key="..\:/Users/Utente/AndroidStudioProjects/UnisaLIB/app/src/main/res/layout/activity_main.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/Utente/AndroidStudioProjects/UnisaLIB/app/src/main/res/layout/mockup01.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/Utente/AndroidStudioProjects/UnisaLIB/app/src/main/res/layout/mockup10.xml" value="0.25416666666666665" />
