@@ -60,25 +60,22 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_marginTop="40dp">
+        android:orientation="vertical"
+        android:gravity="center">
         <Button
             android:layout_width="wrap_content"
-            android:layout_height="50dp"
+            android:layout_height="wrap_content"
             android:text="PRESTITO"
             android:textSize="20dp"
-            android:layout_marginLeft="20dp"
             android:backgroundTint="#146DDA"
             />
 
         <Button
             android:layout_width="wrap_content"
-            android:layout_height="50dp"
+            android:layout_height="wrap_content"
             android:backgroundTint="#146DDA"
             android:text="INTERESSE"
             android:textSize="20dp"
-            android:layout_marginLeft="50dp"
-            android:layout_marginRight="20dp"
             />
 
     </LinearLayout>
