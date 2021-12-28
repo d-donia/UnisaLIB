@@ -1,5 +1,6 @@
 package model.utentemanagement;
 
+import java.io.Serializable;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 
@@ -14,7 +15,7 @@ import model.libromanagement.Libro;
 import model.prenotazionemanagement.Prenotazione;
 import model.prestitomanagement.Prestito;
 
-public class Utente {
+public class Utente implements Serializable {
     private String email, password, nome, cognome, matricola, genere;
     private int eta;
     private boolean admin, nuovo;
