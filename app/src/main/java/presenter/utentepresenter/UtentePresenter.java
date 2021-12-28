@@ -18,7 +18,7 @@ import view.interfacciageneral.LoginActivity;
 public class UtentePresenter {
     RequestParams params;
     AsyncHttpClient client;
-    String MYURL="http://192.168.1.7:8080/UnisaLibServer/utentePresenter/login";
+    String MYURL="http://192.168.1.7:8080/UnisaLibServer/UtentePresenter/login";
 
     public void login(String email, String password) {
         params=new RequestParams();
