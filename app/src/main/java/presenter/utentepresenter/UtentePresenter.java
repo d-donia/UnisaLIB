@@ -1,26 +1,22 @@
 package presenter.utentepresenter;
 
-import android.widget.Toast;
-
-import com.google.gson.Gson;
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.JsonHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
 
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import cz.msebera.android.httpclient.Header;
 import model.utentemanagement.Utente;
-import view.interfacciageneral.LoginActivity;
 
 public class UtentePresenter {
     RequestParams params;
     AsyncHttpClient client;
-    String MYURL="http://192.168.1.7:8080/UnisaLibServer/UtentePresenter/login";
+    String MYURL="http://192.168.1.61:8080/UnisaLIBServer/UtentePresenter/login";
 
     public void login(String email, String password) {
+        System.out.println("ok");
         params=new RequestParams();
         params.put("email",email);
         params.put("pass",password);
@@ -36,6 +32,7 @@ public class UtentePresenter {
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
+                System.out.println(u.getEmail());
                 System.out.println(u.getPassword());
             }
 
@@ -46,6 +43,7 @@ public class UtentePresenter {
                 //Toast.makeText(MainActivity.this, "Something went wrong", Toast.LENGTH_SHORT).show();
             }
         });
+
     }
 
 }
