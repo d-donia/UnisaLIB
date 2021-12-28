@@ -1,4 +1,4 @@
-package presenter;
+package view.interfacciageneral;
 
 import androidx.appcompat.app.AppCompatActivity;
 

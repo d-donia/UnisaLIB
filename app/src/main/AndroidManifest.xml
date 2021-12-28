@@ -14,7 +14,7 @@
             android:exported="false"
             android:label="@string/title_activity_settings" />
         <activity
-            android:name="presenter.MainActivity"
+            android:name="view.interfacciageneral.MainActivity"
             android:exported="true" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

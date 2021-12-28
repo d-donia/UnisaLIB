@@ -1,5 +1,9 @@
 package model.utentemanagement;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+import com.google.gson.Gson;
+
 import java.util.ArrayList;
 
 import model.librimanagement.Libro;
@@ -7,8 +11,9 @@ import model.prenotazionimanagement.Prenotazione;
 import model.prestitimanagement.Prestito;
 
 public class Utente {
-    private String email, password, nome, cognome, matricola;
+    private String email, password, nome, cognome, matricola, genere;
     private boolean admin;
+    private int eta;
     private ArrayList<Libro> interessi;
     private ArrayList<Prestito> prestiti;
     private ArrayList<Prenotazione> prenotazioni;
@@ -81,6 +86,14 @@ public class Utente {
         this.password = password;
     }
 
+    public String getGenere() { return genere; }
+
+    public void setGenere(String genere) { this.genere = genere; }
+
+    public int getEta() { return eta; }
+
+    public void setEta(int eta) { this.eta = eta; }
+
     public ArrayList<Libro> getInteressi() {
         return interessi;
     }
@@ -101,7 +114,11 @@ public class Utente {
         return prenotazioni;
     }
 
-    public void setPrenotazioni(ArrayList<Prenotazione> prenotazioni) {
-        this.prenotazioni = prenotazioni;
+    public void setPrenotazioni(ArrayList<Prenotazione> prenotazioni) { this.prenotazioni = prenotazioni; }
+
+    public static Utente fromJson(JSONObject json) throws JSONException {
+        Gson gson = new Gson();
+        Utente p = gson.fromJson(""+json.get("Utente"),Utente.class);
+        return p;
     }
 }
