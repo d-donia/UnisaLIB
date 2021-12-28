@@ -11,6 +11,10 @@ import com.example.unisalib.R;
 
 import presenter.utentepresenter.UtentePresenter;
 
+/*IP Daniele: 192.168.255.1
+    IP Sabatino: 192.168.1.61
+    IP Pasquale: 192.168.1.7
+ */
 public class MainActivity extends AppCompatActivity {
 
     @Override
