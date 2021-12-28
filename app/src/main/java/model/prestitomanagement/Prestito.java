@@ -1,10 +1,8 @@
-package model.prestitimanagement;
+package model.prestitomanagement;
 
-import java.sql.Date;
-import java.util.Calendar;
 import java.util.GregorianCalendar;
 
-import model.librimanagement.Libro;
+import model.libromanagement.Libro;
 import model.utentemanagement.Utente;
 
 public class Prestito {

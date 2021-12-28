@@ -1,9 +1,8 @@
-package model.prenotazionimanagement;
+package model.prenotazionemanagement;
 
 import java.util.GregorianCalendar;
 
-import model.posizionemanagement.Posizione;
-import model.postazionimanagement.Postazione;
+import model.postazionemanagement.Postazione;
 import model.utentemanagement.Utente;
 
 public class Prenotazione {

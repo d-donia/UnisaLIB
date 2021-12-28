@@ -1,4 +1,4 @@
-package model.postazionimanagement;
+package model.postazionemanagement;
 
 import java.util.ArrayList;
 
