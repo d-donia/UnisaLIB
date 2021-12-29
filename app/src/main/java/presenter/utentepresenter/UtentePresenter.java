@@ -50,7 +50,7 @@ public class UtentePresenter{
             @Override
             public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
                 super.onFailure(statusCode, headers, responseString, throwable);
-                Toast.makeText(MainActivity.getAppContext(), "Utente non Trovato", Toast.LENGTH_SHORT).show();
+                Toast.makeText(MainActivity.getAppContext(), responseString, Toast.LENGTH_SHORT).show();
             }
         });
 
