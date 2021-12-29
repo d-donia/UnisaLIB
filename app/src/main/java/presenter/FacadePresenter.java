@@ -4,7 +4,6 @@ import java.util.GregorianCalendar;
 
 import model.posizionemanagement.Posizione;
 import model.postazionemanagement.Periodo;
-import model.postazionemanagement.Postazione;
 import model.prestitomanagement.Prestito;
 import presenter.libropresenter.LibroPresenter;
 import presenter.posizionepresenter.PosizionePresenter;
@@ -21,25 +20,25 @@ public class FacadePresenter {
     private PrenotazionePresenter prenotazionePresenter = new PrenotazionePresenter();
     private PrestitoPresenter prestitoPresenter = new PrestitoPresenter();
 
-    private void login(String email, String password){
+    public void login(String email, String password){
         utentePresenter.login(email, password);
     }
 
-    private void attivaPrestito(Prestito p){}
+    public void attivaPrestito(Prestito p){}
 
-    private void cercaPrestitiperLibro(String isbn){}
+    public void cercaPrestitiperLibro(String isbn){}
 
-    private void bloccaPostazione(int pID){}
+    public void bloccaPostazione(int pID){}
 
-    private void bloccaPostazione(int pID, Periodo p){}
+    public void bloccaPostazione(int pID, Periodo p){}
 
-    private void sbloccaPostazione(int pID, Periodo p){}
+    public void sbloccaPostazione(int pID, Periodo p){}
 
-    private void cercaPostazione(int pID){}
+    public void cercaPostazione(int pID){}
 
-    private void cercaPostazioni(Posizione po, GregorianCalendar d){}
+    public void cercaPostazioni(Posizione po, GregorianCalendar d){}
 
-    private void cercaPostazioni(Posizione po){}
+    public void cercaPostazioni(Posizione po){}
 
 
 

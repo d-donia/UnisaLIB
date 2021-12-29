@@ -10,6 +10,7 @@ import android.widget.EditText;
 
 import com.example.unisalib.R;
 
+import presenter.FacadePresenter;
 import presenter.utentepresenter.UtentePresenter;
 
 /*IP Daniele: 192.168.255.1
@@ -35,8 +36,8 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
                 String email = emailText.getText().toString();
                 String password = passwordText.getText().toString();
-                UtentePresenter up = new UtentePresenter();
-                up.login(email, password);
+                FacadePresenter fp = new FacadePresenter();
+                fp.login(email, password);
             }
         });
     }
