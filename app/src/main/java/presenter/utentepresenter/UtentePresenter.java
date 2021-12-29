@@ -20,6 +20,7 @@ public class UtentePresenter{
 
     public void login(String email, String password) {
         String MYURL=GenericURL+"/login";
+
         RequestParams params;
         AsyncHttpClient client;
         params=new RequestParams();
