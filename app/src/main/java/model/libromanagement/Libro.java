@@ -68,6 +68,12 @@ public class Libro {
         return categorie;
     }
 
+    public static Libro[] fromJson(JSONArray response) {
+        Gson gson = new Gson();
+        Libro[] libri = gson.fromJson("" + response, Libro[].class);
+        return libri;
+    }
+
     public static class LibroBuilder{
         private String isbn, titolo, autore, editore, urlCopertina, categoria;
         private int nCopie, annoPubbl;
