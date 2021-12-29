@@ -1,9 +1,15 @@
 package model.libromanagement;
 
+import com.google.gson.Gson;
+import com.google.gson.JsonArray;
+
+import org.json.JSONArray;
+
 import java.util.ArrayList;
 
 import model.posizionemanagement.Posizione;
 import model.prestitomanagement.Prestito;
+import model.utentemanagement.Utente;
 
 public class Libro {
     private String isbn, titolo, autore, editore, urlCopertina, categoria;
@@ -54,6 +60,12 @@ public class Libro {
 
     public ArrayList<Prestito> getPrestiti() {
         return prestiti;
+    }
+
+    public static String[] fromJsonToCategories(JSONArray response){
+        Gson gson = new Gson();
+        String[] categorie = gson.fromJson("" + response, String[].class);
+        return categorie;
     }
 
     public static class LibroBuilder{

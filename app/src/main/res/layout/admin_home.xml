@@ -10,7 +10,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="5dp"
-        android:src="@drawable/account"
+        android:src="@drawable/logout"
         android:backgroundTint="@color/white"
         />
 
@@ -35,34 +35,27 @@
 
 
         <Button
+            android:id="@+id/mgmtPrestitoButton"
             android:layout_width="fill_parent"
             android:layout_height="150dp"
             android:layout_margin="5dp"
             android:layout_weight="1"
             android:backgroundTint="#146DDA"
             android:drawableLeft="@drawable/bookstack"
-            android:text="Prestito Libri"
+            android:text="Gestione Libri"
             android:textSize="13sp" />
 
         <Button
+            android:id="@+id/mgmtPrenotazioneButton"
             android:layout_width="fill_parent"
             android:layout_height="150dp"
             android:layout_margin="5dp"
             android:layout_weight="1"
             android:backgroundTint="#146DDA"
             android:drawableLeft="@drawable/desk"
-            android:text="Prenota Postazioni"
+            android:text="Gestione Postazioni"
             android:textSize="13sp" />
 
     </LinearLayout>
-
-    <Button
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="15dp"
-        android:layout_marginRight="15dp"
-        android:backgroundTint="#D9364F"
-        android:text="Chiedi al Bibliotecario"
-        android:textSize="13sp" />
 
 </LinearLayout>

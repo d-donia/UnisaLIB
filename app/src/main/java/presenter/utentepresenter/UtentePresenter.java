@@ -12,11 +12,12 @@ import org.json.JSONObject;
 
 import cz.msebera.android.httpclient.Header;
 import model.utentemanagement.Utente;
+import view.interfacciaadmin.HomeAdminActivity;
 import view.interfacciageneral.MainActivity;
-import view.interfacciautente.HomeActivity;
+import view.interfacciautenteunisa.HomeUtenteUnisaActivity;
 
 public class UtentePresenter{
-    static final String GenericURL="http://192.168.1.7:8080/UnisaLIBServer/UtentePresenter";
+    static final String GenericURL="http://192.168.255.1:8080/UnisaLIBServer/UtentePresenter";
 
     public void login(String email, String password) {
         String MYURL=GenericURL+"/login";
@@ -38,13 +39,18 @@ public class UtentePresenter{
                     e.printStackTrace();
                 }
                 Intent i=new Intent();
-                i.setClass(MainActivity.getAppContext(), HomeActivity.class);
-                i.putExtra("Utente",u);
-                i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                MainActivity.getAppContext().startActivity(i);
-
-                System.out.println(u.getEmail());
-                System.out.println(u.getPassword());
+                if(u.isAdmin()) {
+                    i.setClass(MainActivity.getAppContext(), HomeAdminActivity.class);
+                    i.putExtra("Utente", u);
+                    i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                    MainActivity.getAppContext().startActivity(i);
+                }
+                else{
+                    i.setClass(MainActivity.getAppContext(), HomeUtenteUnisaActivity.class);
+                    i.putExtra("Utente", u);
+                    i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                    MainActivity.getAppContext().startActivity(i);
+                }
             }
 
             @Override

@@ -24,6 +24,10 @@ public class FacadePresenter {
         utentePresenter.login(email, password);
     }
 
+    public void mostraRicercaLibri(boolean is_admin) {
+        libroPresenter.mostraRicercaLibri(is_admin);
+    }
+
     public void attivaPrestito(Prestito p){}
 
     public void cercaPrestitiperLibro(String isbn){}
@@ -40,8 +44,7 @@ public class FacadePresenter {
 
     public void cercaPostazioni(Posizione po){}
 
-
-
-
-
+    public void mostraRicercaPostazioni(boolean is_admin) {
+        postazionePresenter.mostraRicercaPostazioni(is_admin);
+    }
 }
