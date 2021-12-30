@@ -6,6 +6,7 @@ import java.util.ArrayList;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonArray;
+import com.google.gson.JsonSyntaxException;
 import com.google.gson.reflect.TypeToken;
 
 import org.json.JSONException;
@@ -158,6 +159,12 @@ public class Utente implements Serializable {
 
     }
 
+    public static Utente fromJson(String json) throws JsonSyntaxException {
+        Gson gson = new Gson();
+        Utente p = gson.fromJson(json,Utente.class);
+        return p;
+    }
+
     public static Utente fromJson(JSONObject json) throws JSONException {
         Gson gson = new Gson();
         Utente p = gson.fromJson(""+json.get("Utente"),Utente.class);
@@ -168,5 +175,12 @@ public class Utente implements Serializable {
         Gson gson = new Gson();
         Utente[] u = gson.fromJson("" + response, Utente[].class);
         return u;
+    }
+
+    public static String toJson(Utente u){
+        Gson gson = new Gson();
+        Type fooType = new TypeToken<Utente>() {}.getType();
+        String json = gson.toJson(u,fooType);
+        return json;
     }
 }
