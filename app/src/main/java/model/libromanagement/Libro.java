@@ -2,6 +2,7 @@ package model.libromanagement;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonArray;
+import com.google.gson.JsonSyntaxException;
 
 import org.json.JSONArray;
 
@@ -72,6 +73,17 @@ public class Libro {
         Gson gson = new Gson();
         Libro[] libri = gson.fromJson("" + response, Libro[].class);
         return libri;
+    }
+
+    public static ArrayList<Libro> fromJson(String json) throws JsonSyntaxException {
+        Gson gson = new Gson();
+        ArrayList<Libro> p = gson.fromJson(json,ArrayList.class);
+        return p;
+    }
+
+    public static String toJson(ArrayList<Libro> libri) {
+        Gson gson = new Gson();
+        return gson.toJson(libri);
     }
 
     public static class LibroBuilder{

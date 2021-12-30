@@ -1,6 +1,7 @@
 package view.interfacciageneral;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -14,8 +15,10 @@ import presenter.FacadePresenter;
 public class RicercaActivity extends Activity {
     public ListView listView;
     public FacadePresenter fp;
+    public static Context context;
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        context = getApplicationContext();
         setContentView(R.layout.utente_ricerca_libri);
         fp=new FacadePresenter();
         Intent i=getIntent();
@@ -44,5 +47,9 @@ public class RicercaActivity extends Activity {
                 return false;
             }
         });
+    }
+
+    public static Context getAppContext() {
+        return context;
     }
 }

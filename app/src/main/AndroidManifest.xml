@@ -21,6 +21,8 @@
         <activity android:name="view.interfacciautenteunisa.HomeUtenteUnisaActivity" />
         <activity android:name="view.interfacciaadmin.HomeAdminActivity"/>
         <activity android:name="view.interfacciageneral.RicercaActivity"/>
+        <activity android:name="view.interfacciageneral.ElencoLibriActivity"/>
+
     </application>
 
 </manifest>
