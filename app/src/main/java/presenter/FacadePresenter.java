@@ -2,6 +2,7 @@ package presenter;
 
 import java.util.GregorianCalendar;
 
+import model.libromanagement.Libro;
 import model.posizionemanagement.Posizione;
 import model.postazionemanagement.Periodo;
 import model.prestitomanagement.Prestito;
@@ -50,5 +51,9 @@ public class FacadePresenter {
 
     public void ricercaLibriCategoria(String categoria) {
         libroPresenter.ricercaLibriCategoria(categoria);
+    }
+
+    public void mostraDettagliLibro(Libro libro) {
+        libroPresenter.mostraDettagliLibro(libro);
     }
 }

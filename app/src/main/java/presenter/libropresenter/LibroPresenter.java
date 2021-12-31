@@ -13,6 +13,7 @@ import com.loopj.android.http.RequestParams;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Arrays;
 
@@ -20,13 +21,12 @@ import cz.msebera.android.httpclient.Header;
 import model.libromanagement.Libro;
 import model.utentemanagement.Utente;
 import view.interfacciageneral.ElencoLibriActivity;
-import view.interfacciageneral.MainActivity;
 import view.interfacciageneral.RicercaActivity;
+import view.interfacciautenteunisa.DettagliLibroUtenteUnisaActivity;
 import view.interfacciautenteunisa.HomeUtenteUnisaActivity;
-import view.interfacciautenteunisa.LibroUtenteUnisaActivity;
 
 public class LibroPresenter {
-    static final String GenericURL="http://192.168.1.7:8080/UnisaLIBServer/LibroPresenter";
+    static final String GenericURL="http://192.168.255.1:8080/UnisaLIBServer/LibroPresenter";
     private AsyncHttpClient client=new AsyncHttpClient();
     public void mostraRicercaLibri(boolean is_admin){
         String MYURL=GenericURL+"/mostra-ricerca-libri";
@@ -68,9 +68,7 @@ public class LibroPresenter {
                 Utente u = Utente.fromJson(userSession.getString("Utente", ""));
 
                 Libro[] libri=Libro.fromJson(response);
-                for(int i=0; i<libri.length; i++){
-                    System.out.println(libri[i].getTitolo());
-                }
+
                 Intent i=new Intent();
                 i.setClass(RicercaActivity.getAppContext(), ElencoLibriActivity.class);
                 i.putExtra("Libri", Libro.toJson(new ArrayList<>(Arrays.asList(libri))));
@@ -99,5 +97,18 @@ public class LibroPresenter {
 
     public void ricercaLibriCategoria(String categoria) {
 
+    }
+
+    public void mostraDettagliLibro(Libro l) {
+        SharedPreferences userSession = PreferenceManager.getDefaultSharedPreferences(ElencoLibriActivity.getAppContext());
+        Utente u = Utente.fromJson(userSession.getString("Utente", ""));
+
+        System.out.println("mostraDettagli");
+        Intent i=new Intent();
+        i.setClass(ElencoLibriActivity.getAppContext(), DettagliLibroUtenteUnisaActivity.class);
+        i.putExtra("Libro", Libro.toJson(l));
+        i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        System.out.println("settato intent");
+        ElencoLibriActivity.getAppContext().startActivity(i);
     }
 }

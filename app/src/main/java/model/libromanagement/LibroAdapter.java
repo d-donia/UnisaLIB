@@ -11,6 +11,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import com.bumptech.glide.Glide;
 import com.example.unisalib.R;
 import com.squareup.picasso.Picasso;
 
@@ -35,7 +36,8 @@ public class LibroAdapter extends ArrayAdapter<Libro> {
         TextView descrizioneTextView = (TextView) v.findViewById(R.id.descrizioneTV);
         TextView isbnTextView = (TextView) v.findViewById(R.id.isbnTV);
 
-        Picasso.get().load(l.getUrlCopertina()).into(copertinaImageView);
+        Glide.with(v).load(l.getUrlCopertina()).into(copertinaImageView);
+        System.out.println(l.getUrlCopertina());
         titoloTextView.setText(l.getTitolo());
         descrizioneTextView.setText(l.getTitolo());
         isbnTextView.setText(l.getIsbn());

@@ -3,6 +3,7 @@
     package="com.example.unisalib" >
 
     <application
+        android:usesCleartextTraffic="true"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
@@ -22,6 +23,7 @@
         <activity android:name="view.interfacciaadmin.HomeAdminActivity"/>
         <activity android:name="view.interfacciageneral.RicercaActivity"/>
         <activity android:name="view.interfacciageneral.ElencoLibriActivity"/>
+        <activity android:name="view.interfacciautenteunisa.DettagliLibroUtenteUnisaActivity"/>
 
     </application>
 

@@ -21,7 +21,7 @@ import model.posizionemanagement.Posizione;
 import model.prestitomanagement.Prestito;
 import model.utentemanagement.Utente;
 
-public class Libro{
+public class Libro implements Serializable{
     /*public static final Parcelable.Creator CREATOR = new Parcelable.Creator() {
         public Libro createFromParcel(Parcel in) {
             return new Libro(in);
@@ -93,11 +93,22 @@ public class Libro{
         return libri;
     }
 
+    public static Libro fromJsonToLibro(String json) throws JsonSyntaxException {
+        Gson gson = new Gson();
+        Libro libro= gson.fromJson(json, Libro.class);
+        return libro;
+    }
+
 
     public static ArrayList<Libro> fromJson(String json) throws JsonSyntaxException {
         Gson gson = new Gson();
         ArrayList<Libro> libri= new ArrayList<>(Arrays.asList(gson.fromJson(json,Libro[].class)));
         return libri;
+    }
+
+    public static String toJson(Libro l) {
+        Gson gson = new Gson();
+        return gson.toJson(l);
     }
 
     public static String toJson(ArrayList<Libro> libri) {

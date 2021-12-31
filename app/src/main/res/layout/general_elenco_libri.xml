@@ -12,18 +12,6 @@
         android:backgroundTint="@color/white"
         android:src="@drawable/back" />
 
-    <Button
-        android:layout_width="match_parent"
-        android:layout_height="90dp"
-        android:layout_margin="5dp"
-        android:backgroundTint="#D5D5D5"
-        android:drawableLeft="@drawable/bookplaceholder"
-
-        android:text="Titolo Libro, Autore Libro"
-        android:textColor="@color/black"
-        android:textSize="10dp"
-        android:textAlignment="textStart"/>
-
    <ListView
        android:id="@+id/libriLV"
        android:layout_width="wrap_content"
