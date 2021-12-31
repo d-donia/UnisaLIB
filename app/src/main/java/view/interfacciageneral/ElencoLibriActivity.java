@@ -22,11 +22,15 @@ public class ElencoLibriActivity extends Activity {
         setContentView(R.layout.general_elenco_libri);
 
         Intent i = getIntent();
-        //Prova ObjectMapper
+        String libri=i.getStringExtra("Libri");
+        ArrayList<Libro> l=Libro.fromJson(libri);
         ListView lv = findViewById(R.id.libriLV);
 
-        LibroAdapter libroAdapter = new LibroAdapter(this, R.layout.libro_element, libri);
+        LibroAdapter libroAdapter = new LibroAdapter(this, R.layout.libro_element, new ArrayList<Libro>());
 
         lv.setAdapter(libroAdapter);
+        for (Libro lib:l) {
+            libroAdapter.add(lib);
+        }
     }
 }

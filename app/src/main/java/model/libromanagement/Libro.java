@@ -1,18 +1,36 @@
 package model.libromanagement;
 
+import android.os.Build;
+import android.os.Parcel;
+import android.os.Parcelable;
+
+import androidx.annotation.RequiresApi;
+
 import com.google.gson.Gson;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonSyntaxException;
 
 import org.json.JSONArray;
 
+import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 import model.posizionemanagement.Posizione;
 import model.prestitomanagement.Prestito;
 import model.utentemanagement.Utente;
 
-public class Libro {
+public class Libro{
+    /*public static final Parcelable.Creator CREATOR = new Parcelable.Creator() {
+        public Libro createFromParcel(Parcel in) {
+            return new Libro(in);
+        }
+
+        public Libro[] newArray(int size) {
+            return new Libro[size];
+        }
+    };*/
     private String isbn, titolo, autore, editore, urlCopertina, categoria;
     private int nCopie, annoPubbl;
     private float rating;
@@ -75,16 +93,55 @@ public class Libro {
         return libri;
     }
 
+
     public static ArrayList<Libro> fromJson(String json) throws JsonSyntaxException {
         Gson gson = new Gson();
-        ArrayList<Libro> p = gson.fromJson(json,ArrayList.class);
-        return p;
+        ArrayList<Libro> libri= new ArrayList<>(Arrays.asList(gson.fromJson(json,Libro[].class)));
+        return libri;
     }
 
     public static String toJson(ArrayList<Libro> libri) {
         Gson gson = new Gson();
         return gson.toJson(libri);
     }
+
+   /* public Libro(Parcel in){
+        this.isbn = in.readString();
+        this.titolo = in.readString();
+        this.autore = in.readString();
+        this.editore = in.readString();
+        this.urlCopertina = in.readString();
+        this.categoria = in.readString();
+        this.nCopie = in.readInt();
+        this.annoPubbl = in.readInt();
+        this.rating = in.readFloat();
+        this.posizione = in.readP;
+        this.prestiti = lb.prestiti;
+        this.id = in.readLong();
+        this.name = in.readString();
+        this.grade =  in.readString();
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @RequiresApi(api = Build.VERSION_CODES.Q)
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(this.isbn);
+        dest.writeString(this.titolo);
+        dest.writeString(this.autore);
+        dest.writeString(this.editore);
+        dest.writeString(this.urlCopertina);
+        dest.writeString(this.categoria);
+        dest.writeInt(this.nCopie);
+        dest.writeInt(this.annoPubbl);
+        dest.writeFloat(this.rating);
+        dest.writeParcelable(this.posizione,flags);
+        dest.writeParcelableList(this.prestiti,flags);
+    }*/
 
     public static class LibroBuilder{
         private String isbn, titolo, autore, editore, urlCopertina, categoria;

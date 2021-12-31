@@ -26,7 +26,7 @@ import view.interfacciautenteunisa.HomeUtenteUnisaActivity;
 import view.interfacciautenteunisa.LibroUtenteUnisaActivity;
 
 public class LibroPresenter {
-    static final String GenericURL="http://192.168.255.1:8080/UnisaLIBServer/LibroPresenter";
+    static final String GenericURL="http://192.168.1.7:8080/UnisaLIBServer/LibroPresenter";
     private AsyncHttpClient client=new AsyncHttpClient();
     public void mostraRicercaLibri(boolean is_admin){
         String MYURL=GenericURL+"/mostra-ricerca-libri";
@@ -74,7 +74,6 @@ public class LibroPresenter {
                 Intent i=new Intent();
                 i.setClass(RicercaActivity.getAppContext(), ElencoLibriActivity.class);
                 i.putExtra("Libri", Libro.toJson(new ArrayList<>(Arrays.asList(libri))));
-                System.out.println(Libro.toJson(new ArrayList<>(Arrays.asList(libri))));
                 i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 RicercaActivity.getAppContext().startActivity(i);
             }

@@ -1,10 +1,13 @@
 package model.posizionemanagement;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import java.util.ArrayList;
 
 import model.postazionemanagement.Postazione;
 
-public class Posizione {
+public class Posizione{
     private int id;
     private String biblioteca, zona;
     private ArrayList<Postazione> postazioni;
@@ -58,4 +61,5 @@ public class Posizione {
     public void setPostazioni(ArrayList<Postazione> postazioni) {
         this.postazioni = postazioni;
     }
+
 }

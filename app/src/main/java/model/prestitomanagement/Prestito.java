@@ -1,11 +1,14 @@
 package model.prestitomanagement;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import java.util.GregorianCalendar;
 
 import model.libromanagement.Libro;
 import model.utentemanagement.Utente;
 
-public class Prestito {
+public class Prestito  {
     private GregorianCalendar dataInizio, dataFine, dataConsegna;
     private Utente utente;
     private Libro libro;

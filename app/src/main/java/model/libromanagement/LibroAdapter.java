@@ -24,11 +24,11 @@ public class LibroAdapter extends ArrayAdapter<Libro> {
         inflater = LayoutInflater.from(context);
     }
 
-    public View getView(int position, View v,  @NonNull ViewGroup parent) {
+    public View getView(int position, View v, ViewGroup parent) {
         if(v==null)
             v=inflater.inflate(R.layout.libro_element, null);
 
-        Libro l = (Libro) getItem(position);
+        Libro l = getItem(position);
 
         ImageView copertinaImageView = (ImageView) v.findViewById(R.id.copertinaIV);
         TextView titoloTextView = (TextView) v.findViewById(R.id.titoloTV);
