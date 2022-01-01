@@ -62,4 +62,11 @@ public class Posizione{
         this.postazioni = postazioni;
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Posizione posizione = (Posizione) o;
+        return id == posizione.id && biblioteca.equals(posizione.biblioteca) && zona.equals(posizione.zona);
+    }
 }

@@ -77,6 +77,7 @@ public class DettagliLibroUtenteUnisaActivity extends Activity {
         //Settare immagine url utilizzando libreria glide
         Glide.with(this).load(l.getUrlCopertina()).into(detsCopertinaIV);
 
+        System.out.println(u.getInteressi().get(0).getTitolo());
         if(u.getInteressi().contains(l))
             interesseButton.setImageResource(R.drawable.rsz_heart);
         else
@@ -113,15 +114,23 @@ public class DettagliLibroUtenteUnisaActivity extends Activity {
             @Override
             public void onClick(View v) {
                 if(u.getInteressi().contains(l)) {
-                    interesseButton.setImageResource(R.drawable.like);
+                    //richiesta al server per eliminare libro dalla lista di interesse
+                    Utente utenteAggiornato=fp.rimuoviLibroFromInteressi(l, u);
+                    if(utenteAggiornato!=null) {
+                        SharedPreferences.Editor editor = userSession.edit();
+                        editor.putString("Utente", Utente.toJson(utenteAggiornato));
+                        interesseButton.setImageResource(R.drawable.like);
+                    }
                 }
                 else {
-                    interesseButton.setImageResource(R.drawable.rsz_heart);
+                    //richiesta al server per aggiungere libro alla lista di interesse
+                    Utente utenteAggiornato=fp.aggiungiLibroToInteressi(l, u);
+                    if(utenteAggiornato!=null) {
+                        SharedPreferences.Editor editor = userSession.edit();
+                        editor.putString("Utente", Utente.toJson(utenteAggiornato));
+                        interesseButton.setImageResource(R.drawable.rsz_heart);
+                    }
                 }
-
-                Utente utenteAggiornato=fp.rimuoviLibroFromInteressi(l, u);
-                SharedPreferences.Editor editor= userSession.edit();
-                editor.putString("Utente", Utente.toJson(utenteAggiornato));
             }
         });
 

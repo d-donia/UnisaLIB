@@ -30,7 +30,7 @@ public class RicercaActivity extends Activity {
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                fp.ricercaLibriCategoria(listView.getItemAtPosition(position).toString());
+                fp.ricercaLibriCategoria((String)listView.getItemAtPosition(position));
             }
         });
 

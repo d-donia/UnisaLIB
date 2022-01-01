@@ -52,9 +52,6 @@ public class HomeUtenteUnisaActivity extends Activity {
                 fp.mostraRicercaPostazioni(u.isAdmin());
             }
         });
-
-
-
     }
 
     public static Context getAppContext() {

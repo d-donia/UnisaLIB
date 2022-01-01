@@ -64,7 +64,7 @@ public class FacadePresenter {
 
     public void ricercaLibriCategoria(String categoria) {
         if(categoria.equalsIgnoreCase("Consigliati")){
-
+            System.out.println(categoria);
         }
         else
             libroPresenter.ricercaLibriCategoria(categoria);
