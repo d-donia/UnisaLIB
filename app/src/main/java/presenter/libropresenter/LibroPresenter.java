@@ -65,9 +65,6 @@ public class LibroPresenter {
             public void onSuccess(int statusCode, Header[] headers, JSONArray response) {
                 super.onSuccess(statusCode, headers, response);
 
-                SharedPreferences userSession = PreferenceManager.getDefaultSharedPreferences(RicercaActivity.getAppContext());
-                Utente u = Utente.fromJson(userSession.getString("Utente", ""));
-
                 Libro[] libri=Libro.fromJson(response);
 
                 Intent i=new Intent();
@@ -97,7 +94,41 @@ public class LibroPresenter {
     }
 
     public void ricercaLibriCategoria(String categoria) {
+        String MYURL=GenericURL+"/ricerca-libri-categoria";
+        RequestParams params;
+        params= new RequestParams();
+        params.put("ricerca", categoria);
+        client.post(MYURL,params, new JsonHttpResponseHandler(){
+            @Override
+            public void onSuccess(int statusCode, Header[] headers, JSONArray response) {
+                super.onSuccess(statusCode, headers, response);
+                Libro[] libri=Libro.fromJson(response);
 
+                Intent i=new Intent();
+                i.setClass(RicercaActivity.getAppContext(), ElencoLibriActivity.class);
+                i.putExtra("Libri", Libro.toJson(new ArrayList<>(Arrays.asList(libri))));
+                i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                RicercaActivity.getAppContext().startActivity(i);
+            }
+
+            @Override
+            public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONObject errorResponse) {
+                super.onFailure(statusCode, headers, throwable, errorResponse);
+                Toast.makeText(HomeUtenteUnisaActivity.getAppContext(), errorResponse.toString(), Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONArray errorResponse) {
+                super.onFailure(statusCode, headers, throwable, errorResponse);
+                Toast.makeText(HomeUtenteUnisaActivity.getAppContext(), errorResponse.toString(), Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
+                super.onFailure(statusCode, headers, responseString, throwable);
+                Toast.makeText(HomeUtenteUnisaActivity.getAppContext(), responseString, Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
     public void mostraDettagliLibro(Libro l) {

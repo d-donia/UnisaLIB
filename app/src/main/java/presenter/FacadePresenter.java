@@ -54,7 +54,11 @@ public class FacadePresenter {
     public void mostraRicercaPostazioni(boolean is_admin) { postazionePresenter.mostraRicercaPostazioni(is_admin); }
 
     public void ricercaLibriCategoria(String categoria) {
-        libroPresenter.ricercaLibriCategoria(categoria);
+        if(categoria.equalsIgnoreCase("Consigliati")){
+
+        }
+        else
+            libroPresenter.ricercaLibriCategoria(categoria);
     }
 
     public void mostraDettagliLibro(Libro libro) {
