@@ -20,6 +20,7 @@ import java.util.Arrays;
 import cz.msebera.android.httpclient.Header;
 import model.libromanagement.Libro;
 import model.utentemanagement.Utente;
+import view.interfacciaadmin.DettagliLibroAdminActivity;
 import view.interfacciageneral.ElencoLibriActivity;
 import view.interfacciageneral.RicercaActivity;
 import view.interfacciautenteunisa.DettagliLibroUtenteUnisaActivity;
@@ -103,12 +104,19 @@ public class LibroPresenter {
         SharedPreferences userSession = PreferenceManager.getDefaultSharedPreferences(ElencoLibriActivity.getAppContext());
         Utente u = Utente.fromJson(userSession.getString("Utente", ""));
 
-        System.out.println("mostraDettagli");
         Intent i=new Intent();
-        i.setClass(ElencoLibriActivity.getAppContext(), DettagliLibroUtenteUnisaActivity.class);
-        i.putExtra("Libro", Libro.toJson(l));
-        i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-        System.out.println("settato intent");
-        ElencoLibriActivity.getAppContext().startActivity(i);
+
+        if(u.isAdmin()){
+            i.setClass(ElencoLibriActivity.getAppContext(), DettagliLibroAdminActivity.class);
+            i.putExtra("Libro", Libro.toJson(l));
+            i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            ElencoLibriActivity.getAppContext().startActivity(i);
+        }
+        else {
+            i.setClass(ElencoLibriActivity.getAppContext(), DettagliLibroUtenteUnisaActivity.class);
+            i.putExtra("Libro", Libro.toJson(l));
+            i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            ElencoLibriActivity.getAppContext().startActivity(i);
+        }
     }
 }

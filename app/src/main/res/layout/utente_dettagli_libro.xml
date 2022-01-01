@@ -207,7 +207,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
+        android:orientation="horizontal"
         android:gravity="center">
         <Button
             android:id="@+id/prestitoButton"
@@ -215,13 +215,15 @@
             android:layout_height="wrap_content"
             android:text="PRESTITO"
             android:textSize="20dp"
+            android:textColor="@color/white"
             android:backgroundTint="#146DDA"
-            />
-        <Button
+            android:layout_marginRight="5dp"/>
+        <ImageButton
             android:id="@+id/interesseButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="40dp"
+            android:layout_height="match_parent"
             android:backgroundTint="#146DDA"
+            android:src="@drawable/rsz_heart"
             android:text="INTERESSE"
             android:textSize="20dp"
             />

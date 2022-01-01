@@ -31,6 +31,10 @@ public class FacadePresenter {
         libroPresenter.ricercaLibri(ricerca);
     }
 
+    public void creaPrestito(Prestito p) {
+        prestitoPresenter.creaPrestito(p);
+    }
+
     public void attivaPrestito(Prestito p){}
 
     public void cercaPrestitiperLibro(String isbn){}
@@ -56,4 +60,5 @@ public class FacadePresenter {
     public void mostraDettagliLibro(Libro libro) {
         libroPresenter.mostraDettagliLibro(libro);
     }
+
 }
