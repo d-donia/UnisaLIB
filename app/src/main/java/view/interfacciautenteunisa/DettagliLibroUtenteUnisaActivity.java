@@ -20,6 +20,7 @@ import com.bumptech.glide.Glide;
 import com.example.unisalib.R;
 import com.google.gson.JsonSyntaxException;
 
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 
@@ -76,6 +77,11 @@ public class DettagliLibroUtenteUnisaActivity extends Activity {
         //Settare immagine url utilizzando libreria glide
         Glide.with(this).load(l.getUrlCopertina()).into(detsCopertinaIV);
 
+        if(u.getInteressi().contains(l))
+            interesseButton.setImageResource(R.drawable.rsz_heart);
+        else
+            interesseButton.setImageResource(R.drawable.like);
+
         prestitoButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -106,8 +112,16 @@ public class DettagliLibroUtenteUnisaActivity extends Activity {
         interesseButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if(u.getInteressi().contains(l)) {
+                    interesseButton.setImageResource(R.drawable.like);
+                }
+                else {
+                    interesseButton.setImageResource(R.drawable.rsz_heart);
+                }
 
-
+                Utente utenteAggiornato=fp.rimuoviLibroFromInteressi(l, u);
+                SharedPreferences.Editor editor= userSession.edit();
+                editor.putString("Utente", Utente.toJson(utenteAggiornato));
             }
         });
 

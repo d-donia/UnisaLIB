@@ -16,6 +16,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Objects;
 
 import model.posizionemanagement.Posizione;
 import model.prestitomanagement.Prestito;
@@ -116,7 +117,15 @@ public class Libro implements Serializable{
         return gson.toJson(libri);
     }
 
-   /* public Libro(Parcel in){
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Libro)) return false;
+        Libro libro = (Libro) o;
+        return getnCopie() == libro.getnCopie() && getAnnoPubbl() == libro.getAnnoPubbl() && Float.compare(libro.getRating(), getRating()) == 0 && getIsbn().equals(libro.getIsbn()) && getTitolo().equals(libro.getTitolo()) && getAutore().equals(libro.getAutore()) && Objects.equals(getEditore(), libro.getEditore()) && getUrlCopertina().equals(libro.getUrlCopertina()) && Objects.equals(getCategoria(), libro.getCategoria()) && getPosizione().equals(libro.getPosizione()) ;
+    }
+
+    /* public Libro(Parcel in){
         this.isbn = in.readString();
         this.titolo = in.readString();
         this.autore = in.readString();
