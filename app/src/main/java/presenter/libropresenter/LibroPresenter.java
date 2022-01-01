@@ -150,4 +150,12 @@ public class LibroPresenter {
             ElencoLibriActivity.getAppContext().startActivity(i);
         }
     }
+
+    public Utente rimuoviLibroFromInteressi(Libro l, Utente u) {
+        return u;
+    }
+
+    public Utente aggiungiLibroFromInteressi(Libro l, Utente u) {
+        return u;
+    }
 }

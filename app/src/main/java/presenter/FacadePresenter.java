@@ -6,6 +6,7 @@ import model.libromanagement.Libro;
 import model.posizionemanagement.Posizione;
 import model.postazionemanagement.Periodo;
 import model.prestitomanagement.Prestito;
+import model.utentemanagement.Utente;
 import presenter.libropresenter.LibroPresenter;
 import presenter.posizionepresenter.PosizionePresenter;
 import presenter.postazionepresenter.PostazionePresenter;
@@ -33,6 +34,14 @@ public class FacadePresenter {
 
     public void creaPrestito(Prestito p) {
         prestitoPresenter.creaPrestito(p);
+    }
+
+    public Utente rimuoviLibroFromInteressi(Libro l, Utente u) {
+        return libroPresenter.rimuoviLibroFromInteressi(l,u);
+    }
+
+    public Utente aggiungiLibroToInteressi(Libro l, Utente u) {
+        return libroPresenter.aggiungiLibroFromInteressi(l,u);
     }
 
     public void attivaPrestito(Prestito p){}
@@ -64,5 +73,7 @@ public class FacadePresenter {
     public void mostraDettagliLibro(Libro libro) {
         libroPresenter.mostraDettagliLibro(libro);
     }
+
+
 
 }
