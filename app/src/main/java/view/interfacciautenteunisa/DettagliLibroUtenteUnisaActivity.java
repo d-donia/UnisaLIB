@@ -77,7 +77,6 @@ public class DettagliLibroUtenteUnisaActivity extends Activity {
         //Settare immagine url utilizzando libreria glide
         Glide.with(this).load(l.getUrlCopertina()).into(detsCopertinaIV);
 
-        System.out.println(u.getInteressi().get(0).getTitolo());
         if(u.getInteressi().contains(l))
             interesseButton.setImageResource(R.drawable.rsz_heart);
         else

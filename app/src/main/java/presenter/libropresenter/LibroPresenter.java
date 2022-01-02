@@ -2,15 +2,19 @@ package presenter.libropresenter;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.os.NetworkOnMainThreadException;
 import android.widget.Toast;
 
 import androidx.preference.PreferenceManager;
 
+import com.example.unisalib.R;
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.JsonHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
+import com.loopj.android.http.SyncHttpClient;
 
 import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.Serializable;
@@ -27,7 +31,7 @@ import view.interfacciautenteunisa.DettagliLibroUtenteUnisaActivity;
 import view.interfacciautenteunisa.HomeUtenteUnisaActivity;
 
 public class LibroPresenter {
-    static final String GenericURL="http://192.168.1.7:8080/UnisaLIBServer/LibroPresenter";
+    static final String GenericURL="http://192.168.255.1:8080/UnisaLIBServer/LibroPresenter";
     private AsyncHttpClient client=new AsyncHttpClient();
     public void mostraRicercaLibri(boolean is_admin){
         String MYURL=GenericURL+"/mostra-ricerca-libri";
@@ -152,7 +156,47 @@ public class LibroPresenter {
     }
 
     public Utente rimuoviLibroFromInteressi(Libro l, Utente u) {
-        return u;
+        String MYURL=GenericURL+"/rimuovi-interesse";
+        SyncHttpClient syncClient=new SyncHttpClient();
+        RequestParams params;
+        params=new RequestParams();
+        params.put("isbn", l.getIsbn());
+        params.put("email", u.getEmail());
+        final Utente[] utenteAggiornato = new Utente[1];
+        try {
+            syncClient.post(MYURL, params, new JsonHttpResponseHandler() {
+                @Override
+                public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
+                    super.onSuccess(statusCode, headers, response);
+                    try {
+                        utenteAggiornato[0] = Utente.fromJson(response);
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                }
+
+                @Override
+                public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONArray errorResponse) {
+                    super.onFailure(statusCode, headers, throwable, errorResponse);
+                    utenteAggiornato[0] = null;
+                    Toast.makeText(DettagliLibroUtenteUnisaActivity.getAppContext(), errorResponse.toString(), Toast.LENGTH_SHORT).show();
+                }
+
+                @Override
+                public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
+                    super.onFailure(statusCode, headers, responseString, throwable);
+                    utenteAggiornato[0] = null;
+                    Toast.makeText(DettagliLibroUtenteUnisaActivity.getAppContext(), responseString, Toast.LENGTH_SHORT).show();
+                }
+            });
+        }
+        catch (NetworkOnMainThreadException e){
+            System.out.println(e.getMessage());
+            e.printStackTrace();
+        }
+
+        return utenteAggiornato[0];
+
     }
 
     public Utente aggiungiLibroFromInteressi(Libro l, Utente u) {
