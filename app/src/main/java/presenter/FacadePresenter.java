@@ -36,12 +36,12 @@ public class FacadePresenter {
         prestitoPresenter.creaPrestito(p);
     }
 
-    public Utente rimuoviLibroFromInteressi(Libro l, Utente u) {
-        return libroPresenter.rimuoviLibroFromInteressi(l,u);
+    public void rimuoviLibroFromInteressi(Libro l, Utente u) {
+        libroPresenter.rimuoviLibroFromInteressi(l,u);
     }
 
-    public Utente aggiungiLibroToInteressi(Libro l, Utente u) {
-        return libroPresenter.aggiungiLibroFromInteressi(l,u);
+    public void aggiungiLibroToInteressi(Libro l, Utente u) {
+        libroPresenter.aggiungiLibroFromInteressi(l,u);
     }
 
     public void attivaPrestito(Prestito p){}

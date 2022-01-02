@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.ImageSwitcher;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -31,12 +32,14 @@ import presenter.FacadePresenter;
 
 public class DettagliLibroUtenteUnisaActivity extends Activity {
     private static Context context;
+    private static ImageButton interesseButton;
     private FacadePresenter fp;
     private Utente u;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.utente_dettagli_libro);
+        System.out.println("che merda");
         fp=new FacadePresenter();
         context=getApplicationContext();
 
@@ -59,7 +62,7 @@ public class DettagliLibroUtenteUnisaActivity extends Activity {
         TextView detsPosizioneTV= findViewById(R.id.detsPosizioneTV);
         ImageView detsCopertinaIV= findViewById(R.id.detsCopertinaIV);
         Button prestitoButton=findViewById(R.id.prestitoButton);
-        ImageButton interesseButton=findViewById(R.id.interesseButton);
+        interesseButton=findViewById(R.id.interesseButton);
 
         Intent i = getIntent();
         Libro l = Libro.fromJsonToLibro(i.getStringExtra("Libro"));
@@ -91,6 +94,12 @@ public class DettagliLibroUtenteUnisaActivity extends Activity {
                         setPositiveButton(R.string.si, new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
+                                try {
+                                    u = Utente.fromJson(userSession.getString("Utente", ""));
+                                }
+                                catch (JsonSyntaxException e){
+                                    e.printStackTrace();
+                                }
                                 dialog.cancel();
                                 Prestito p = new Prestito.PrestitoBuilder().
                                         utente(u).
@@ -112,23 +121,14 @@ public class DettagliLibroUtenteUnisaActivity extends Activity {
         interesseButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                u= Utente.fromJson(userSession.getString("Utente", ""));
                 if(u.getInteressi().contains(l)) {
                     //richiesta al server per eliminare libro dalla lista di interesse
-                    Utente utenteAggiornato=fp.rimuoviLibroFromInteressi(l, u);
-                    if(utenteAggiornato!=null) {
-                        SharedPreferences.Editor editor = userSession.edit();
-                        editor.putString("Utente", Utente.toJson(utenteAggiornato));
-                        interesseButton.setImageResource(R.drawable.like);
-                    }
+                    fp.rimuoviLibroFromInteressi(l, u);
                 }
                 else {
                     //richiesta al server per aggiungere libro alla lista di interesse
-                    Utente utenteAggiornato=fp.aggiungiLibroToInteressi(l, u);
-                    if(utenteAggiornato!=null) {
-                        SharedPreferences.Editor editor = userSession.edit();
-                        editor.putString("Utente", Utente.toJson(utenteAggiornato));
-                        interesseButton.setImageResource(R.drawable.rsz_heart);
-                    }
+                    fp.aggiungiLibroToInteressi(l, u);
                 }
             }
         });
@@ -137,5 +137,24 @@ public class DettagliLibroUtenteUnisaActivity extends Activity {
 
     public static Context getAppContext(){
         return context;
+    }
+
+    public static void impostaNonInteresse(Utente utenteAggiornato){
+        if(utenteAggiornato!=null) {
+            SharedPreferences userSession = PreferenceManager.getDefaultSharedPreferences(DettagliLibroUtenteUnisaActivity.getAppContext());
+            SharedPreferences.Editor editor = userSession.edit();
+            editor.putString("Utente", Utente.toJson(utenteAggiornato)).apply();
+            System.out.println(userSession.getString("Utente",""));
+            interesseButton.setImageResource(R.drawable.like);
+        }
+    }
+
+    public static void impostaInteresse(Utente utenteAggiornato){
+        if(utenteAggiornato!=null) {
+            SharedPreferences userSession = PreferenceManager.getDefaultSharedPreferences(DettagliLibroUtenteUnisaActivity.getAppContext());
+            SharedPreferences.Editor editor = userSession.edit();
+            editor.putString("Utente", Utente.toJson(utenteAggiornato)).apply();
+            interesseButton.setImageResource(R.drawable.rsz_heart);
+        }
     }
 }
