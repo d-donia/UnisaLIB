@@ -5,7 +5,12 @@ import java.util.GregorianCalendar;
 import java.util.List;
 
 import com.google.gson.Gson;
+import com.google.gson.JsonSyntaxException;
 import com.google.gson.reflect.TypeToken;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import model.libromanagement.Libro;
 import model.utentemanagement.Utente;
 
@@ -111,5 +116,17 @@ public class Prestito {
     public static String toJson(List<Prestito> prestiti){
         Gson gson = new Gson();
         return gson.toJson(prestiti);
+    }
+
+    public static Prestito fromJsonToPrestito(String json) throws JsonSyntaxException {
+        Gson gson = new Gson();
+        Prestito prestito= gson.fromJson(json, Prestito.class);
+        return prestito;
+    }
+
+    public static Prestito fromJson(JSONObject json) throws JSONException {
+        Gson gson = new Gson();
+        Prestito p = gson.fromJson(""+json.get("Prestito"),Prestito.class);
+        return p;
     }
 }

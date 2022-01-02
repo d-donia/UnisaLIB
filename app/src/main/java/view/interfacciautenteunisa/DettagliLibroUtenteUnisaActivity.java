@@ -39,7 +39,6 @@ public class DettagliLibroUtenteUnisaActivity extends Activity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.utente_dettagli_libro);
-        System.out.println("che merda");
         fp=new FacadePresenter();
         context=getApplicationContext();
 
@@ -88,6 +87,7 @@ public class DettagliLibroUtenteUnisaActivity extends Activity {
         prestitoButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                //aggiungere controllo libro già in prestito all'utente loggato
                 AlertDialog confermaPrestito = new AlertDialog.Builder(DettagliLibroUtenteUnisaActivity.this).
                         setTitle("Conferma prestito").
                         setMessage("Sicuro di voler prendere in prestito il libro " + l.getTitolo() + "?").
