@@ -15,40 +15,43 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        android:layout_marginVertical="80dp"
+        android:layout_marginVertical="60dp"
         android:layout_marginHorizontal="30dp">
 
-        <Button
+
+        <Spinner
+            android:id="@+id/bibliotecaSpinner"
             android:layout_width="fill_parent"
-            android:layout_height="50dp"
+            android:layout_height="40dp"
             android:layout_margin="5dp"
             android:layout_weight="1"
-            android:backgroundTint="#CCCCCC"
-            android:drawableRight="@drawable/arrow_down"
-            android:text="Biblioteca"
-            android:textSize="20sp" />
+            android:background="@android:drawable/btn_dropdown"
+            android:spinnerMode="dropdown"
+            android:textSize="20sp"/>
 
-        <Button
+        <Spinner
+            android:id="@+id/zonaSpinner"
             android:layout_width="fill_parent"
-            android:layout_height="50dp"
+            android:layout_height="40dp"
             android:layout_margin="5dp"
             android:layout_weight="1"
-            android:backgroundTint="#CCCCCC"
-            android:drawableRight="@drawable/arrow_down"
-            android:text="Zona"
-            android:textSize="20sp" />
+            android:background="@android:drawable/btn_dropdown"
+            android:spinnerMode="dropdown"
+            android:textSize="20sp"/>
 
-        <Button
-            android:layout_width="fill_parent"
-            android:layout_height="50dp"
+
+        <DatePicker
+            android:id="@+id/datePicker"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:layout_margin="5dp"
             android:layout_weight="1"
-            android:backgroundTint="#CCCCCC"
-            android:drawableRight="@drawable/arrow_down"
-            android:text="Data"
-            android:textSize="20sp" />
+            android:datePickerMode="spinner"
+            android:calendarViewShown="false"/>
+
 
         <Button
+            android:id="@+id/cercaButton"
             android:layout_width="fill_parent"
             android:layout_height="50dp"
             android:layout_margin="5dp"

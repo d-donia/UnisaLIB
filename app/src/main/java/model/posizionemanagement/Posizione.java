@@ -3,8 +3,14 @@ package model.posizionemanagement;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-import java.util.ArrayList;
+import com.google.gson.Gson;
 
+import org.json.JSONArray;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+
+import model.libromanagement.Libro;
 import model.postazionemanagement.Postazione;
 
 public class Posizione{
@@ -23,12 +29,41 @@ public class Posizione{
         this.id = id;
         this.biblioteca = biblioteca;
         this.zona = zona;
+        postazioni = new ArrayList<>();
     }
 
     public Posizione(String biblioteca, String zona) {
         this.biblioteca = biblioteca;
         this.zona = zona;
+        postazioni = new ArrayList<>();
     }
+
+    public Posizione() {
+        postazioni = new ArrayList<>();
+    }
+
+    public static Posizione[] fromJson(JSONArray response) {
+        Gson gson = new Gson();
+        Posizione[] posizioni = gson.fromJson("" + response, Posizione[].class);
+        return posizioni;
+    }
+
+    public static String toJson(ArrayList<Posizione> posizioni) {
+        Gson gson = new Gson();
+        return gson.toJson(posizioni);
+    }
+
+    public static ArrayList<Posizione> fromJson(String json) {
+        Gson gson = new Gson();
+        ArrayList<Posizione> posizioni= new ArrayList<>(Arrays.asList(gson.fromJson(json,Posizione[].class)));
+        return posizioni;
+    }
+
+    public static String toJson(Posizione p) {
+        Gson gson = new Gson();
+        return gson.toJson(p);
+    }
+
 
     public int getId() {
         return id;

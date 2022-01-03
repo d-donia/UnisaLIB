@@ -1,7 +1,13 @@
 package model.postazionemanagement;
 
-import java.util.ArrayList;
+import com.google.gson.Gson;
 
+import org.json.JSONArray;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+
+import model.libromanagement.Libro;
 import model.posizionemanagement.Posizione;
 
 public class Postazione {
@@ -19,6 +25,17 @@ public class Postazione {
     public Postazione(boolean disponibile, Posizione posizione) {
         this.disponibile = disponibile;
         this.posizione = posizione;
+    }
+
+
+    public static String toJson(ArrayList<Postazione> postazioni) {
+        Gson gson = new Gson();
+        return gson.toJson(postazioni);
+    }
+
+    public static Postazione[] fromJson(JSONArray response) {
+        Gson gson = new Gson();
+        return gson.fromJson("" + response, Postazione[].class);
     }
 
     public String getId() {

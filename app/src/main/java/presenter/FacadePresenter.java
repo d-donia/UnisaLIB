@@ -38,7 +38,7 @@ public class FacadePresenter {
 
     public void rimuoviLibroFromInteressi(Libro l, Utente u) {
         libroPresenter.rimuoviLibroFromInteressi(l,u);
-    }
+}
 
     public void aggiungiLibroToInteressi(Libro l, Utente u) {
         libroPresenter.aggiungiLibroFromInteressi(l,u);
@@ -75,5 +75,7 @@ public class FacadePresenter {
     }
 
 
-
+    public void mostraElencoPostazioni(Posizione p, GregorianCalendar date) {
+        postazionePresenter.mostraElencoPostazioni(p, date);
+    }
 }

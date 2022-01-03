@@ -20,7 +20,7 @@ import view.interfacciageneral.MainActivity;
 import view.interfacciautenteunisa.HomeUtenteUnisaActivity;
 
 public class UtentePresenter{
-    static final String GenericURL="http://192.168.1.7:8080/UnisaLIBServer/UtentePresenter";
+    static final String GenericURL="http://192.168.1.61:8080/UnisaLIBServer/UtentePresenter";
     private AsyncHttpClient client=new AsyncHttpClient();
     public void login(String email, String password) {
         String MYURL=GenericURL+"/login";
@@ -35,6 +35,7 @@ public class UtentePresenter{
                 Utente u= null;
                 try {
                     u = Utente.fromJson(response);
+
                     //Salvataggio utente loggato in shared preferences come oggetto json
                     SharedPreferences userSession = PreferenceManager.getDefaultSharedPreferences(MainActivity.getAppContext());
                     SharedPreferences.Editor editor = userSession.edit();

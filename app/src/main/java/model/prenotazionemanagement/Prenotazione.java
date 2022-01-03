@@ -1,7 +1,13 @@
 package model.prenotazionemanagement;
 
+import com.google.gson.Gson;
+
+import org.json.JSONArray;
+
+import java.util.ArrayList;
 import java.util.GregorianCalendar;
 
+import model.libromanagement.Libro;
 import model.postazionemanagement.Postazione;
 import model.utentemanagement.Utente;
 
@@ -17,6 +23,16 @@ public class Prenotazione {
         this.oraFine = oraFine;
         this.utente = utente;
         this.postazione = postazione;
+    }
+
+    public static Prenotazione[] fromJson(JSONArray response) {
+        Gson gson = new Gson();
+        return gson.fromJson("" + response, Prenotazione[].class);
+    }
+
+    public static String toJson(ArrayList<Prenotazione> prenotazioni) {
+        Gson gson = new Gson();
+        return gson.toJson(prenotazioni);
     }
 
     public GregorianCalendar getData() {
