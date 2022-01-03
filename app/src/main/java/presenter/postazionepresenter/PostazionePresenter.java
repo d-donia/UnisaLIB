@@ -9,6 +9,7 @@ import com.loopj.android.http.RequestParams;
 
 import org.json.JSONArray;
 import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -26,7 +27,7 @@ import view.interfacciautenteunisa.HomeUtenteUnisaActivity;
 import view.interfacciautenteunisa.RicercaPostazioneUtenteActivity;
 
 public class PostazionePresenter {
-        static final String GenericURL="http://192.168.1.61:8080/UnisaLIBServer/PostazionePresenter";
+        static final String GenericURL="http://192.168.1.7:8080/UnisaLIBServer/PostazionePresenter";
         private AsyncHttpClient client=new AsyncHttpClient();
 
         public void mostraRicercaPostazioni(boolean is_admin){
@@ -69,6 +70,7 @@ public class PostazionePresenter {
                 super.onSuccess(statusCode, headers, response);
                 Postazione[] postazioni = new Postazione[0];
                 Prenotazione[] prenotazioni = new Prenotazione[0];
+                System.out.println(response);
                 try {
                     postazioni = Postazione.fromJson(response.getJSONArray(1));
                     prenotazioni = Prenotazione.fromJson(response.getJSONArray(2));
@@ -84,6 +86,41 @@ public class PostazionePresenter {
                 i.putExtra("giorno", date.get(Calendar.DATE));
                 i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 RicercaPostazioneUtenteActivity.getAppContext().startActivity(i);
+            }
+
+            @Override
+            public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
+                super.onSuccess(statusCode, headers, response);
+                System.out.println(response);
+                try {
+                    Postazione[] postazioni=Postazione.fromJson(response.getJSONArray("postazioni"));
+                    Prenotazione[] prenotazioni=Prenotazione.fromJson(response.getJSONArray("prenotazioni"));
+                    for(int i=0;i<postazioni.length;++i)
+                        System.out.println(postazioni[i].getId());
+                    for(Prenotazione pr:prenotazioni)
+                        System.out.println(pr.getOraFine());
+                    /*System.out.println(""+response.getJSONArray("postazioni"));
+                    JSONArray pos=response.getJSONArray("postazioni");
+                    for(int i=0;i<pos.length();++i)
+
+                    postazioni = Postazione.fromJson(response.getJSONArray("postazioni"));
+                    for(Postazione p:postazioni)
+                        System.out.println(p.getId());
+                    prenotazioni = Prenotazione.fromJson(response.getJSONArray("prenotazioni"));
+                    for(Prenotazione pr:prenotazioni)
+                        System.out.println(pr.getOraFine());*/
+                    Intent i = new Intent();
+                    i.setClass(RicercaPostazioneUtenteActivity.getAppContext(), ElencoPostazioniUtenteActivity.class);
+                    i.putExtra("postazioni", Postazione.toJson(new ArrayList<>(Arrays.asList(postazioni))));
+                    i.putExtra("prenotazioni", Prenotazione.toJson(new ArrayList<>(Arrays.asList(prenotazioni))));
+                    i.putExtra("anno", date.get(Calendar.YEAR));
+                    i.putExtra("mese", date.get(Calendar.MONTH));
+                    i.putExtra("giorno", date.get(Calendar.DATE));
+                    i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                    RicercaPostazioneUtenteActivity.getAppContext().startActivity(i);
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
             }
 
             @Override

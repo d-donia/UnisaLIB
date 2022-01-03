@@ -43,7 +43,7 @@ import view.interfacciautenteunisa.DettagliLibroUtenteUnisaActivity;
 import view.interfacciautenteunisa.HomeUtenteUnisaActivity;
 
 public class LibroPresenter {
-    static final String GenericURL = "http://192.168.1.61:8080/UnisaLIBServer/LibroPresenter";
+    static final String GenericURL = "http://192.168.1.7:8080/UnisaLIBServer/LibroPresenter";
     private AsyncHttpClient client = new AsyncHttpClient();
 
     public void mostraRicercaLibri(boolean is_admin) {
@@ -81,7 +81,7 @@ public class LibroPresenter {
             @Override
             public void onSuccess(int statusCode, Header[] headers, JSONArray response) {
                 super.onSuccess(statusCode, headers, response);
-
+                System.out.println(""+response);
                 Libro[] libri = Libro.fromJson(response);
 
                 Intent i = new Intent();
@@ -115,7 +115,7 @@ public class LibroPresenter {
         String MYURL = GenericURL + "/ricerca-libri-categoria";
         RequestParams params;
         params = new RequestParams();
-        params.put("ricerca", categoria);
+        params.put("categoria", categoria);
         client.post(MYURL, params, new JsonHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, JSONArray response) {

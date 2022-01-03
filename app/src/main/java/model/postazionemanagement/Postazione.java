@@ -3,12 +3,15 @@ package model.postazionemanagement;
 import com.google.gson.Gson;
 
 import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 
 import model.libromanagement.Libro;
 import model.posizionemanagement.Posizione;
+import model.utentemanagement.Utente;
 
 public class Postazione {
     private String id;
@@ -33,9 +36,19 @@ public class Postazione {
         return gson.toJson(postazioni);
     }
 
-    public static Postazione[] fromJson(JSONArray response) {
+    public static Postazione[] fromJson(JSONArray response) throws JSONException {
+        ArrayList<Postazione> p=new ArrayList<>();
+        for(int i=0;i<response.length();++i)
+            p.add(Postazione.fromJson(response.getJSONObject(i)));
+        Postazione[] array = new Postazione[p.size()];
+        array = p.toArray(array);
+        return array;
+    }
+
+    public static Postazione fromJson(JSONObject json) throws JSONException {
         Gson gson = new Gson();
-        return gson.fromJson("" + response, Postazione[].class);
+        Postazione p = gson.fromJson(""+json.get("postazione"),Postazione.class);
+        return p;
     }
 
     public String getId() {

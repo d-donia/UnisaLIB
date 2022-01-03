@@ -3,6 +3,8 @@ package model.prenotazionemanagement;
 import com.google.gson.Gson;
 
 import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.GregorianCalendar;
@@ -25,9 +27,19 @@ public class Prenotazione {
         this.postazione = postazione;
     }
 
-    public static Prenotazione[] fromJson(JSONArray response) {
+    public static Prenotazione[] fromJson(JSONArray response) throws JSONException {
+        ArrayList<Prenotazione> p=new ArrayList<>();
+        for(int i=0;i<response.length();++i)
+            p.add(Prenotazione.fromJson(response.getJSONObject(i)));
+        Prenotazione[] array = new Prenotazione[p.size()];
+        array = p.toArray(array);
+        return array;
+    }
+
+    public static Prenotazione fromJson(JSONObject json) throws JSONException {
         Gson gson = new Gson();
-        return gson.fromJson("" + response, Prenotazione[].class);
+        Prenotazione p = gson.fromJson(""+json.get("prenotazione"),Prenotazione.class);
+        return p;
     }
 
     public static String toJson(ArrayList<Prenotazione> prenotazioni) {

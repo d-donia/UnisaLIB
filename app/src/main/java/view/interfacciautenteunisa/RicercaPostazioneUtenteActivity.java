@@ -26,7 +26,7 @@ import model.posizionemanagement.Posizione;
 import presenter.FacadePresenter;
 
 public class RicercaPostazioneUtenteActivity extends Activity {
-    public FacadePresenter fp;
+    public FacadePresenter fp=new FacadePresenter();
     public static Context context;
 
     @Override
