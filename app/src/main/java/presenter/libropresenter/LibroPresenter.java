@@ -38,6 +38,7 @@ import model.libromanagement.Libro;
 import model.utentemanagement.Utente;
 import view.interfacciaadmin.DettagliLibroAdminActivity;
 import view.interfacciageneral.ElencoLibriActivity;
+import view.interfacciageneral.MainActivity;
 import view.interfacciageneral.RicercaActivity;
 import view.interfacciautenteunisa.DettagliLibroUtenteUnisaActivity;
 import view.interfacciautenteunisa.HomeUtenteUnisaActivity;
@@ -191,16 +192,19 @@ public class LibroPresenter {
             @Override
             public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONObject errorResponse) {
                 super.onFailure(statusCode, headers, throwable, errorResponse);
+                Toast.makeText(MainActivity.getAppContext(), errorResponse.toString(), Toast.LENGTH_SHORT).show();
             }
 
             @Override
             public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONArray errorResponse) {
                 super.onFailure(statusCode, headers, throwable, errorResponse);
+                Toast.makeText(MainActivity.getAppContext(), errorResponse.toString(), Toast.LENGTH_SHORT).show();
             }
 
             @Override
             public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
                 super.onFailure(statusCode, headers, responseString, throwable);
+                Toast.makeText(MainActivity.getAppContext(), responseString, Toast.LENGTH_SHORT).show();
             }
         });
     }
@@ -227,16 +231,19 @@ public class LibroPresenter {
             @Override
             public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONObject errorResponse) {
                 super.onFailure(statusCode, headers, throwable, errorResponse);
+                Toast.makeText(MainActivity.getAppContext(), errorResponse.toString(), Toast.LENGTH_SHORT).show();
             }
 
             @Override
             public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONArray errorResponse) {
                 super.onFailure(statusCode, headers, throwable, errorResponse);
+                Toast.makeText(MainActivity.getAppContext(), errorResponse.toString(), Toast.LENGTH_SHORT).show();
             }
 
             @Override
             public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
                 super.onFailure(statusCode, headers, responseString, throwable);
+                Toast.makeText(MainActivity.getAppContext(), responseString, Toast.LENGTH_SHORT).show();
             }
         });
     }
