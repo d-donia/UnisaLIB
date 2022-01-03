@@ -1,6 +1,9 @@
 package presenter.prestitopresenter;
 
+import android.content.SharedPreferences;
 import android.widget.Toast;
+
+import androidx.preference.PreferenceManager;
 
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.JsonHttpResponseHandler;
@@ -14,10 +17,11 @@ import java.lang.reflect.ParameterizedType;
 
 import cz.msebera.android.httpclient.Header;
 import model.prestitomanagement.Prestito;
+import model.utentemanagement.Utente;
 import view.interfacciautenteunisa.DettagliLibroUtenteUnisaActivity;
 
 public class PrestitoPresenter {
-    static final String GenericURL="http://192.168.1.7:8080/UnisaLIBServer/PrestitoPresenter";
+    static final String GenericURL="http://192.168.255.1:8080/UnisaLIBServer/PrestitoPresenter";
     private AsyncHttpClient client=new AsyncHttpClient();
     public void creaPrestito(Prestito p) {
         String MYURL=GenericURL + "/crea-prestito";
@@ -30,7 +34,13 @@ public class PrestitoPresenter {
                 super.onSuccess(statusCode, headers, response);
                 try {
                     Prestito prestito = Prestito.fromJson(response);
+                    SharedPreferences userSession = PreferenceManager.getDefaultSharedPreferences(DettagliLibroUtenteUnisaActivity.getAppContext());
+                    SharedPreferences.Editor editor = userSession.edit();
+                    Utente utenteAggiornato=Utente.fromJson(userSession.getString("Utente", ""));
+                    utenteAggiornato.getPrestiti().add(prestito);
+                    editor.putString("Utente", Utente.toJson(utenteAggiornato)).apply();
                     Toast.makeText(DettagliLibroUtenteUnisaActivity.getAppContext(), "Prestito avvenuto con successo. Ritirare il libro in biblioteca", Toast.LENGTH_LONG).show();
+
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }

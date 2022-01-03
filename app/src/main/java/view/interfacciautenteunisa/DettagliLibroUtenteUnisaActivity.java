@@ -13,6 +13,7 @@ import android.widget.ImageButton;
 import android.widget.ImageSwitcher;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.preference.PreferenceManager;
@@ -87,36 +88,52 @@ public class DettagliLibroUtenteUnisaActivity extends Activity {
         prestitoButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //aggiungere controllo libro già in prestito all'utente loggato
-                AlertDialog confermaPrestito = new AlertDialog.Builder(DettagliLibroUtenteUnisaActivity.this).
-                        setTitle("Conferma prestito").
-                        setMessage("Sicuro di voler prendere in prestito il libro " + l.getTitolo() + "?").
-                        setPositiveButton(R.string.si, new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                                try {
-                                    u = Utente.fromJson(userSession.getString("Utente", ""));
+                u = Utente.fromJson(userSession.getString("Utente", ""));
+
+                //Controllo se il libro è già in prestito all'utente loggato
+                boolean in_prestito = false;
+                for (Prestito p_utente : u.getPrestiti())
+                    if (p_utente.getLibro().getIsbn().equals(l.getIsbn())) {
+                        in_prestito = true;
+                        break;
+                    }
+
+                if (!in_prestito) {
+                    AlertDialog confermaPrestito = new AlertDialog.Builder(DettagliLibroUtenteUnisaActivity.this).
+                            setTitle("Conferma prestito").
+                            setMessage("Sicuro di voler prendere in prestito il libro " + l.getTitolo() + "?").
+                            setPositiveButton(R.string.si, new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+                                    try {
+                                        u = Utente.fromJson(userSession.getString("Utente", ""));
+                                    } catch (JsonSyntaxException e) {
+                                        e.printStackTrace();
+                                    }
+                                    dialog.cancel();
+                                    Prestito p = new Prestito.PrestitoBuilder().
+                                            utente(u).
+                                            libro(l).
+                                            dataInizio(new GregorianCalendar()).build();
+                                    fp.creaPrestito(p);
                                 }
-                                catch (JsonSyntaxException e){
-                                    e.printStackTrace();
+                            }).
+                            setNegativeButton(R.string.no, new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+                                    dialog.cancel();
                                 }
-                                dialog.cancel();
-                                Prestito p = new Prestito.PrestitoBuilder().
-                                        utente(u).
-                                        libro(l).
-                                        dataInizio(new GregorianCalendar()).build();
-                                fp.creaPrestito(p);
-                            }
-                        }).
-                        setNegativeButton(R.string.no, new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                                dialog.cancel();
-                            }
-                        }).show();
+                            }).show();
+
+                }
+                else{
+                    Toast.makeText(DettagliLibroUtenteUnisaActivity.getAppContext(), "Hai il libro in prestito. Controlla nella sezione Miei Prestiti", Toast.LENGTH_LONG).show();
+                }
 
             }
+
         });
+
 
         interesseButton.setOnClickListener(new View.OnClickListener() {
             @Override
