@@ -63,7 +63,8 @@ public class ElencoPostazioniUtenteActivity extends Activity {
                     orariDisponibili.add(new Periodo(i, i+2));
                 ArrayList<Periodo> blocchi = new ArrayList<>();
                 for (Periodo periodo : pos.getBlocchi()) {
-                    blocchi.add(new Periodo(periodo.getOraInizio(), periodo.getOraFine()));
+                    if (periodo.getData().get(Calendar.YEAR)==date.get(Calendar.YEAR) && periodo.getData().get(Calendar.MONTH)==date.get(Calendar.MONTH) && periodo.getData().get(Calendar.DATE)==date.get(Calendar.DATE))
+                        blocchi.add(new Periodo(periodo.getOraInizio(), periodo.getOraFine()));
                 }
                 ArrayList<Periodo> orariNonDisponibili = new ArrayList<>();
                 for (Prenotazione prenotazione : prenotazioni){
