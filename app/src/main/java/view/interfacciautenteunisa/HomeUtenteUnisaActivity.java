@@ -1,18 +1,28 @@
 package view.interfacciautenteunisa;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
+import android.widget.ImageView;
+import android.widget.PopupMenu;
+import android.widget.Toast;
 
 import androidx.preference.PreferenceManager;
 
 import com.example.unisalib.R;
 import com.google.gson.JsonSyntaxException;
 
+import java.util.GregorianCalendar;
+
+import model.prestitomanagement.Prestito;
 import model.utentemanagement.Utente;
 import presenter.FacadePresenter;
 import view.interfacciageneral.MainActivity;
@@ -25,6 +35,7 @@ public class HomeUtenteUnisaActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.utente_home);
         context=getApplicationContext();
+        FacadePresenter fp=new FacadePresenter();
 
         SharedPreferences userSession = PreferenceManager.getDefaultSharedPreferences(this);
         try {
@@ -36,11 +47,59 @@ public class HomeUtenteUnisaActivity extends Activity {
 
         Button svcPrestitoButton = findViewById(R.id.svcPrestitoButton);
         Button svcPrenotazioneButton = findViewById(R.id.svcPrenotazioneButton);
+        ImageButton userIB=findViewById(R.id.userIB);
+
+        userIB.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                System.out.println("ciao");
+                PopupMenu popupMenu=new PopupMenu(HomeUtenteUnisaActivity.this, userIB);
+                popupMenu.getMenuInflater().inflate(R.menu.utente_menu, popupMenu.getMenu());
+                popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+                    @Override
+                    public boolean onMenuItemClick(MenuItem item) {
+                        String title=item.getTitle().toString();
+                        switch (title){
+                            case "Miei Prestiti":
+                                Toast.makeText(getApplicationContext(), title, Toast.LENGTH_SHORT).show();
+                                break;
+                            case "Mie Prenotazioni":
+                                Toast.makeText(getApplicationContext(), title, Toast.LENGTH_SHORT).show();
+                                break;
+                            case "Miei Interessi":
+                                Toast.makeText(getApplicationContext(), title, Toast.LENGTH_SHORT).show();
+                                break;
+                            case "Logout":
+                                AlertDialog confermaLogout = new AlertDialog.Builder(HomeUtenteUnisaActivity.this).
+                                        setTitle("Logout").
+                                        setMessage("Sicuro di voler uscire?").
+                                        setPositiveButton(R.string.si, new DialogInterface.OnClickListener() {
+                                            @Override
+                                            public void onClick(DialogInterface dialog, int which) {
+                                                fp.logout();
+                                                finish();
+                                            }
+                                        }).
+                                        setNegativeButton(R.string.no, new DialogInterface.OnClickListener() {
+                                            @Override
+                                            public void onClick(DialogInterface dialog, int which) {
+                                                dialog.cancel();
+                                            }
+                                        }).show();
+                                break;
+                        }
+                        return false;
+                    }
+                });
+
+                popupMenu.show();
+            }
+        });
+
 
         svcPrestitoButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                FacadePresenter fp = new FacadePresenter();
                 fp.mostraRicercaLibri(u.isAdmin());
             }
         });
@@ -48,10 +107,10 @@ public class HomeUtenteUnisaActivity extends Activity {
         svcPrenotazioneButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                FacadePresenter fp = new FacadePresenter();
                 fp.mostraRicercaPostazioni(u.isAdmin());
             }
         });
+
     }
 
     public static Context getAppContext() {

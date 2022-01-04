@@ -7,6 +7,7 @@
     android:layout_weight="1">
 
     <ImageButton
+        android:id="@+id/userIB"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="5dp"

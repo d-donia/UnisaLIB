@@ -29,6 +29,10 @@ public class FacadePresenter {
         utentePresenter.login(email, password);
     }
 
+    public void logout() {
+        utentePresenter.logout();
+    }
+
     public void mostraRicercaLibri(boolean is_admin) { libroPresenter.mostraRicercaLibri(is_admin); }
 
     public void ricercaLibri(String ricerca){
@@ -85,4 +89,6 @@ public class FacadePresenter {
     public ArrayList<String> mostraOrariDisponibili(ArrayList<Postazione> postazioni, String idPos, ArrayList<Prenotazione> prenotazioni, GregorianCalendar date){
         return postazionePresenter.mostraOrariDisponibili(postazioni, idPos, prenotazioni,date);
     }
+
+
 }

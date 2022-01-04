@@ -157,21 +157,10 @@ public class DettagliLibroUtenteUnisaActivity extends Activity {
     }
 
     public static void impostaNonInteresse(Utente utenteAggiornato){
-        if(utenteAggiornato!=null) {
-            SharedPreferences userSession = PreferenceManager.getDefaultSharedPreferences(DettagliLibroUtenteUnisaActivity.getAppContext());
-            SharedPreferences.Editor editor = userSession.edit();
-            editor.putString("Utente", Utente.toJson(utenteAggiornato)).apply();
-            System.out.println(userSession.getString("Utente",""));
-            interesseButton.setImageResource(R.drawable.like);
-        }
+        interesseButton.setImageResource(R.drawable.like);
     }
 
     public static void impostaInteresse(Utente utenteAggiornato){
-        if(utenteAggiornato!=null) {
-            SharedPreferences userSession = PreferenceManager.getDefaultSharedPreferences(DettagliLibroUtenteUnisaActivity.getAppContext());
-            SharedPreferences.Editor editor = userSession.edit();
-            editor.putString("Utente", Utente.toJson(utenteAggiornato)).apply();
-            interesseButton.setImageResource(R.drawable.rsz_heart);
-        }
+        interesseButton.setImageResource(R.drawable.rsz_heart);
     }
 }

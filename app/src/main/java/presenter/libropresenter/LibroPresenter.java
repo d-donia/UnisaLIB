@@ -43,7 +43,7 @@ import view.interfacciautenteunisa.DettagliLibroUtenteUnisaActivity;
 import view.interfacciautenteunisa.HomeUtenteUnisaActivity;
 
 public class LibroPresenter {
-    static final String GenericURL = "http://192.168.1.61:8080/UnisaLIBServer/LibroPresenter";
+    static final String GenericURL = "http://192.168.255.1:8080/UnisaLIBServer/LibroPresenter";
     private AsyncHttpClient client = new AsyncHttpClient();
 
     public void mostraRicercaLibri(boolean is_admin) {
@@ -181,8 +181,12 @@ public class LibroPresenter {
                 System.out.println("" + response);
                 try {
                     utente[0] = Utente.fromJson(response);
-                    utente[0].getEmail();
-                    DettagliLibroUtenteUnisaActivity.impostaNonInteresse(utente[0]);
+                    if(utente[0]!=null) {
+                        SharedPreferences userSession = PreferenceManager.getDefaultSharedPreferences(DettagliLibroUtenteUnisaActivity.getAppContext());
+                        SharedPreferences.Editor editor = userSession.edit();
+                        editor.putString("Utente", Utente.toJson(utente[0])).apply();
+                        DettagliLibroUtenteUnisaActivity.impostaNonInteresse(utente[0]);
+                    }
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
@@ -218,7 +222,13 @@ public class LibroPresenter {
                 System.out.println("" + response);
                 try {
                     utente[0] = Utente.fromJson(response);
-                    DettagliLibroUtenteUnisaActivity.impostaInteresse(utente[0]);
+                    if(utente[0]!=null){
+                        SharedPreferences userSession = PreferenceManager.getDefaultSharedPreferences(DettagliLibroUtenteUnisaActivity.getAppContext());
+                        SharedPreferences.Editor editor = userSession.edit();
+                        editor.putString("Utente", Utente.toJson(utente[0])).apply();
+                        DettagliLibroUtenteUnisaActivity.impostaInteresse(utente[0]);
+                    }
+
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
