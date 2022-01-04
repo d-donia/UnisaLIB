@@ -20,6 +20,7 @@ import model.postazionemanagement.Periodo;
 import model.postazionemanagement.Postazione;
 import model.prenotazionemanagement.Prenotazione;
 import presenter.FacadePresenter;
+import utils.SwitchDate;
 
 public class ElencoPostazioniUtenteActivity extends Activity {
     public FacadePresenter fp = new FacadePresenter();
@@ -53,43 +54,34 @@ public class ElencoPostazioniUtenteActivity extends Activity {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int k, long l) {
                 Postazione pos = new Postazione();
-                for (Postazione p : postazioni) {
+                for (Postazione p : postazioni)
                     if (p.getId().equals(adapterView.getSelectedItem().toString()))
                         pos = p;
-                }
-
                 ArrayList<Periodo> orariDisponibili = new ArrayList<>();
                 for (int i = 8; i < 18; i += 2)
                     orariDisponibili.add(new Periodo(i, i+2));
-                ArrayList<Periodo> blocchi = new ArrayList<>();
-                for (Periodo periodo : pos.getBlocchi()) {
-                    if (periodo.getData().get(Calendar.YEAR)==date.get(Calendar.YEAR) && periodo.getData().get(Calendar.MONTH)==date.get(Calendar.MONTH) && periodo.getData().get(Calendar.DATE)==date.get(Calendar.DATE))
-                        blocchi.add(new Periodo(periodo.getOraInizio(), periodo.getOraFine()));
-                }
-                ArrayList<Periodo> orariNonDisponibili = new ArrayList<>();
-                for (Prenotazione prenotazione : prenotazioni){
-                    if (prenotazione.getPostazione().getId().equals(pos.getId()) && date.get(Calendar.YEAR)==prenotazione.getData().get(Calendar.YEAR) &&
-                            date.get(Calendar.MONTH)==prenotazione.getData().get(Calendar.MONTH) && date.get(Calendar.DATE)==prenotazione.getData().get(Calendar.DATE)){
-                        System.out.println(prenotazione.getOraInizio());
-                        for ( int i = prenotazione.getOraInizio(); i < prenotazione.getOraFine(); i += 2){
-                            orariNonDisponibili.add(new Periodo(i, i+2));
-                        }
-                    }
-                }
 
-                for (Periodo p : blocchi){
+                ArrayList<Periodo> blocchi = new ArrayList<>();
+                for (Periodo periodo : pos.getBlocchi())
+                    if (SwitchDate.equalsDate(periodo.getData(), date))
+                        blocchi.add(new Periodo(periodo.getOraInizio(), periodo.getOraFine()));
+                for (Periodo p : blocchi)
                     if (orariDisponibili.contains(p))
                         orariDisponibili.remove(p);
-                }
-                for (Periodo p : orariNonDisponibili){
+
+                ArrayList<Periodo> orariNonDisponibili = new ArrayList<>();
+                for (Prenotazione prenotazione : prenotazioni)
+                    if (prenotazione.getPostazione().getId().equals(pos.getId()) && SwitchDate.equalsDate(prenotazione.getData(), date))
+                        for ( int i = prenotazione.getOraInizio(); i < prenotazione.getOraFine(); i += 2)
+                            orariNonDisponibili.add(new Periodo(i, i+2));
+                for (Periodo p : orariNonDisponibili)
                     if (orariDisponibili.contains(p))
                         orariDisponibili.remove(p);
-                }
 
                 ArrayList<String> fasceOrarie = new ArrayList<>();
-                for (Periodo p : orariDisponibili){
+                for (Periodo p : orariDisponibili)
                     fasceOrarie.add(p.getOraInizio() + " - " + p.getOraFine());
-                }
+
                 String[] orari = fasceOrarie.toArray(new String[0]);
                 orarioSpinner.setAdapter(new ArrayAdapter<>(getAppContext(), android.R.layout.simple_spinner_dropdown_item, orari));
             }
