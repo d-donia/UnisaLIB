@@ -4,6 +4,7 @@ import android.os.Parcel;
 import android.os.Parcelable;
 
 import com.google.gson.Gson;
+import com.google.gson.JsonSyntaxException;
 
 import org.json.JSONArray;
 
@@ -62,6 +63,12 @@ public class Posizione{
     public static String toJson(Posizione p) {
         Gson gson = new Gson();
         return gson.toJson(p);
+    }
+
+    public static Posizione fromJsonToPosizione(String json) throws JsonSyntaxException {
+        Gson gson = new Gson();
+        Posizione posizione= gson.fromJson(json, Posizione.class);
+        return posizione;
     }
 
 

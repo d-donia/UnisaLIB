@@ -7,9 +7,11 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.GregorianCalendar;
 
 import model.libromanagement.Libro;
+import model.posizionemanagement.Posizione;
 import model.postazionemanagement.Postazione;
 import model.utentemanagement.Utente;
 
@@ -45,6 +47,12 @@ public class Prenotazione {
     public static String toJson(ArrayList<Prenotazione> prenotazioni) {
         Gson gson = new Gson();
         return gson.toJson(prenotazioni);
+    }
+
+    public static ArrayList<Prenotazione> fromJson(String json) {
+        Gson gson = new Gson();
+        ArrayList<Prenotazione> prenotazioni= new ArrayList<>(Arrays.asList(gson.fromJson(json,Prenotazione[].class)));
+        return prenotazioni;
     }
 
     public GregorianCalendar getData() {

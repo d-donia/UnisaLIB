@@ -20,22 +20,24 @@ import androidx.fragment.app.FragmentManager;
 import com.example.unisalib.R;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.GregorianCalendar;
 
 import model.posizionemanagement.Posizione;
 import presenter.FacadePresenter;
 
 public class RicercaPostazioneUtenteActivity extends Activity {
-    public FacadePresenter fp=new FacadePresenter();
+    public FacadePresenter fp;
     public static Context context;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         context = getApplicationContext();
+        fp = new FacadePresenter();
         setContentView(R.layout.utente_ricerca_postazione);
-        Spinner bibliotecaSpinner = (Spinner) findViewById(R.id.bibliotecaSpinner);
-        Spinner zonaSpinner = (Spinner) findViewById(R.id.zonaSpinner);
+        Spinner bibliotecaSpinner = findViewById(R.id.bibliotecaSpinner);
+        Spinner zonaSpinner = findViewById(R.id.zonaSpinner);
         DatePicker datePicker = findViewById(R.id.datePicker);
         Button cercaButton = findViewById(R.id.cercaButton);
         String p = getIntent().getStringExtra("Posizioni");

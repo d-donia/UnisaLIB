@@ -21,7 +21,7 @@ import model.utentemanagement.Utente;
 import view.interfacciautenteunisa.DettagliLibroUtenteUnisaActivity;
 
 public class PrestitoPresenter {
-    static final String GenericURL="http://192.168.255.1:8080/UnisaLIBServer/PrestitoPresenter";
+    static final String GenericURL="http://192.168.1.61:8080/UnisaLIBServer/PrestitoPresenter";
     private AsyncHttpClient client=new AsyncHttpClient();
     public void creaPrestito(Prestito p) {
         String MYURL=GenericURL + "/crea-prestito";

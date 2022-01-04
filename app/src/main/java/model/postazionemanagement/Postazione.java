@@ -11,7 +11,6 @@ import java.util.Arrays;
 
 import model.libromanagement.Libro;
 import model.posizionemanagement.Posizione;
-import model.utentemanagement.Utente;
 
 public class Postazione {
     private String id;
@@ -28,6 +27,10 @@ public class Postazione {
     public Postazione(boolean disponibile, Posizione posizione) {
         this.disponibile = disponibile;
         this.posizione = posizione;
+    }
+
+    public Postazione() {
+
     }
 
 
@@ -49,6 +52,12 @@ public class Postazione {
         Gson gson = new Gson();
         Postazione p = gson.fromJson(""+json.get("postazione"),Postazione.class);
         return p;
+    }
+
+    public static ArrayList<Postazione> fromJson(String json) {
+        Gson gson = new Gson();
+        ArrayList<Postazione> postazioni= new ArrayList<>(Arrays.asList(gson.fromJson(json,Postazione[].class)));
+        return postazioni;
     }
 
     public String getId() {
