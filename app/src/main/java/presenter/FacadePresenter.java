@@ -1,10 +1,13 @@
 package presenter;
 
+import java.util.ArrayList;
 import java.util.GregorianCalendar;
 
 import model.libromanagement.Libro;
 import model.posizionemanagement.Posizione;
 import model.postazionemanagement.Periodo;
+import model.postazionemanagement.Postazione;
+import model.prenotazionemanagement.Prenotazione;
 import model.prestitomanagement.Prestito;
 import model.utentemanagement.Utente;
 import presenter.libropresenter.LibroPresenter;
@@ -77,5 +80,9 @@ public class FacadePresenter {
 
     public void mostraElencoPostazioni(Posizione p, GregorianCalendar date) {
         postazionePresenter.mostraElencoPostazioni(p, date);
+    }
+
+    public ArrayList<String> mostraOrariDisponibili(ArrayList<Postazione> postazioni, String idPos, ArrayList<Prenotazione> prenotazioni, GregorianCalendar date){
+        return postazionePresenter.mostraOrariDisponibili(postazioni, idPos, prenotazioni,date);
     }
 }

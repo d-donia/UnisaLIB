@@ -8,6 +8,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.unisalib.R;
 
@@ -53,46 +54,18 @@ public class ElencoPostazioniUtenteActivity extends Activity {
         postazioneSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int k, long l) {
-                Postazione pos = new Postazione();
-                for (Postazione p : postazioni)
-                    if (p.getId().equals(adapterView.getSelectedItem().toString()))
-                        pos = p;
-                ArrayList<Periodo> orariDisponibili = new ArrayList<>();
-                for (int i = 8; i < 18; i += 2)
-                    orariDisponibili.add(new Periodo(i, i+2));
-
-                ArrayList<Periodo> blocchi = new ArrayList<>();
-                for (Periodo periodo : pos.getBlocchi())
-                    if (SwitchDate.equalsDate(periodo.getData(), date))
-                        blocchi.add(new Periodo(periodo.getOraInizio(), periodo.getOraFine()));
-                for (Periodo p : blocchi)
-                    if (orariDisponibili.contains(p))
-                        orariDisponibili.remove(p);
-
-                ArrayList<Periodo> orariNonDisponibili = new ArrayList<>();
-                for (Prenotazione prenotazione : prenotazioni)
-                    if (prenotazione.getPostazione().getId().equals(pos.getId()) && SwitchDate.equalsDate(prenotazione.getData(), date))
-                        for ( int i = prenotazione.getOraInizio(); i < prenotazione.getOraFine(); i += 2)
-                            orariNonDisponibili.add(new Periodo(i, i+2));
-                for (Periodo p : orariNonDisponibili)
-                    if (orariDisponibili.contains(p))
-                        orariDisponibili.remove(p);
-
-                ArrayList<String> fasceOrarie = new ArrayList<>();
-                for (Periodo p : orariDisponibili)
-                    fasceOrarie.add(p.getOraInizio() + " - " + p.getOraFine());
-
-                String[] orari = fasceOrarie.toArray(new String[0]);
+                String id = adapterView.getSelectedItem().toString();
+                ArrayList<String> orariDisponibili = fp.mostraOrariDisponibili(postazioni, id, prenotazioni, date);
+                if (orariDisponibili.isEmpty())
+                    Toast.makeText(ElencoPostazioniUtenteActivity.getAppContext(), "Nessuna fascia oraria disponibile per questa postazione", Toast.LENGTH_SHORT).show();
+                String[] orari = orariDisponibili.toArray(new String[0]);
                 orarioSpinner.setAdapter(new ArrayAdapter<>(getAppContext(), android.R.layout.simple_spinner_dropdown_item, orari));
             }
 
             @Override
             public void onNothingSelected(AdapterView<?> adapterView) {
-
             }
         });
-
-
     }
 
     public static Context getAppContext() {

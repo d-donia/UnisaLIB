@@ -27,6 +27,8 @@ import model.posizionemanagement.Posizione;
 import presenter.FacadePresenter;
 
 public class RicercaPostazioneUtenteActivity extends Activity {
+    public final long SECONDINMILLS = 1000;
+    public final long WEEKINMILLS = 604800000;
     public FacadePresenter fp;
     public static Context context;
 
@@ -45,10 +47,9 @@ public class RicercaPostazioneUtenteActivity extends Activity {
 
         //inizializzazione del Biblioteca Spinner
         ArrayList<String> b = new ArrayList<>();
-        for (Posizione x: posizioni) {
+        for (Posizione x: posizioni)
             if (!b.contains(x.getBiblioteca()))
                 b.add(x.getBiblioteca());
-        }
         String[] biblioteche = b.toArray(new String[0]);
         bibliotecaSpinner.setAdapter(new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, biblioteche));
 
@@ -65,15 +66,14 @@ public class RicercaPostazioneUtenteActivity extends Activity {
                 System.out.println(z);
                 String[] zone = z.toArray(new String[0]);
                 zonaSpinner.setAdapter(new ArrayAdapter<>(getAppContext(), android.R.layout.simple_spinner_dropdown_item, zone));
-
             }
             @Override
             public void onNothingSelected(AdapterView<?> adapterView) {
             //
             }
         });
-        datePicker.setMinDate(System.currentTimeMillis() - 1000);
-        datePicker.setMaxDate(System.currentTimeMillis() + 604800000);
+        datePicker.setMinDate(System.currentTimeMillis() - SECONDINMILLS);
+        datePicker.setMaxDate(System.currentTimeMillis() + WEEKINMILLS);
 
         cercaButton.setOnClickListener(new View.OnClickListener() {
             @Override
