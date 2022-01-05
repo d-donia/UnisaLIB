@@ -18,9 +18,6 @@ public class SwitchDate {
     }
 
     public static boolean equalsDate(GregorianCalendar d1, GregorianCalendar d2){
-        if(d1.get(Calendar.YEAR)==d2.get(Calendar.YEAR) && d1.get(Calendar.MONTH)==d2.get(Calendar.MONTH) && d1.get(Calendar.DATE)==d2.get(Calendar.DATE))
-            return true;
-        else
-            return false;
+        return (d1.get(Calendar.YEAR)==d2.get(Calendar.YEAR) && d1.get(Calendar.MONTH)==d2.get(Calendar.MONTH) && d1.get(Calendar.DATE)==d2.get(Calendar.DATE));
     }
 }

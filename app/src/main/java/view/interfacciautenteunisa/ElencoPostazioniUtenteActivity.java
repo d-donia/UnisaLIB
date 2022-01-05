@@ -2,13 +2,17 @@ package view.interfacciautenteunisa;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.preference.PreferenceManager;
 
 import com.example.unisalib.R;
 
@@ -20,6 +24,7 @@ import model.posizionemanagement.Posizione;
 import model.postazionemanagement.Periodo;
 import model.postazionemanagement.Postazione;
 import model.prenotazionemanagement.Prenotazione;
+import model.utentemanagement.Utente;
 import presenter.FacadePresenter;
 import utils.SwitchDate;
 
@@ -33,10 +38,13 @@ public class ElencoPostazioniUtenteActivity extends Activity {
         setContentView(R.layout.utente_elenco_postazioni);
         fp = new FacadePresenter();
         context = getApplicationContext();
+        SharedPreferences userSession = PreferenceManager.getDefaultSharedPreferences(this);
+        Utente u = Utente.fromJson(userSession.getString("Utente", ""));
         Spinner postazioneSpinner = findViewById(R.id.postazioneSpinner);
         Spinner orarioSpinner = findViewById(R.id.orarioSpinner);
         TextView posizioneText = findViewById(R.id.posizioneTextView);
         TextView dataText = findViewById(R.id.dataTextView);
+        Button confermaButton = findViewById(R.id.confermaPrenotazioneButton);
         ArrayList<Postazione> postazioni = Postazione.fromJson(getIntent().getStringExtra("postazioni"));
         ArrayList<Prenotazione> prenotazioni = Prenotazione.fromJson(getIntent().getStringExtra("prenotazioni"));
         Posizione posizione = Posizione.fromJsonToPosizione(getIntent().getStringExtra("posizione"));
@@ -64,6 +72,20 @@ public class ElencoPostazioniUtenteActivity extends Activity {
 
             @Override
             public void onNothingSelected(AdapterView<?> adapterView) {
+            }
+        });
+        confermaButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                // inserire richiesta conferma utente
+                Postazione pos = new Postazione();
+                for (Postazione p : postazioni)
+                    if (p.getId().equals(postazioneSpinner.getSelectedItem().toString()))
+                        pos=p;
+                String orarioSelected = orarioSpinner.getSelectedItem().toString();
+                int oraInizio = Integer.getInteger(orarioSelected.substring(0, (orarioSelected.indexOf("-")-1)));
+                int oraFine = Integer.getInteger(orarioSelected.substring(0, (orarioSelected.indexOf("-")+1)));
+                Prenotazione pre = new Prenotazione(date, oraInizio, oraFine, u, pos);
             }
         });
     }

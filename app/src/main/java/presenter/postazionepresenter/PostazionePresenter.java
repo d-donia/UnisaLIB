@@ -127,16 +127,11 @@ public class PostazionePresenter {
         ArrayList<Periodo> orariNonDisponibili = new ArrayList<>();
         for (Prenotazione prenotazione : prenotazioni)
             if (prenotazione.getPostazione().getId().equals(pos.getId()) && SwitchDate.equalsDate(prenotazione.getData(), date))
-                for (int i = prenotazione.getOraInizio(); i < prenotazione.getOraFine(); i += 2) {
-                    if (i == 13)
-                        i++;
-                    orariNonDisponibili.add(new Periodo(i, i + 2));
-                }
-        for(Periodo p : orariDisponibili){
-            GregorianCalendar currentTime = new GregorianCalendar();
+                orariNonDisponibili.add(new Periodo(prenotazione.getOraInizio(), prenotazione.getOraFine()));
+        GregorianCalendar currentTime = new GregorianCalendar();
+        for(Periodo p : orariDisponibili)
             if (SwitchDate.equalsDate(date, currentTime) && currentTime.get(Calendar.HOUR_OF_DAY)>=p.getOraFine())
                 orariNonDisponibili.add(p);
-        }
         for (Periodo p : orariNonDisponibili)
             if (orariDisponibili.contains(p))
                 orariDisponibili.remove(p);

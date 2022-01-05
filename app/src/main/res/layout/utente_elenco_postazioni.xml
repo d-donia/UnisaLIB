@@ -105,7 +105,7 @@
             android:layout_height="200dp" />
 
         <Button
-            android:id="@+id/cercaButton"
+            android:id="@+id/confermaPrenotazioneButton"
             android:layout_width="200dp"
             android:layout_height="60dp"
             android:layout_gravity="center"
