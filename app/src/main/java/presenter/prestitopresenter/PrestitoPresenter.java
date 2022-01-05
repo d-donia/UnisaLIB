@@ -36,7 +36,7 @@ public class PrestitoPresenter {
                     Prestito prestito = Prestito.fromJson(response);
                     SharedPreferences userSession = PreferenceManager.getDefaultSharedPreferences(DettagliLibroUtenteUnisaActivity.getAppContext());
                     SharedPreferences.Editor editor = userSession.edit();
-                    Utente utenteAggiornato=Utente.fromJson(userSession.getString("Utente", ""));
+                    Utente utenteAggiornato = Utente.fromJson(userSession.getString("Utente", ""));
                     utenteAggiornato.getPrestiti().add(prestito);
                     editor.putString("Utente", Utente.toJson(utenteAggiornato)).apply();
                     Toast.makeText(DettagliLibroUtenteUnisaActivity.getAppContext(), "Prestito avvenuto con successo. Ritirare il libro in biblioteca", Toast.LENGTH_LONG).show();

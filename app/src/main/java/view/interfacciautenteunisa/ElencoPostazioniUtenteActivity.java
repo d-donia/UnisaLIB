@@ -1,7 +1,9 @@
 package view.interfacciautenteunisa;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
@@ -15,6 +17,7 @@ import android.widget.Toast;
 import androidx.preference.PreferenceManager;
 
 import com.example.unisalib.R;
+import com.google.gson.JsonSyntaxException;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -24,6 +27,7 @@ import model.posizionemanagement.Posizione;
 import model.postazionemanagement.Periodo;
 import model.postazionemanagement.Postazione;
 import model.prenotazionemanagement.Prenotazione;
+import model.prestitomanagement.Prestito;
 import model.utentemanagement.Utente;
 import presenter.FacadePresenter;
 import utils.SwitchDate;
@@ -74,18 +78,34 @@ public class ElencoPostazioniUtenteActivity extends Activity {
             public void onNothingSelected(AdapterView<?> adapterView) {
             }
         });
-        confermaButton.setOnClickListener(new View.OnClickListener() {
+        confermaButton.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view) {
-                // inserire richiesta conferma utente
                 Postazione pos = new Postazione();
                 for (Postazione p : postazioni)
                     if (p.getId().equals(postazioneSpinner.getSelectedItem().toString()))
                         pos=p;
                 String orarioSelected = orarioSpinner.getSelectedItem().toString();
-                int oraInizio = Integer.getInteger(orarioSelected.substring(0, (orarioSelected.indexOf("-")-1)));
-                int oraFine = Integer.getInteger(orarioSelected.substring(0, (orarioSelected.indexOf("-")+1)));
+                int oraInizio = Integer.parseInt(orarioSelected.substring(0, (orarioSelected.indexOf("-")-1)));
+                int oraFine = Integer.parseInt(orarioSelected.substring(orarioSelected.indexOf("-")+2));
                 Prenotazione pre = new Prenotazione(date, oraInizio, oraFine, u, pos);
+
+                AlertDialog confermaPrestito = new AlertDialog.Builder(ElencoPostazioniUtenteActivity.this).
+                        setTitle("Conferma prenotazione").
+                        setMessage("Sicuro di voler prenotare la postazione " + pos.getId() + " dalle ore " + pre.getOraInizio() + " alle ore " + pre.getOraFine() + "?").
+                        setPositiveButton(R.string.si, new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                dialog.cancel();
+                                fp.creaPrenotazione(pre);
+                            }
+                        }).
+                        setNegativeButton(R.string.no, new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                dialog.cancel();
+                            }
+                        }).show();
             }
         });
     }

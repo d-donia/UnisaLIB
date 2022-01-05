@@ -91,4 +91,7 @@ public class FacadePresenter {
     }
 
 
+    public void creaPrenotazione(Prenotazione prenotazione) {
+        prenotazionePresenter.creaPrenotazione(prenotazione);
+    }
 }

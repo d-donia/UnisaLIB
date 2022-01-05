@@ -130,7 +130,7 @@ public class PostazionePresenter {
                 orariNonDisponibili.add(new Periodo(prenotazione.getOraInizio(), prenotazione.getOraFine()));
         GregorianCalendar currentTime = new GregorianCalendar();
         for(Periodo p : orariDisponibili)
-            if (SwitchDate.equalsDate(date, currentTime) && currentTime.get(Calendar.HOUR_OF_DAY)>=p.getOraFine())
+            if (SwitchDate.equalsDate(date, currentTime) && currentTime.get(Calendar.HOUR_OF_DAY)>=p.getOraInizio())
                 orariNonDisponibili.add(p);
         for (Periodo p : orariNonDisponibili)
             if (orariDisponibili.contains(p))

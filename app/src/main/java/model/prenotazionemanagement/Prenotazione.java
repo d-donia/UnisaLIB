@@ -1,11 +1,13 @@
 package model.prenotazionemanagement;
 
 import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.GregorianCalendar;
@@ -13,6 +15,7 @@ import java.util.GregorianCalendar;
 import model.libromanagement.Libro;
 import model.posizionemanagement.Posizione;
 import model.postazionemanagement.Postazione;
+import model.prestitomanagement.Prestito;
 import model.utentemanagement.Utente;
 
 public class Prenotazione {
@@ -53,6 +56,13 @@ public class Prenotazione {
         Gson gson = new Gson();
         ArrayList<Prenotazione> prenotazioni= new ArrayList<>(Arrays.asList(gson.fromJson(json,Prenotazione[].class)));
         return prenotazioni;
+    }
+
+    public static String toJson(Prenotazione p){
+        Gson gson = new Gson();
+        Type fooType = new TypeToken<Prenotazione>() {}.getType();
+        String json = gson.toJson(p,fooType);
+        return json;
     }
 
     public GregorianCalendar getData() {
