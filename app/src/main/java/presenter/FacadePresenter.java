@@ -43,6 +43,10 @@ public class FacadePresenter {
         prestitoPresenter.creaPrestito(p);
     }
 
+    public void mostraMieiPrestiti() {
+        prestitoPresenter.mostraMieiPrestiti();
+    }
+
     public void rimuoviLibroFromInteressi(Libro l, Utente u) {
         libroPresenter.rimuoviLibroFromInteressi(l,u);
 }

@@ -61,7 +61,7 @@ public class HomeUtenteUnisaActivity extends Activity {
                         String title=item.getTitle().toString();
                         switch (title){
                             case "Miei Prestiti":
-                                Toast.makeText(getApplicationContext(), title, Toast.LENGTH_SHORT).show();
+                                fp.mostraMieiPrestiti();
                                 break;
                             case "Mie Prenotazioni":
                                 Toast.makeText(getApplicationContext(), title, Toast.LENGTH_SHORT).show();

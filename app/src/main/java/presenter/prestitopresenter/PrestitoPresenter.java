@@ -1,5 +1,6 @@
 package presenter.prestitopresenter;
 
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.widget.Toast;
 
@@ -19,9 +20,11 @@ import cz.msebera.android.httpclient.Header;
 import model.prestitomanagement.Prestito;
 import model.utentemanagement.Utente;
 import view.interfacciautenteunisa.DettagliLibroUtenteUnisaActivity;
+import view.interfacciautenteunisa.HomeUtenteUnisaActivity;
+import view.interfacciautenteunisa.MieiPrestitiActivity;
 
 public class PrestitoPresenter {
-    static final String GenericURL="http://192.168.1.61:8080/UnisaLIBServer/PrestitoPresenter";
+    static final String GenericURL="http://192.168.255.1:8080/UnisaLIBServer/PrestitoPresenter";
     private AsyncHttpClient client=new AsyncHttpClient();
     public void creaPrestito(Prestito p) {
         String MYURL=GenericURL + "/crea-prestito";
@@ -33,14 +36,13 @@ public class PrestitoPresenter {
             public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
                 super.onSuccess(statusCode, headers, response);
                 try {
-                    Prestito prestito = Prestito.fromJson(response);
-                    SharedPreferences userSession = PreferenceManager.getDefaultSharedPreferences(DettagliLibroUtenteUnisaActivity.getAppContext());
-                    SharedPreferences.Editor editor = userSession.edit();
-                    Utente utenteAggiornato = Utente.fromJson(userSession.getString("Utente", ""));
-                    utenteAggiornato.getPrestiti().add(prestito);
-                    editor.putString("Utente", Utente.toJson(utenteAggiornato)).apply();
-                    Toast.makeText(DettagliLibroUtenteUnisaActivity.getAppContext(), "Prestito avvenuto con successo. Ritirare il libro in biblioteca", Toast.LENGTH_LONG).show();
-
+                    Utente utenteAggiornato = Utente.fromJson(response);
+                    if(utenteAggiornato!=null) {
+                        SharedPreferences userSession = PreferenceManager.getDefaultSharedPreferences(DettagliLibroUtenteUnisaActivity.getAppContext());
+                        SharedPreferences.Editor editor = userSession.edit();
+                        editor.putString("Utente", Utente.toJson(utenteAggiornato)).apply();
+                        Toast.makeText(DettagliLibroUtenteUnisaActivity.getAppContext(), "Prestito avvenuto con successo. Ritirare il libro in biblioteca", Toast.LENGTH_LONG).show();
+                    }
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
@@ -67,5 +69,12 @@ public class PrestitoPresenter {
                 Toast.makeText(DettagliLibroUtenteUnisaActivity.getAppContext(), responseString + ". Riprovare più tardi", Toast.LENGTH_LONG).show();
             }
         });
+    }
+
+    public void mostraMieiPrestiti() {
+        Intent i = new Intent();
+        i.setClass(HomeUtenteUnisaActivity.getAppContext(), MieiPrestitiActivity.class);
+        i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        HomeUtenteUnisaActivity.getAppContext().startActivity(i);
     }
 }
