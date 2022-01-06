@@ -2,6 +2,7 @@ package view.interfacciautenteunisa;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
@@ -31,8 +32,8 @@ public class MieiPrestitiActivity extends Activity {
         context=getApplicationContext();
 
         SharedPreferences userSession = PreferenceManager.getDefaultSharedPreferences(this);
-        Utente utente = Utente.fromJson(userSession.getString("Utente",""));
-        ArrayList<Prestito> prestitiUtente=utente.getPrestiti();
+        Intent i=getIntent();
+        ArrayList<Prestito> prestitiUtente=Prestito.fromJson(i.getStringExtra("prestiti"));
 
         ListView lv = findViewById(R.id.prestitiLV);
 

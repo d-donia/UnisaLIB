@@ -19,6 +19,7 @@ import java.lang.reflect.ParameterizedType;
 import cz.msebera.android.httpclient.Header;
 import model.prestitomanagement.Prestito;
 import model.utentemanagement.Utente;
+import view.interfacciageneral.MainActivity;
 import view.interfacciautenteunisa.DettagliLibroUtenteUnisaActivity;
 import view.interfacciautenteunisa.HomeUtenteUnisaActivity;
 import view.interfacciautenteunisa.MieiPrestitiActivity;
@@ -72,9 +73,37 @@ public class PrestitoPresenter {
     }
 
     public void mostraMieiPrestiti() {
-        Intent i = new Intent();
-        i.setClass(HomeUtenteUnisaActivity.getAppContext(), MieiPrestitiActivity.class);
-        i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-        HomeUtenteUnisaActivity.getAppContext().startActivity(i);
+        SharedPreferences userSession = PreferenceManager.getDefaultSharedPreferences(MainActivity.getAppContext());
+        String MYURL=GenericURL + "/all-prestiti";
+        RequestParams params;
+        params=new RequestParams();
+        params.put("utente",userSession.getString("Utente",""));
+        client.post(MYURL, params, new JsonHttpResponseHandler(){
+            @Override
+            public void onSuccess(int statusCode, Header[] headers, JSONArray response) {
+                super.onSuccess(statusCode, headers, response);
+                Intent i = new Intent();
+                i.setClass(HomeUtenteUnisaActivity.getAppContext(), MieiPrestitiActivity.class);
+                i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                i.putExtra("prestiti",""+response);
+                HomeUtenteUnisaActivity.getAppContext().startActivity(i);
+            }
+
+            @Override
+            public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONObject errorResponse) {
+                super.onFailure(statusCode, headers, throwable, errorResponse);
+            }
+
+            @Override
+            public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONArray errorResponse) {
+                super.onFailure(statusCode, headers, throwable, errorResponse);
+            }
+
+            @Override
+            public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
+                super.onFailure(statusCode, headers, responseString, throwable);
+            }
+        });
+
     }
 }

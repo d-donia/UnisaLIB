@@ -1,6 +1,8 @@
 package model.prestitomanagement;
 
 import java.lang.reflect.Type;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.GregorianCalendar;
 import java.util.List;
 
@@ -127,6 +129,12 @@ public class Prestito {
     public static Prestito fromJson(JSONObject json) throws JSONException {
         Gson gson = new Gson();
         Prestito p = gson.fromJson(""+json.get("Prestito"),Prestito.class);
+        return p;
+    }
+
+    public static ArrayList<Prestito> fromJson(String json) throws JsonSyntaxException {
+        Gson gson = new Gson();
+        ArrayList<Prestito> p= new ArrayList<>(Arrays.asList(gson.fromJson(json,Prestito[].class)));
         return p;
     }
 }
