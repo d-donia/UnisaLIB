@@ -25,7 +25,7 @@ import view.interfacciautenteunisa.HomeUtenteUnisaActivity;
 import view.interfacciautenteunisa.MieiPrestitiActivity;
 
 public class PrestitoPresenter {
-    static final String GenericURL="http://192.168.255.1:8080/UnisaLIBServer/PrestitoPresenter";
+    static final String GenericURL="http://192.168.1.7:8080/UnisaLIBServer/PrestitoPresenter";
     private AsyncHttpClient client=new AsyncHttpClient();
     public void creaPrestito(Prestito p) {
         String MYURL=GenericURL + "/crea-prestito";
@@ -77,7 +77,8 @@ public class PrestitoPresenter {
         String MYURL=GenericURL + "/all-prestiti";
         RequestParams params;
         params=new RequestParams();
-        params.put("utente",userSession.getString("Utente",""));
+        Utente u=Utente.fromJson(userSession.getString("Utente",""));
+        params.put("utente",u.getEmail());
         client.post(MYURL, params, new JsonHttpResponseHandler(){
             @Override
             public void onSuccess(int statusCode, Header[] headers, JSONArray response) {

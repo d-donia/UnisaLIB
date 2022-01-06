@@ -43,7 +43,7 @@ import view.interfacciautenteunisa.DettagliLibroUtenteUnisaActivity;
 import view.interfacciautenteunisa.HomeUtenteUnisaActivity;
 
 public class LibroPresenter {
-    static final String GenericURL = "http://192.168.255.1:8080/UnisaLIBServer/LibroPresenter";
+    static final String GenericURL = "http://192.168.1.7:8080/UnisaLIBServer/LibroPresenter";
     private AsyncHttpClient client = new AsyncHttpClient();
 
     public void mostraRicercaLibri(boolean is_admin) {
@@ -173,19 +173,18 @@ public class LibroPresenter {
         RequestParams params = new RequestParams();
         params.put("isbn", l.getIsbn());
         params.put("email", u.getEmail());
-        final Utente[] utente = {null};
         client.post(MYURL, params, new JsonHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
                 super.onSuccess(statusCode, headers, response);
                 System.out.println("" + response);
                 try {
-                    utente[0] = Utente.fromJson(response);
-                    if(utente[0]!=null) {
+                    Utente utente= Utente.fromJson(response);
+                    if(utente!=null) {
                         SharedPreferences userSession = PreferenceManager.getDefaultSharedPreferences(DettagliLibroUtenteUnisaActivity.getAppContext());
                         SharedPreferences.Editor editor = userSession.edit();
-                        editor.putString("Utente", Utente.toJson(utente[0])).apply();
-                        DettagliLibroUtenteUnisaActivity.impostaNonInteresse(utente[0]);
+                        editor.putString("Utente", Utente.toJson(utente)).apply();
+                        DettagliLibroUtenteUnisaActivity.impostaNonInteresse(utente);
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -195,16 +194,19 @@ public class LibroPresenter {
             @Override
             public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONObject errorResponse) {
                 super.onFailure(statusCode, headers, throwable, errorResponse);
+                Toast.makeText(HomeUtenteUnisaActivity.getAppContext(), errorResponse.toString(), Toast.LENGTH_SHORT).show();
             }
 
             @Override
             public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONArray errorResponse) {
                 super.onFailure(statusCode, headers, throwable, errorResponse);
+                Toast.makeText(HomeUtenteUnisaActivity.getAppContext(), errorResponse.toString(), Toast.LENGTH_SHORT).show();
             }
 
             @Override
             public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
                 super.onFailure(statusCode, headers, responseString, throwable);
+                Toast.makeText(HomeUtenteUnisaActivity.getAppContext(), responseString, Toast.LENGTH_SHORT).show();
             }
         });
     }
@@ -214,19 +216,18 @@ public class LibroPresenter {
         RequestParams params = new RequestParams();
         params.put("isbn", l.getIsbn());
         params.put("email", u.getEmail());
-        final Utente[] utente = {null};
         client.post(MYURL, params, new JsonHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
                 super.onSuccess(statusCode, headers, response);
                 System.out.println("" + response);
                 try {
-                    utente[0] = Utente.fromJson(response);
-                    if(utente[0]!=null){
+                    Utente utente = Utente.fromJson(response);
+                    if(utente!=null){
                         SharedPreferences userSession = PreferenceManager.getDefaultSharedPreferences(DettagliLibroUtenteUnisaActivity.getAppContext());
                         SharedPreferences.Editor editor = userSession.edit();
-                        editor.putString("Utente", Utente.toJson(utente[0])).apply();
-                        DettagliLibroUtenteUnisaActivity.impostaInteresse(utente[0]);
+                        editor.putString("Utente", Utente.toJson(utente)).apply();
+                        DettagliLibroUtenteUnisaActivity.impostaInteresse(utente);
                     }
 
                 } catch (JSONException e) {
@@ -237,18 +238,20 @@ public class LibroPresenter {
             @Override
             public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONObject errorResponse) {
                 super.onFailure(statusCode, headers, throwable, errorResponse);
+                Toast.makeText(HomeUtenteUnisaActivity.getAppContext(), errorResponse.toString(), Toast.LENGTH_SHORT).show();
             }
 
             @Override
             public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONArray errorResponse) {
                 super.onFailure(statusCode, headers, throwable, errorResponse);
+                Toast.makeText(HomeUtenteUnisaActivity.getAppContext(), errorResponse.toString(), Toast.LENGTH_SHORT).show();
             }
 
             @Override
             public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
                 super.onFailure(statusCode, headers, responseString, throwable);
+                Toast.makeText(HomeUtenteUnisaActivity.getAppContext(), responseString, Toast.LENGTH_SHORT).show();
             }
         });
     }
-
 }

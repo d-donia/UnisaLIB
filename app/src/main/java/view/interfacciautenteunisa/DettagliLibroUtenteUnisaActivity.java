@@ -89,18 +89,6 @@ public class DettagliLibroUtenteUnisaActivity extends Activity {
             @Override
             public void onClick(View v) {
                 u = Utente.fromJson(userSession.getString("Utente", ""));
-
-                //Controllo se il libro è già in prestito all'utente loggato
-                boolean in_prestito = false;
-                for (Prestito p_utente : u.getPrestiti()) {
-                    System.out.println("Data consegna:" + p_utente.getDataConsegna());
-                    if (p_utente.getLibro().getIsbn().equals(l.getIsbn()) && p_utente.getDataConsegna() == null) {
-                        in_prestito = true;
-                        break;
-                    }
-                }
-
-                if (!in_prestito) {
                     AlertDialog confermaPrestito = new AlertDialog.Builder(DettagliLibroUtenteUnisaActivity.this).
                             setTitle("Conferma prestito").
                             setMessage("Sicuro di voler prendere in prestito il libro " + l.getTitolo() + "?").
@@ -126,17 +114,9 @@ public class DettagliLibroUtenteUnisaActivity extends Activity {
                                     dialog.cancel();
                                 }
                             }).show();
-
-                }
-                else{
-                    Toast.makeText(DettagliLibroUtenteUnisaActivity.getAppContext(), "Hai il libro in prestito. Controlla nella sezione Miei Prestiti", Toast.LENGTH_LONG).show();
-                }
-
             }
 
         });
-
-
         interesseButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
