@@ -62,15 +62,25 @@ public class PrestitoAdapter extends ArrayAdapter<Prestito> {
         }
 
         int voto=p.getVoto();
-        if(voto!=0){
+        if(dataConsegna!=null){
             System.out.println("Voto:" +voto);
-            prestitoRatingTV.setText(voto);
-            prestitoStarIV.setVisibility(View.VISIBLE);
-            valutaButton.setVisibility(View.GONE);
+            if(voto!=0){
+                prestitoRatingTV.setText(p.getVoto()+"");
+                prestitoRatingTV.setVisibility(View.VISIBLE);
+                prestitoStarIV.setVisibility(View.VISIBLE);
+                valutaButton.setVisibility(View.GONE);
+            }
+            else{
+                prestitoRatingTV.setVisibility(View.GONE);
+                prestitoStarIV.setVisibility(View.GONE);
+                valutaButton.setVisibility(View.VISIBLE);
+            }
         }
         else{
             System.out.println("Voto:" + voto);
-            valutaButton.setVisibility(View.VISIBLE);
+            valutaButton.setVisibility(View.GONE);
+            prestitoRatingTV.setVisibility(View.GONE);
+            prestitoStarIV.setVisibility(View.GONE);
         }
 
         return v;

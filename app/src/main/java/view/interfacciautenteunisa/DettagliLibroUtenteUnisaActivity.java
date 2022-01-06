@@ -92,11 +92,13 @@ public class DettagliLibroUtenteUnisaActivity extends Activity {
 
                 //Controllo se il libro è già in prestito all'utente loggato
                 boolean in_prestito = false;
-                for (Prestito p_utente : u.getPrestiti())
-                    if (p_utente.getLibro().getIsbn().equals(l.getIsbn())) {
+                for (Prestito p_utente : u.getPrestiti()) {
+                    System.out.println("Data consegna:" + p_utente.getDataConsegna());
+                    if (p_utente.getLibro().getIsbn().equals(l.getIsbn()) && p_utente.getDataConsegna() == null) {
                         in_prestito = true;
                         break;
                     }
+                }
 
                 if (!in_prestito) {
                     AlertDialog confermaPrestito = new AlertDialog.Builder(DettagliLibroUtenteUnisaActivity.this).
