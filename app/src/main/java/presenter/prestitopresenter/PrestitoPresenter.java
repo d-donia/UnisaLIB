@@ -124,7 +124,7 @@ public class PrestitoPresenter {
 
         RequestParams params;
         params= new RequestParams();
-        params.put("Prestito", Prestito.toJson(p_valutato));
+        params.put("prestito", Prestito.toJson(p_valutato));
         client.post(MYURL, params, new JsonHttpResponseHandler(){
             @Override
             public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
