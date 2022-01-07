@@ -18,11 +18,13 @@ import presenter.FacadePresenter;
 
 public class HomeAdminActivity extends Activity {
     Utente u;
+    FacadePresenter fp;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.admin_home);
 
+        fp=new FacadePresenter();
         SharedPreferences userSession = PreferenceManager.getDefaultSharedPreferences(this);
         try {
             u = Utente.fromJson(userSession.getString("Utente", ""));
@@ -37,16 +39,14 @@ public class HomeAdminActivity extends Activity {
         mgmtPrenotazioneButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                FacadePresenter fp = new FacadePresenter();
-                fp.mostraRicercaLibri(u.isAdmin());
+                fp.mostraRicercaPostazioni(u.isAdmin());
             }
         });
 
         mgmtPrestitoButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                FacadePresenter fp = new FacadePresenter();
-                fp.mostraRicercaPostazioni(u.isAdmin());
+                fp.mostraRicercaLibri(u.isAdmin(),getApplicationContext());
             }
         });
 

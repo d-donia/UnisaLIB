@@ -1,5 +1,6 @@
 package presenter;
 
+import android.content.Context;
 import android.view.View;
 
 import java.util.ArrayList;
@@ -35,7 +36,7 @@ public class FacadePresenter {
         utentePresenter.logout();
     }
 
-    public void mostraRicercaLibri(boolean is_admin) { libroPresenter.mostraRicercaLibri(is_admin); }
+    public void mostraRicercaLibri(boolean is_admin, Context c) { libroPresenter.mostraRicercaLibri(is_admin,c); }
 
     public void ricercaLibri(String ricerca){
         libroPresenter.ricercaLibri(ricerca);

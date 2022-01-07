@@ -1,5 +1,7 @@
 package presenter.libropresenter;
 
+import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.widget.Toast;
@@ -27,10 +29,10 @@ import view.interfacciautenteunisa.HomeUtenteUnisaActivity;
 import view.interfacciautenteunisa.MieiPrestitiActivity;
 
 public class LibroPresenter {
-    static final String GenericURL = "http://192.168.255.1:8080/UnisaLIBServer/LibroPresenter";
+    static final String GenericURL = "http://192.168.1.7:8080/UnisaLIBServer/LibroPresenter";
     private AsyncHttpClient client = new AsyncHttpClient();
 
-    public void mostraRicercaLibri(boolean is_admin) {
+    public void mostraRicercaLibri(boolean is_admin, Context c) {
         String MYURL = GenericURL + "/mostra-ricerca-libri";
         RequestParams params;
         params = new RequestParams();
@@ -42,16 +44,19 @@ public class LibroPresenter {
                 String[] categorie = Libro.fromJsonToCategories(response);
 
                 Intent i = new Intent();
-                i.setClass(HomeUtenteUnisaActivity.getAppContext(), RicercaActivity.class);
+                i.setClass(c, RicercaActivity.class);
                 i.putExtra("Categorie", categorie);
                 i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                HomeUtenteUnisaActivity.getAppContext().startActivity(i);
+                c.startActivity(i);
             }
 
             @Override
             public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
                 super.onFailure(statusCode, headers, responseString, throwable);
-                Toast.makeText(HomeUtenteUnisaActivity.getAppContext(), responseString, Toast.LENGTH_SHORT).show();
+                Intent i = new Intent();
+                i.setClass(c, RicercaActivity.class);
+                i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                c.startActivity(i);
             }
         });
     }

@@ -13,7 +13,7 @@
         android:src="@drawable/back"
         />
 
-    <TextView
+    <EditText
         android:id="@+id/detsTitoloTV"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -45,28 +45,31 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="7dp">
+                android:layout_marginLeft="7dp"
+                android:layout_marginTop="3dp"
+                android:layout_marginBottom="3dp">
 
                 <TextView
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:text="ISBN:"
-                    android:textSize="18sp"
-                    android:textStyle="bold"
                     android:textColor="@color/black"
-                    />
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
+
                 <TextView
                     android:id="@+id/detsISBNTV"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="3"
-                    android:textSize="18sp"
-                    android:textColor="@color/black"/>
+                    android:textColor="@color/black"
+                    android:textSize="18sp" />
             </LinearLayout>
+
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="35dp"
                 android:layout_margin="7dp">
 
                 <TextView
@@ -74,18 +77,19 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:text="Autore:"
-                    android:textSize="18sp"
-                    android:textStyle="bold"
                     android:textColor="@color/black"
-                    />
-                <TextView
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
+
+                <EditText
                     android:id="@+id/detsAutoreTV"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="2"
-                    android:textSize="18sp"
-                    android:textColor="@color/black"/>
+                    android:textColor="@color/black"
+                    android:textSize="18sp" />
             </LinearLayout>
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -96,18 +100,19 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:text="Editore:"
-                    android:textSize="18sp"
-                    android:textStyle="bold"
                     android:textColor="@color/black"
-                    />
-                <TextView
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
+
+                <EditText
                     android:id="@+id/detsEditoreTV"
                     android:layout_width="0dp"
-                    android:layout_height="match_parent"
+                    android:layout_height="wrap_content"
                     android:layout_weight="2"
-                    android:textSize="18sp"
-                    android:textColor="@color/black"/>
+                    android:textColor="@color/black"
+                    android:textSize="18sp" />
             </LinearLayout>
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -118,18 +123,19 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:text="AP:"
-                    android:textSize="18sp"
-                    android:textStyle="bold"
                     android:textColor="@color/black"
-                    />
-                <TextView
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
+
+                <EditText
                     android:id="@+id/detsAPTV"
                     android:layout_width="0dp"
-                    android:layout_height="match_parent"
+                    android:layout_height="wrap_content"
                     android:layout_weight="5"
-                    android:textSize="18sp"
-                    android:textColor="@color/black"/>
+                    android:textColor="@color/black"
+                    android:textSize="18sp" />
             </LinearLayout>
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -140,24 +146,26 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:text="Cat:"
+                    android:textColor="@color/black"
                     android:textSize="18sp"
-                    android:textStyle="bold"
-                    android:textColor="@color/black" />
-                <TextView
+                    android:textStyle="bold" />
+
+                <EditText
                     android:id="@+id/detsCatTV"
                     android:layout_width="0dp"
-                    android:layout_height="match_parent"
+                    android:layout_height="wrap_content"
                     android:layout_weight="4"
                     android:textAlignment="textStart"
-                    android:textSize="18sp"
-                    android:textColor="@color/black"/>
+                    android:textColor="@color/black"
+                    android:textSize="18sp" />
 
             </LinearLayout>
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
-                android:layout_margin="7dp">
+                android:layout_margin="7dp"
+                android:layout_marginTop="20dp">
 
 
                 <TextView
@@ -165,15 +173,15 @@
                     android:layout_width="30dp"
                     android:layout_height="wrap_content"
                     android:text="5"
-                    android:textSize="18sp"
-                    android:textStyle="bold"
                     android:textColor="@color/black"
-                    />
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
+
                 <ImageView
                     android:id="@+id/detsDescrizioneTV"
                     android:layout_width="20dp"
                     android:layout_height="match_parent"
-                    android:src="@drawable/star"/>
+                    android:src="@drawable/star" />
             </LinearLayout>
         </LinearLayout>
 
@@ -194,13 +202,36 @@
             android:textStyle="bold"
             android:textColor="@color/black"
             />
-        <TextView
+        <EditText
             android:id="@+id/detsPosizioneTV"
-            android:layout_width="0dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="2"
             android:textSize="20sp"
             android:textColor="@color/black"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="64dp"
+        android:layout_margin="15dp">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Aggiungi copie:"
+            android:textColor="@color/black"
+            android:textSize="20sp"
+            android:textStyle="bold" />
+
+        <EditText
+            android:id="@+id/detsCopieTV"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="2"
+            android:textColor="@color/black"
+            android:textSize="20sp" />
     </LinearLayout>
 
     <LinearLayout

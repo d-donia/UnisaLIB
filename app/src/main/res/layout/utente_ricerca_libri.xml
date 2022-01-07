@@ -20,6 +20,7 @@
         android:queryHint="Inserisci titolo o autore" />
 
     <TextView
+        android:id="@+id/titoloCategorie"
         android:padding="10dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

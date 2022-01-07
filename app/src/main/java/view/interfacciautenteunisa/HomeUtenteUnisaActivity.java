@@ -100,7 +100,7 @@ public class HomeUtenteUnisaActivity extends Activity {
         svcPrestitoButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                fp.mostraRicercaLibri(u.isAdmin());
+                fp.mostraRicercaLibri(u.isAdmin(),getApplicationContext());
             }
         });
 

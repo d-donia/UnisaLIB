@@ -27,7 +27,7 @@
         <activity android:name="view.interfacciautenteunisa.RicercaPostazioneUtenteActivity"/>
         <activity android:name="view.interfacciautenteunisa.ElencoPostazioniUtenteActivity"/>
         <activity android:name="view.interfacciautenteunisa.MieiPrestitiActivity"/>
-
+        <activity android:name="view.interfacciaadmin.DettagliLibroAdminActivity"/>
 
     </application>
 
