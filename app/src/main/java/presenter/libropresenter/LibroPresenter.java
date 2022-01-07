@@ -21,8 +21,11 @@ import java.util.Arrays;
 
 import cz.msebera.android.httpclient.Header;
 import model.libromanagement.Libro;
+import model.posizionemanagement.Posizione;
 import model.utentemanagement.Utente;
+import view.interfacciaadmin.AggiungiLibroActivity;
 import view.interfacciaadmin.DettagliLibroAdminActivity;
+import view.interfacciaadmin.GestioneLibroAdminActivity;
 import view.interfacciageneral.ElencoLibriActivity;
 import view.interfacciageneral.RicercaActivity;
 import view.interfacciautenteunisa.DettagliLibroUtenteUnisaActivity;
@@ -30,7 +33,7 @@ import view.interfacciautenteunisa.HomeUtenteUnisaActivity;
 import view.interfacciautenteunisa.MieiPrestitiActivity;
 
 public class LibroPresenter {
-    static final String GenericURL = "http://192.168.255.1:8080/UnisaLIBServer/LibroPresenter";
+    static final String GenericURL = "http://192.168.1.7:8080/UnisaLIBServer/LibroPresenter";
     private AsyncHttpClient client = new AsyncHttpClient();
 
     public void mostraRicercaLibri(boolean is_admin, Context c) {
@@ -220,6 +223,52 @@ public class LibroPresenter {
                         DettagliLibroUtenteUnisaActivity.impostaInteresse(utente);
                     }
 
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+
+            @Override
+            public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONObject errorResponse) {
+                super.onFailure(statusCode, headers, throwable, errorResponse);
+                Toast.makeText(HomeUtenteUnisaActivity.getAppContext(), errorResponse.toString(), Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONArray errorResponse) {
+                super.onFailure(statusCode, headers, throwable, errorResponse);
+                Toast.makeText(HomeUtenteUnisaActivity.getAppContext(), errorResponse.toString(), Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
+                super.onFailure(statusCode, headers, responseString, throwable);
+                Toast.makeText(HomeUtenteUnisaActivity.getAppContext(), responseString, Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
+    public void informazioniAggiuntaLibro() {
+        String MYURL = GenericURL + "/informazioni-aggiunta";
+        RequestParams params = new RequestParams();
+        client.post(MYURL, params, new JsonHttpResponseHandler() {
+            @Override
+            public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
+                super.onSuccess(statusCode, headers, response);
+                System.out.println("" + response);
+                String[] categorie=null;
+                Posizione[] posizioni=null;
+                try {
+                    categorie=Libro.fromJsonCategorie(response.getJSONArray("categorie"));
+                    posizioni=Posizione.fromJsonEtic(response.getJSONArray("posizioni"));
+                    for(int i=0;i<posizioni.length;++i)
+                        System.out.println(posizioni[i].getId());
+                    Intent i=new Intent();
+                    i.setClass(GestioneLibroAdminActivity.getAppContext(), AggiungiLibroActivity.class);
+                    i.putExtra("categorie", Libro.toJsonCategorie(new ArrayList<>(Arrays.asList(categorie))));
+                    i.putExtra("posizioni", Posizione.toJson(new ArrayList<>(Arrays.asList(posizioni))));
+                    i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                    GestioneLibroAdminActivity.getAppContext().startActivity(i);
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }

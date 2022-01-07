@@ -105,4 +105,8 @@ public class FacadePresenter {
         prestitoPresenter.valutaPrestito(p, voto, commento);
 
     }
+
+    public void informazioniAggiuntaLibro() {
+        libroPresenter.informazioniAggiuntaLibro();
+    }
 }

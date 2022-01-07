@@ -4,10 +4,13 @@ import com.google.gson.Gson;
 import com.google.gson.JsonSyntaxException;
 
 import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 import java.util.Objects;
 
 import model.posizionemanagement.Posizione;
@@ -70,6 +73,21 @@ public class Libro implements Serializable{
         return categorie;
     }
 
+    private static String fromJsonCategoria(JSONObject json) throws JSONException {
+        Gson gson = new Gson();
+        String c = gson.fromJson(""+json.get("categoria"),String.class);
+        return c;
+    }
+
+    public static String[] fromJsonCategorie(JSONArray response) throws JSONException {
+        ArrayList<String> c=new ArrayList<>();
+        for(int i=0;i<response.length();++i)
+            c.add(Libro.fromJsonCategoria(response.getJSONObject(i)));
+        String[] array = new String[c.size()];
+        array = c.toArray(array);
+        return array;
+    }
+
     public static Libro[] fromJson(JSONArray response) {
         Gson gson = new Gson();
         Libro[] libri = gson.fromJson("" + response, Libro[].class);
@@ -82,6 +100,10 @@ public class Libro implements Serializable{
         return libro;
     }
 
+    public static String toJsonCategorie(List<String> categorie){
+        Gson gson = new Gson();
+        return gson.toJson(categorie);
+    }
 
     public static ArrayList<Libro> fromJson(String json) throws JsonSyntaxException {
         Gson gson = new Gson();

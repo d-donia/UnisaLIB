@@ -7,6 +7,8 @@ import com.google.gson.Gson;
 import com.google.gson.JsonSyntaxException;
 
 import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -41,6 +43,21 @@ public class Posizione{
 
     public Posizione() {
         postazioni = new ArrayList<>();
+    }
+
+    public static Posizione[] fromJsonEtic(JSONArray response) throws JSONException {
+        ArrayList<Posizione> c=new ArrayList<>();
+        for(int i=0;i<response.length();++i)
+            c.add(Posizione.fromJson(response.getJSONObject(i)));
+        Posizione[] array = new Posizione[c.size()];
+        array = c.toArray(array);
+        return array;
+    }
+
+    public static Posizione fromJson(JSONObject response) throws JSONException {
+        Gson gson = new Gson();
+        Posizione p = gson.fromJson("" + response.get("posizione"), Posizione.class);
+        return p;
     }
 
     public static Posizione[] fromJson(JSONArray response) {
