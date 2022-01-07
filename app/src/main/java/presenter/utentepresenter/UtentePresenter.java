@@ -1,5 +1,6 @@
 package presenter.utentepresenter;
 
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.widget.Toast;
@@ -20,7 +21,7 @@ import view.interfacciageneral.MainActivity;
 import view.interfacciautenteunisa.HomeUtenteUnisaActivity;
 
 public class UtentePresenter{
-    static final String GenericURL="http://192.168.1.7:8080/UnisaLIBServer/UtentePresenter";
+    static final String GenericURL="http://192.168.255.1:8080/UnisaLIBServer/UtentePresenter";
     private AsyncHttpClient client=new AsyncHttpClient();
     public void login(String email, String password) {
         String MYURL=GenericURL+"/login";
@@ -67,16 +68,16 @@ public class UtentePresenter{
 
     }
 
-    public void logout() {
+    public void logout(Context c) {
         //Eliminazione utente da shared preferences
-        SharedPreferences userSession = PreferenceManager.getDefaultSharedPreferences(MainActivity.getAppContext());
+        SharedPreferences userSession = PreferenceManager.getDefaultSharedPreferences(c);
         SharedPreferences.Editor editor = userSession.edit();
         editor.remove("Utente").commit();
 
         //Creazione intent e reindirizzamento alla pagina di login
         Intent i=new Intent();
-        i.setClass(HomeUtenteUnisaActivity.getAppContext(), MainActivity.class);
+        i.setClass(c, MainActivity.class);
         i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK |Intent.FLAG_ACTIVITY_CLEAR_TOP);
-        HomeUtenteUnisaActivity.getAppContext().startActivity(i);
+        c.startActivity(i);
     }
 }

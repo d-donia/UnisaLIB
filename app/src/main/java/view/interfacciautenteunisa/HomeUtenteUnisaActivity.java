@@ -61,7 +61,7 @@ public class HomeUtenteUnisaActivity extends Activity {
                         String title=item.getTitle().toString();
                         switch (title){
                             case "Miei Prestiti":
-                                fp.mostraMieiPrestiti();
+                                fp.mostraMieiPrestiti(HomeUtenteUnisaActivity.getAppContext());
                                 break;
                             case "Mie Prenotazioni":
                                 Toast.makeText(getApplicationContext(), title, Toast.LENGTH_SHORT).show();
@@ -76,7 +76,7 @@ public class HomeUtenteUnisaActivity extends Activity {
                                         setPositiveButton(R.string.si, new DialogInterface.OnClickListener() {
                                             @Override
                                             public void onClick(DialogInterface dialog, int which) {
-                                                fp.logout();
+                                                fp.logout(HomeUtenteUnisaActivity.getAppContext());
                                                 finish();
                                             }
                                         }).

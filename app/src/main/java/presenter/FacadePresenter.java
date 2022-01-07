@@ -1,7 +1,7 @@
 package presenter;
 
 import android.content.Context;
-import android.view.View;
+import android.content.Context;
 
 import java.util.ArrayList;
 import java.util.GregorianCalendar;
@@ -32,8 +32,8 @@ public class FacadePresenter {
         utentePresenter.login(email, password);
     }
 
-    public void logout() {
-        utentePresenter.logout();
+    public void logout(Context c) {
+        utentePresenter.logout(c);
     }
 
     public void mostraRicercaLibri(boolean is_admin, Context c) { libroPresenter.mostraRicercaLibri(is_admin,c); }
@@ -46,8 +46,8 @@ public class FacadePresenter {
         prestitoPresenter.creaPrestito(p);
     }
 
-    public void mostraMieiPrestiti() {
-        prestitoPresenter.mostraMieiPrestiti();
+    public void mostraMieiPrestiti(Context c) {
+        prestitoPresenter.mostraMieiPrestiti(c);
     }
 
     public void rimuoviLibroFromInteressi(Libro l, Utente u) {
@@ -84,14 +84,9 @@ public class FacadePresenter {
             libroPresenter.ricercaLibriCategoria(categoria);
     }
 
-    public void mostraDettagliLibro(Libro libro) {
-        libroPresenter.mostraDettagliLibro(libro);
+    public void mostraDettagliLibro(Context c, Libro libro) {
+        libroPresenter.mostraDettagliLibro(c, libro);
     }
-
-    public void mostraDettagliLibroPrestito(Libro libro) {
-        libroPresenter.mostraDettagliLibroPrestito(libro);
-    }
-
 
     public void mostraElencoPostazioni(Posizione p, GregorianCalendar date) {
         postazionePresenter.mostraElencoPostazioni(p, date);
@@ -108,5 +103,6 @@ public class FacadePresenter {
 
     public void valutaPrestito(Prestito p, int voto, String commento) {
         prestitoPresenter.valutaPrestito(p, voto, commento);
+
     }
 }

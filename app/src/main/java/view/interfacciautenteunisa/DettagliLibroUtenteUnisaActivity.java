@@ -7,11 +7,13 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageSwitcher;
 import android.widget.ImageView;
+import android.widget.PopupMenu;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -62,6 +64,7 @@ public class DettagliLibroUtenteUnisaActivity extends Activity {
         TextView detsPosizioneTV= findViewById(R.id.detsPosizioneTV);
         ImageView detsCopertinaIV= findViewById(R.id.detsCopertinaIV);
         Button prestitoButton=findViewById(R.id.prestitoButton);
+        ImageButton menuButton=findViewById(R.id.menuLibroIB);
         interesseButton=findViewById(R.id.interesseButton);
 
         Intent i = getIntent();
@@ -129,6 +132,53 @@ public class DettagliLibroUtenteUnisaActivity extends Activity {
                     //richiesta al server per aggiungere libro alla lista di interesse
                     fp.aggiungiLibroToInteressi(l, u);
                 }
+            }
+        });
+
+        menuButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                System.out.println("ciao");
+                PopupMenu popupMenu=new PopupMenu(DettagliLibroUtenteUnisaActivity.this, menuButton);
+                popupMenu.getMenuInflater().inflate(R.menu.utente_menu, popupMenu.getMenu());
+                popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+                    @Override
+                    public boolean onMenuItemClick(MenuItem item) {
+                        String title=item.getTitle().toString();
+                        switch (title){
+                            case "Miei Prestiti":
+                                fp.mostraMieiPrestiti(DettagliLibroUtenteUnisaActivity.getAppContext());
+                                break;
+                            case "Mie Prenotazioni":
+                                Toast.makeText(getApplicationContext(), title, Toast.LENGTH_SHORT).show();
+                                break;
+                            case "Miei Interessi":
+                                Toast.makeText(getApplicationContext(), title, Toast.LENGTH_SHORT).show();
+                                break;
+                            case "Logout":
+                                AlertDialog confermaLogout = new AlertDialog.Builder(DettagliLibroUtenteUnisaActivity.this).
+                                        setTitle("Logout").
+                                        setMessage("Sicuro di voler uscire?").
+                                        setPositiveButton(R.string.si, new DialogInterface.OnClickListener() {
+                                            @Override
+                                            public void onClick(DialogInterface dialog, int which) {
+                                                fp.logout(DettagliLibroUtenteUnisaActivity.getAppContext());
+                                                finish();
+                                            }
+                                        }).
+                                        setNegativeButton(R.string.no, new DialogInterface.OnClickListener() {
+                                            @Override
+                                            public void onClick(DialogInterface dialog, int which) {
+                                                dialog.cancel();
+                                            }
+                                        }).show();
+                                break;
+                        }
+                        return false;
+                    }
+                });
+
+                popupMenu.show();
             }
         });
 

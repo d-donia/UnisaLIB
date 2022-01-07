@@ -52,7 +52,7 @@ public class MieiPrestitiActivity extends Activity {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Prestito prestito=(Prestito) lv.getItemAtPosition(position);
                 Libro l= prestito.getLibro();
-                fp.mostraDettagliLibroPrestito(l);
+                fp.mostraDettagliLibro(MieiPrestitiActivity.getAppContext(), l);
             }
         });
     }

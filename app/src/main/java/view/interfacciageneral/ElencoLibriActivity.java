@@ -44,7 +44,7 @@ public class ElencoLibriActivity extends Activity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Libro l = (Libro) lv.getItemAtPosition(position);
-                fp.mostraDettagliLibro(l);
+                fp.mostraDettagliLibro(ElencoLibriActivity.getAppContext(), l);
             }
         });
     }

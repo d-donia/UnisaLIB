@@ -69,14 +69,14 @@ public class DettagliLibroAdminActivity extends Activity {
                     copie=0;
                 }
                 Posizione p=new Posizione(s[0],s[1]);
-                Libro l= new Libro.LibroBuilder().titolo(detsTitoloTV.getText().toString())
+                /*Libro l= new Libro.LibroBuilder().titolo(detsTitoloTV.getText().toString())
                         .isbn(detsISBNTV.getText().toString())
                         .autore(detsAutoreTV.getText().toString())
                         .editore(detsEditoreTV.getText().toString())
                         .annoPubbl(detsAPTV.getText().toString())
                         .categoria(detsCatTV.getText().toString())
                         .nCopie(l.getnCopie()+copie);
-                fp.modificaLibro()
+                fp.modificaLibro()*/
             }
         });
     }

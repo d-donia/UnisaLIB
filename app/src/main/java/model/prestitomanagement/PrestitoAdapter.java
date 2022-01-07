@@ -12,7 +12,9 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 
@@ -49,6 +51,8 @@ public class PrestitoAdapter extends ArrayAdapter<Prestito> {
         TextView dataConsegnaTV = v.findViewById(R.id.dataConsegnaTV);
         TextView attivoTV = v.findViewById(R.id.attivoTV);
         TextView prestitoRatingTV = v.findViewById(R.id.prestitoRatingTV);
+        LinearLayout commentoLayout = v.findViewById(R.id.commentoLayout);
+        TextView commentoTV = v.findViewById(R.id.commentoTV);
         Button valutaButton = v.findViewById(R.id.valutaButton);
         ImageView prestitoStarIV = v.findViewById(R.id.prestitoStarIV);
 
@@ -88,9 +92,14 @@ public class PrestitoAdapter extends ArrayAdapter<Prestito> {
                         setPositiveButton(R.string.conferma, new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
-                                int voto= Integer.parseInt(votoET.getText().toString());
-                                String commento = commentoET.getText().toString();
-                                fp.valutaPrestito(p, voto, commento);
+                                try {
+                                    int voto = Integer.parseInt(votoET.getText().toString());
+                                    String commento = commentoET.getText().toString();
+                                    fp.valutaPrestito(p, voto, commento);
+                                }
+                                catch (NumberFormatException ex){
+                                    Toast.makeText(v.getContext(), "Voto non rispetta il formato. Prestito non valutato", Toast.LENGTH_SHORT).show();
+                                }
                             }
                         }).
                         setNegativeButton(R.string.esci, new DialogInterface.OnClickListener() {
@@ -108,12 +117,20 @@ public class PrestitoAdapter extends ArrayAdapter<Prestito> {
             if(voto!=0){
                 prestitoRatingTV.setText(p.getVoto()+"");
                 prestitoRatingTV.setVisibility(View.VISIBLE);
+                System.out.println("CommentTV: " + p.getCommento());
+                if(p.getCommento()!=null)
+                    commentoTV.setText(p.getCommento());
+                else{
+                    commentoTV.setText("commento non presente");
+                }
+                commentoLayout.setVisibility(View.VISIBLE);
                 prestitoStarIV.setVisibility(View.VISIBLE);
                 valutaButton.setVisibility(View.GONE);
             }
             else{
                 prestitoRatingTV.setVisibility(View.GONE);
                 prestitoStarIV.setVisibility(View.GONE);
+                commentoLayout.setVisibility(View.GONE);
                 valutaButton.setVisibility(View.VISIBLE);
             }
         }
@@ -122,6 +139,7 @@ public class PrestitoAdapter extends ArrayAdapter<Prestito> {
             valutaButton.setVisibility(View.GONE);
             prestitoRatingTV.setVisibility(View.GONE);
             prestitoStarIV.setVisibility(View.GONE);
+            commentoLayout.setVisibility(View.GONE);
         }
 
         return v;

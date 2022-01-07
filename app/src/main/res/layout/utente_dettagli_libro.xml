@@ -5,13 +5,30 @@
     android:layout_height="match_parent"
     android:layout_margin="10dp">
 
-    <ImageButton
-        android:layout_width="40dp"
-        android:layout_height="40dp"
-        android:layout_margin="10dp"
-        android:backgroundTint="@color/white"
-        android:src="@drawable/back"
-        />
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <ImageButton
+            android:layout_alignParentLeft="true"
+            android:layout_centerInParent="true"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_margin="10dp"
+            android:backgroundTint="@color/white"
+            android:src="@drawable/back"/>
+
+        <ImageButton
+            android:layout_alignParentRight="true"
+            android:layout_centerInParent="true"
+            android:id="@+id/menuLibroIB"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:src="@drawable/account"
+            android:backgroundTint="@color/white"
+            />
+    </RelativeLayout>
+
 
     <TextView
         android:id="@+id/detsTitoloTV"

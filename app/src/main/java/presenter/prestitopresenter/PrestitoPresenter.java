@@ -1,5 +1,6 @@
 package presenter.prestitopresenter;
 
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.widget.Toast;
@@ -14,7 +15,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.lang.reflect.ParameterizedType;
+import java.util.ArrayList;
 
 import cz.msebera.android.httpclient.Header;
 import model.prestitomanagement.Prestito;
@@ -25,7 +26,7 @@ import view.interfacciautenteunisa.HomeUtenteUnisaActivity;
 import view.interfacciautenteunisa.MieiPrestitiActivity;
 
 public class PrestitoPresenter {
-    static final String GenericURL="http://192.168.1.7:8080/UnisaLIBServer/PrestitoPresenter";
+    static final String GenericURL="http://192.168.255.1:8080/UnisaLIBServer/PrestitoPresenter";
     private AsyncHttpClient client=new AsyncHttpClient();
     public void creaPrestito(Prestito p) {
         String MYURL=GenericURL + "/crea-prestito";
@@ -72,8 +73,8 @@ public class PrestitoPresenter {
         });
     }
 
-    public void mostraMieiPrestiti() {
-        SharedPreferences userSession = PreferenceManager.getDefaultSharedPreferences(MainActivity.getAppContext());
+    public void mostraMieiPrestiti(Context c) {
+        SharedPreferences userSession = PreferenceManager.getDefaultSharedPreferences(c);
         String MYURL=GenericURL + "/all-prestiti";
         RequestParams params;
         params=new RequestParams();
@@ -84,10 +85,10 @@ public class PrestitoPresenter {
             public void onSuccess(int statusCode, Header[] headers, JSONArray response) {
                 super.onSuccess(statusCode, headers, response);
                 Intent i = new Intent();
-                i.setClass(HomeUtenteUnisaActivity.getAppContext(), MieiPrestitiActivity.class);
+                i.setClass(c, MieiPrestitiActivity.class);
                 i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 i.putExtra("prestiti",""+response);
-                HomeUtenteUnisaActivity.getAppContext().startActivity(i);
+                c.startActivity(i);
             }
 
             @Override
@@ -111,6 +112,8 @@ public class PrestitoPresenter {
     public void valutaPrestito(Prestito p, int voto, String commento) {
         String MYURL=GenericURL + "/valuta-prestito";
 
+        System.out.println("Commento: " + commento);
+
         Prestito p_valutato= new Prestito.PrestitoBuilder().
                 utente(p.getUtente()).
                 libro(p.getLibro()).
@@ -122,6 +125,8 @@ public class PrestitoPresenter {
                 commento(commento).
                 build();
 
+        System.out.println("Commento prestito: " + p_valutato.getCommento());
+
         RequestParams params;
         params= new RequestParams();
         params.put("prestito", Prestito.toJson(p_valutato));
@@ -132,10 +137,19 @@ public class PrestitoPresenter {
                 try {
                     Utente utenteAggiornato = Utente.fromJson(response);
                     if(utenteAggiornato!=null) {
-                        SharedPreferences userSession = PreferenceManager.getDefaultSharedPreferences(DettagliLibroUtenteUnisaActivity.getAppContext());
+                        SharedPreferences userSession = PreferenceManager.getDefaultSharedPreferences(MieiPrestitiActivity.getAppContext());
                         SharedPreferences.Editor editor = userSession.edit();
                         editor.putString("Utente", Utente.toJson(utenteAggiornato)).apply();
-                        Toast.makeText(DettagliLibroUtenteUnisaActivity.getAppContext(), "Valutazione andata a buon fine", Toast.LENGTH_LONG).show();
+
+                        userSession = PreferenceManager.getDefaultSharedPreferences(MieiPrestitiActivity.getAppContext());
+                        Utente utente=Utente.fromJson(userSession.getString("Utente", ""));
+                        ArrayList<Prestito> prestiti=utente.getPrestiti();
+
+                        Intent i = new Intent();
+                        i.setClass(MieiPrestitiActivity.getAppContext(), MieiPrestitiActivity.class);
+                        i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK|Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                        i.putExtra("prestiti",Prestito.toJson(prestiti));
+                        MieiPrestitiActivity.getAppContext().startActivity(i);
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -157,6 +171,5 @@ public class PrestitoPresenter {
                 super.onFailure(statusCode, headers, responseString, throwable);
             }
         });
-
     }
 }

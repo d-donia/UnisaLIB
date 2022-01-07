@@ -1,5 +1,6 @@
 package presenter.libropresenter;
 
+import android.content.Context;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
@@ -29,7 +30,7 @@ import view.interfacciautenteunisa.HomeUtenteUnisaActivity;
 import view.interfacciautenteunisa.MieiPrestitiActivity;
 
 public class LibroPresenter {
-    static final String GenericURL = "http://192.168.1.7:8080/UnisaLIBServer/LibroPresenter";
+    static final String GenericURL = "http://192.168.255.1:8080/UnisaLIBServer/LibroPresenter";
     private AsyncHttpClient client = new AsyncHttpClient();
 
     public void mostraRicercaLibri(boolean is_admin, Context c) {
@@ -138,41 +139,22 @@ public class LibroPresenter {
         });
     }
 
-    public void mostraDettagliLibro(Libro l) {
-        SharedPreferences userSession = PreferenceManager.getDefaultSharedPreferences(ElencoLibriActivity.getAppContext());
+    public void mostraDettagliLibro(Context c, Libro l) {
+        SharedPreferences userSession = PreferenceManager.getDefaultSharedPreferences(c);
         Utente u = Utente.fromJson(userSession.getString("Utente", ""));
 
         Intent i = new Intent();
 
         if (u.isAdmin()) {
-            i.setClass(ElencoLibriActivity.getAppContext(), DettagliLibroAdminActivity.class);
+            i.setClass(c, DettagliLibroAdminActivity.class);
             i.putExtra("Libro", Libro.toJson(l));
             i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-            ElencoLibriActivity.getAppContext().startActivity(i);
+            c.startActivity(i);
         } else {
-            i.setClass(ElencoLibriActivity.getAppContext(), DettagliLibroUtenteUnisaActivity.class);
+            i.setClass(c, DettagliLibroUtenteUnisaActivity.class);
             i.putExtra("Libro", Libro.toJson(l));
             i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-            ElencoLibriActivity.getAppContext().startActivity(i);
-        }
-    }
-
-    public void mostraDettagliLibroPrestito(Libro l) {
-        SharedPreferences userSession = PreferenceManager.getDefaultSharedPreferences(ElencoLibriActivity.getAppContext());
-        Utente u = Utente.fromJson(userSession.getString("Utente", ""));
-
-        Intent i = new Intent();
-
-        if (u.isAdmin()) {
-            i.setClass(MieiPrestitiActivity.getAppContext(), DettagliLibroAdminActivity.class);
-            i.putExtra("Libro", Libro.toJson(l));
-            i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-            ElencoLibriActivity.getAppContext().startActivity(i);
-        } else {
-            i.setClass(MieiPrestitiActivity.getAppContext(), DettagliLibroUtenteUnisaActivity.class);
-            i.putExtra("Libro", Libro.toJson(l));
-            i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-            MieiPrestitiActivity.getAppContext().startActivity(i);
+            c.startActivity(i);
         }
     }
 
