@@ -7,23 +7,22 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
+import androidx.annotation.Nullable;
 import androidx.preference.PreferenceManager;
 
 import com.example.unisalib.R;
 import com.google.gson.JsonSyntaxException;
 
-
 import model.utentemanagement.Utente;
 import presenter.FacadePresenter;
 
-public class HomeAdminActivity extends Activity {
-    Utente u;
+public class GestioneLibroAdminActivity extends Activity {
     FacadePresenter fp;
+    Utente u;
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.admin_home);
-
+        setContentView(R.layout.admin_gestione_libri);
         fp=new FacadePresenter();
         SharedPreferences userSession = PreferenceManager.getDefaultSharedPreferences(this);
         try {
@@ -32,26 +31,23 @@ public class HomeAdminActivity extends Activity {
         catch (JsonSyntaxException e){
             e.printStackTrace();
         }
+        Button addLibro= findViewById(R.id.addButton);
+        Button modifyLibro=findViewById(R.id.modifyButton);
 
-        Button mgmtPrestitoButton = findViewById(R.id.mgmtPrestitoButton);
-        Button mgmtPrenotazioneButton = findViewById(R.id.mgmtPrenotazioneButton);
-
-        mgmtPrenotazioneButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                fp.mostraRicercaPostazioni(u.isAdmin());
-            }
-        });
-
-        mgmtPrestitoButton.setOnClickListener(new View.OnClickListener() {
+        addLibro.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent i=new Intent();
-                i.setClass(getApplicationContext(),GestioneLibroAdminActivity.class);
+                i.setClass(getApplicationContext(),AggiungiLibroActivity.class);
                 startActivity(i);
             }
         });
 
-
+        modifyLibro.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                fp.mostraRicercaLibri(u.isAdmin(),getApplicationContext());
+            }
+        });
     }
 }

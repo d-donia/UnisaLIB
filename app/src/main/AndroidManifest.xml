@@ -28,7 +28,8 @@
         <activity android:name="view.interfacciautenteunisa.ElencoPostazioniUtenteActivity"/>
         <activity android:name="view.interfacciautenteunisa.MieiPrestitiActivity"/>
         <activity android:name="view.interfacciaadmin.DettagliLibroAdminActivity"/>
-
+        <activity android:name="view.interfacciaadmin.GestioneLibroAdminActivity"/>
+        <activity android:name="view.interfacciaadmin.AggiungiLibroActivity"/>
     </application>
 
 </manifest>

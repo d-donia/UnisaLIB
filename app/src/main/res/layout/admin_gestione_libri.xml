@@ -35,6 +35,7 @@
 
 
         <Button
+            android:id="@+id/addButton"
             android:layout_width="fill_parent"
             android:layout_height="150dp"
             android:layout_margin="5dp"
@@ -45,6 +46,7 @@
             android:textSize="13sp" />
 
         <Button
+            android:id="@+id/modifyButton"
             android:layout_width="fill_parent"
             android:layout_height="150dp"
             android:layout_margin="5dp"

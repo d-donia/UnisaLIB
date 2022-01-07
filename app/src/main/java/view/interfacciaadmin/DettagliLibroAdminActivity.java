@@ -58,7 +58,7 @@ public class DettagliLibroAdminActivity extends Activity {
         //Settare immagine url utilizzando libreria glide
         Glide.with(this).load(l.getUrlCopertina()).into(detsCopertinaIV);
 
-        modificaButton.setOnClickListener(new View.OnClickListener() {
+        /*modificaButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 String []s=detsPosizioneTV.getText().toString().split(",");
@@ -69,15 +69,15 @@ public class DettagliLibroAdminActivity extends Activity {
                     copie=0;
                 }
                 Posizione p=new Posizione(s[0],s[1]);
-                /*Libro l= new Libro.LibroBuilder().titolo(detsTitoloTV.getText().toString())
+                Libro l= new Libro.LibroBuilder().titolo(detsTitoloTV.getText().toString())
                         .isbn(detsISBNTV.getText().toString())
                         .autore(detsAutoreTV.getText().toString())
                         .editore(detsEditoreTV.getText().toString())
-                        .annoPubbl(detsAPTV.getText().toString())
+                        .annoPubbl(Integer.parseInt(detsAPTV.getText().toString()))
                         .categoria(detsCatTV.getText().toString())
                         .nCopie(l.getnCopie()+copie);
-                fp.modificaLibro()*/
+                fp.modificaLibro()
             }
-        });
+        });*/
     }
 }
