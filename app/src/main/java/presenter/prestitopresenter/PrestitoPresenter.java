@@ -25,7 +25,7 @@ import view.interfacciautenteunisa.HomeUtenteUnisaActivity;
 import view.interfacciautenteunisa.MieiPrestitiActivity;
 
 public class PrestitoPresenter {
-    static final String GenericURL="http://192.168.1.7:8080/UnisaLIBServer/PrestitoPresenter";
+    static final String GenericURL="http://192.168.255.1:8080/UnisaLIBServer/PrestitoPresenter";
     private AsyncHttpClient client=new AsyncHttpClient();
     public void creaPrestito(Prestito p) {
         String MYURL=GenericURL + "/crea-prestito";
@@ -88,6 +88,58 @@ public class PrestitoPresenter {
                 i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 i.putExtra("prestiti",""+response);
                 HomeUtenteUnisaActivity.getAppContext().startActivity(i);
+            }
+
+            @Override
+            public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONObject errorResponse) {
+                super.onFailure(statusCode, headers, throwable, errorResponse);
+            }
+
+            @Override
+            public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONArray errorResponse) {
+                super.onFailure(statusCode, headers, throwable, errorResponse);
+            }
+
+            @Override
+            public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
+                super.onFailure(statusCode, headers, responseString, throwable);
+            }
+        });
+
+    }
+
+    public void valutaPrestito(Prestito p, int voto, String commento) {
+        String MYURL=GenericURL + "/valuta-prestito";
+
+        Prestito p_valutato= new Prestito.PrestitoBuilder().
+                utente(p.getUtente()).
+                libro(p.getLibro()).
+                dataInizio(p.getDataInizio()).
+                dataFine(p.getDataFine()).
+                dataConsegna(p.getDataConsegna()).
+                attivo(p.isAttivo()).
+                voto(voto).
+                commento(commento).
+                build();
+
+        RequestParams params;
+        params= new RequestParams();
+        params.put("Prestito", Prestito.toJson(p_valutato));
+        client.post(MYURL, params, new JsonHttpResponseHandler(){
+            @Override
+            public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
+                super.onSuccess(statusCode, headers, response);
+                try {
+                    Utente utenteAggiornato = Utente.fromJson(response);
+                    if(utenteAggiornato!=null) {
+                        SharedPreferences userSession = PreferenceManager.getDefaultSharedPreferences(DettagliLibroUtenteUnisaActivity.getAppContext());
+                        SharedPreferences.Editor editor = userSession.edit();
+                        editor.putString("Utente", Utente.toJson(utenteAggiornato)).apply();
+                        Toast.makeText(DettagliLibroUtenteUnisaActivity.getAppContext(), "Valutazione andata a buon fine", Toast.LENGTH_LONG).show();
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
             }
 
             @Override

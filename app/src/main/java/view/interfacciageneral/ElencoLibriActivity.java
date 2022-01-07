@@ -13,7 +13,6 @@ import androidx.annotation.Nullable;
 import com.example.unisalib.R;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 
 import model.libromanagement.Libro;
 import model.libromanagement.LibroAdapter;

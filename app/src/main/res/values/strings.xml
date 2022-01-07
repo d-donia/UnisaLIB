@@ -18,5 +18,8 @@
     <string name="attachment_summary_off">Only download attachments when manually requested</string>
     <string name="si"> SI </string>
     <string name="no"> NO </string>
+    <string name="conferma"> CONFERMA </string>
+    <string name="esci"> ESCI </string>
+
 
 </resources>

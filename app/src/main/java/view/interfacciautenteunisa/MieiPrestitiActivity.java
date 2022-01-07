@@ -21,6 +21,7 @@ import model.libromanagement.LibroAdapter;
 import model.prestitomanagement.Prestito;
 import model.prestitomanagement.PrestitoAdapter;
 import model.utentemanagement.Utente;
+import presenter.FacadePresenter;
 
 public class MieiPrestitiActivity extends Activity {
     private static Context context;
@@ -30,6 +31,7 @@ public class MieiPrestitiActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.utente_miei_prestiti);
         context=getApplicationContext();
+        FacadePresenter fp=new FacadePresenter();
 
         SharedPreferences userSession = PreferenceManager.getDefaultSharedPreferences(this);
         Intent i=getIntent();
@@ -48,7 +50,9 @@ public class MieiPrestitiActivity extends Activity {
         lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-
+                Prestito prestito=(Prestito) lv.getItemAtPosition(position);
+                Libro l= prestito.getLibro();
+                fp.mostraDettagliLibroPrestito(l);
             }
         });
     }

@@ -1,11 +1,16 @@
 package model.prestitomanagement;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
+import android.text.InputFilter;
+import android.text.InputType;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -18,12 +23,17 @@ import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.List;
 
+import presenter.FacadePresenter;
+import utils.InputFilterMinMax;
+
 public class PrestitoAdapter extends ArrayAdapter<Prestito> {
     private LayoutInflater inflater;
+    private FacadePresenter fp;
 
     public PrestitoAdapter(Context context, int resource, List<Prestito> objects) {
         super(context, resource, objects);
         inflater=LayoutInflater.from(context);
+        fp=new FacadePresenter();
     }
 
     public View getView(int position, View v, ViewGroup parent){
@@ -60,6 +70,37 @@ public class PrestitoAdapter extends ArrayAdapter<Prestito> {
         else {
             attivoTV.setText("NO");
         }
+
+        valutaButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                View valutaView=inflater.inflate(R.layout.valutazione_prestito, null);
+
+                EditText votoET=valutaView.findViewById(R.id.votoPrestitoET);
+                InputFilter filter= new InputFilterMinMax(1,5);
+                votoET.setFilters(new InputFilter[]{filter});
+
+                EditText commentoET=valutaView.findViewById(R.id.commentoPrestitoET);
+
+                AlertDialog valutaPrestito = new AlertDialog.Builder(v.getContext()).
+                        setTitle("Valuta Prestito").
+                        setView(valutaView).
+                        setPositiveButton(R.string.conferma, new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                int voto= Integer.parseInt(votoET.getText().toString());
+                                String commento = commentoET.getText().toString();
+                                fp.valutaPrestito(p, voto, commento);
+                            }
+                        }).
+                        setNegativeButton(R.string.esci, new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                dialog.cancel();
+                            }
+                        }).show();
+            }
+        });
 
         int voto=p.getVoto();
         if(dataConsegna!=null){

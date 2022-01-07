@@ -1,5 +1,7 @@
 package presenter;
 
+import android.view.View;
+
 import java.util.ArrayList;
 import java.util.GregorianCalendar;
 
@@ -85,6 +87,10 @@ public class FacadePresenter {
         libroPresenter.mostraDettagliLibro(libro);
     }
 
+    public void mostraDettagliLibroPrestito(Libro libro) {
+        libroPresenter.mostraDettagliLibroPrestito(libro);
+    }
+
 
     public void mostraElencoPostazioni(Posizione p, GregorianCalendar date) {
         postazionePresenter.mostraElencoPostazioni(p, date);
@@ -97,5 +103,9 @@ public class FacadePresenter {
 
     public void creaPrenotazione(Prenotazione prenotazione) {
         prenotazionePresenter.creaPrenotazione(prenotazione);
+    }
+
+    public void valutaPrestito(Prestito p, int voto, String commento) {
+        prestitoPresenter.valutaPrestito(p, voto, commento);
     }
 }

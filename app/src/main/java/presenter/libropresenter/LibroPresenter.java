@@ -2,38 +2,21 @@ package presenter.libropresenter;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.os.NetworkOnMainThreadException;
 import android.widget.Toast;
 
 import androidx.preference.PreferenceManager;
 
-import com.example.unisalib.R;
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.JsonHttpResponseHandler;
-import com.loopj.android.http.RequestHandle;
 import com.loopj.android.http.RequestParams;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
 
 import cz.msebera.android.httpclient.Header;
-import cz.msebera.android.httpclient.HttpClientConnection;
-import cz.msebera.android.httpclient.HttpResponse;
-import cz.msebera.android.httpclient.NameValuePair;
-import cz.msebera.android.httpclient.client.HttpClient;
-import cz.msebera.android.httpclient.client.entity.UrlEncodedFormEntity;
-import cz.msebera.android.httpclient.client.methods.HttpPatch;
-import cz.msebera.android.httpclient.client.methods.HttpPost;
-import cz.msebera.android.httpclient.client.utils.URIBuilder;
-import cz.msebera.android.httpclient.impl.client.DefaultHttpClient;
-import cz.msebera.android.httpclient.message.BasicNameValuePair;
 import model.libromanagement.Libro;
 import model.utentemanagement.Utente;
 import view.interfacciaadmin.DettagliLibroAdminActivity;
@@ -41,9 +24,10 @@ import view.interfacciageneral.ElencoLibriActivity;
 import view.interfacciageneral.RicercaActivity;
 import view.interfacciautenteunisa.DettagliLibroUtenteUnisaActivity;
 import view.interfacciautenteunisa.HomeUtenteUnisaActivity;
+import view.interfacciautenteunisa.MieiPrestitiActivity;
 
 public class LibroPresenter {
-    static final String GenericURL = "http://192.168.1.7:8080/UnisaLIBServer/LibroPresenter";
+    static final String GenericURL = "http://192.168.255.1:8080/UnisaLIBServer/LibroPresenter";
     private AsyncHttpClient client = new AsyncHttpClient();
 
     public void mostraRicercaLibri(boolean is_admin) {
@@ -165,6 +149,25 @@ public class LibroPresenter {
             i.putExtra("Libro", Libro.toJson(l));
             i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             ElencoLibriActivity.getAppContext().startActivity(i);
+        }
+    }
+
+    public void mostraDettagliLibroPrestito(Libro l) {
+        SharedPreferences userSession = PreferenceManager.getDefaultSharedPreferences(ElencoLibriActivity.getAppContext());
+        Utente u = Utente.fromJson(userSession.getString("Utente", ""));
+
+        Intent i = new Intent();
+
+        if (u.isAdmin()) {
+            i.setClass(MieiPrestitiActivity.getAppContext(), DettagliLibroAdminActivity.class);
+            i.putExtra("Libro", Libro.toJson(l));
+            i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            ElencoLibriActivity.getAppContext().startActivity(i);
+        } else {
+            i.setClass(MieiPrestitiActivity.getAppContext(), DettagliLibroUtenteUnisaActivity.class);
+            i.putExtra("Libro", Libro.toJson(l));
+            i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            MieiPrestitiActivity.getAppContext().startActivity(i);
         }
     }
 

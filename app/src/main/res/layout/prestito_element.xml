@@ -148,7 +148,8 @@
             android:backgroundTint="#146DDA"
             android:layout_gravity="center"
             android:text="Valuta"
-            android:textSize="10dp"/>
+            android:textSize="10dp"
+            android:textColor="@color/white"/>
     </LinearLayout>
 
 </RelativeLayout>
