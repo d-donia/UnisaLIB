@@ -42,10 +42,13 @@ public class AggiungiLibroActivity extends Activity {
         Spinner zonaSpinner = findViewById(R.id.zonaALSpinner);
         Button aggiungiLibroButton = findViewById(R.id.aggiungiLibroButton);
 
-        String[] categorie = getIntent().getStringArrayExtra("categorie");
-        categoriaSpinner.setAdapter(new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, categorie));
         String pos = getIntent().getStringExtra("posizioni");
+        System.out.println(pos);
         ArrayList<Posizione> posizioni = Posizione.fromJson(pos);
+        String cat = getIntent().getStringExtra("categorie");
+        String[] categorie = Libro.fromJsonToCategorie(cat);
+        System.out.println("aggiungilibroactivity: " + categorie.toString());
+        categoriaSpinner.setAdapter(new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, categorie));
 
         //inizializzazione del Biblioteca Spinner
         ArrayList<String> b = new ArrayList<>();
