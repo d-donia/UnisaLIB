@@ -17,28 +17,41 @@
         android:orientation="vertical"
         android:layout_marginVertical="120dp"
         android:layout_marginHorizontal="30dp">
-
-        <Button
-            android:layout_width="fill_parent"
-            android:layout_height="30dp"
-            android:layout_margin="5dp"
+<TextView
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center"
+    android:textSize="30sp"
+    android:text="Biblioteca"/>
+        <Spinner
+            android:id="@+id/bibliotecaSpinner"
+            android:layout_height="0dp"
+            android:layout_margin="20dp"
             android:layout_weight="1"
-            android:backgroundTint="#CCCCCC"
-            android:drawableRight="@drawable/arrow_down"
+            android:layout_width="match_parent"
             android:text="Biblioteca"
-            android:textSize="20sp" />
-
-        <Button
-            android:layout_width="fill_parent"
-            android:layout_height="30dp"
-            android:layout_margin="5dp"
+            android:background="@android:drawable/btn_dropdown"
+            android:spinnerMode="dropdown"
+             />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:textSize="30sp"
+            android:text="Zona"/>
+        <Spinner
+            android:id="@+id/zonaSpinner"
+            android:layout_height="0dp"
+            android:layout_margin="20dp"
             android:layout_weight="1"
-            android:backgroundTint="#CCCCCC"
-            android:drawableRight="@drawable/arrow_down"
-            android:text="Zona"
-            android:textSize="20sp" />
+            android:layout_width="match_parent"
+            android:text="Biblioteca"
+            android:background="@android:drawable/btn_dropdown"
+            android:spinnerMode="dropdown"
+            />
 
         <Button
+            android:id="@+id/cercaButtonAD"
             android:layout_width="fill_parent"
             android:layout_height="30dp"
             android:layout_margin="5dp"

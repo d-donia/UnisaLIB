@@ -74,7 +74,7 @@ public class FacadePresenter {
 
     public void cercaPostazioni(Posizione po){}
 
-    public void mostraRicercaPostazioni(boolean is_admin) { postazionePresenter.mostraRicercaPostazioni(is_admin); }
+    public void mostraRicercaPostazioni(boolean is_admin, Context c) { postazionePresenter.mostraRicercaPostazioni(is_admin, c); }
 
     public void ricercaLibriCategoria(String categoria) {
         if(categoria.equalsIgnoreCase("Consigliati")){

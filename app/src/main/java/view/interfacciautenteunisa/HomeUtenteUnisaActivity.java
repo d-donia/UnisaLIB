@@ -107,7 +107,7 @@ public class HomeUtenteUnisaActivity extends Activity {
         svcPrenotazioneButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                fp.mostraRicercaPostazioni(u.isAdmin());
+                fp.mostraRicercaPostazioni(u.isAdmin(), getApplicationContext());
             }
         });
 

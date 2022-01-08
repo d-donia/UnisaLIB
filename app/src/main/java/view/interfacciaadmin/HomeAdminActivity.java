@@ -39,7 +39,7 @@ public class HomeAdminActivity extends Activity {
         mgmtPrenotazioneButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                fp.mostraRicercaPostazioni(u.isAdmin());
+                fp.mostraRicercaPostazioni(u.isAdmin(), getApplicationContext());
             }
         });
 

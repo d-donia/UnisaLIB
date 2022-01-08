@@ -1,5 +1,6 @@
 package presenter.postazionepresenter;
 
+import android.content.Context;
 import android.content.Intent;
 import android.widget.Toast;
 
@@ -11,21 +12,18 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.sql.Time;
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 
 import cz.msebera.android.httpclient.Header;
-import model.libromanagement.Libro;
 import model.posizionemanagement.Posizione;
 import model.postazionemanagement.Periodo;
 import model.postazionemanagement.Postazione;
 import model.prenotazionemanagement.Prenotazione;
 import utils.SwitchDate;
-import view.interfacciageneral.RicercaActivity;
+import view.interfacciaadmin.RicercaPostazioneAdminActivity;
 import view.interfacciautenteunisa.ElencoPostazioniUtenteActivity;
 import view.interfacciautenteunisa.HomeUtenteUnisaActivity;
 import view.interfacciautenteunisa.RicercaPostazioneUtenteActivity;
@@ -34,7 +32,7 @@ public class PostazionePresenter {
     static final String GenericURL = "http://192.168.1.7:8080/UnisaLIBServer/PostazionePresenter";
     private AsyncHttpClient client = new AsyncHttpClient();
 
-    public void mostraRicercaPostazioni(boolean is_admin) {
+    public void mostraRicercaPostazioni(boolean is_admin, Context c) {
         String MYURL = GenericURL + "/mostra-ricerca-postazioni";
         RequestParams params;
         params = new RequestParams();
@@ -45,13 +43,20 @@ public class PostazionePresenter {
             public void onSuccess(int statusCode, Header[] headers, JSONArray response) {
                 super.onSuccess(statusCode, headers, response);
                 Posizione[] posizioni = Posizione.fromJson(response);
-
                 Intent i = new Intent();
-                i.setClass(HomeUtenteUnisaActivity.getAppContext(), RicercaPostazioneUtenteActivity.class);
+                if(!is_admin){
+                i.setClass(c, RicercaPostazioneUtenteActivity.class);
                 i.putExtra("Posizioni", Posizione.toJson(new ArrayList<>(Arrays.asList(posizioni))));
                 i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                HomeUtenteUnisaActivity.getAppContext().startActivity(i);
+                c.startActivity(i);
             }
+                else {
+                    i.setClass(c, RicercaPostazioneAdminActivity.class);
+                    i.putExtra("Posizioni", Posizione.toJson(new ArrayList<>(Arrays.asList(posizioni))));
+                    i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                    c.startActivity(i);
+                }
+                }
 
             @Override
             public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
