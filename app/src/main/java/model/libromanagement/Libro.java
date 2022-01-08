@@ -100,6 +100,12 @@ public class Libro implements Serializable{
         return libro;
     }
 
+    public static String[] fromJsonToCategorie(String json){
+        Gson gson = new Gson();
+        String[] categorie = gson.fromJson(json, String[].class);
+        return categorie;
+    }
+
     public static String toJsonCategorie(List<String> categorie){
         Gson gson = new Gson();
         return gson.toJson(categorie);

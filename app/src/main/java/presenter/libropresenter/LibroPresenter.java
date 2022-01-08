@@ -34,7 +34,7 @@ import view.interfacciautenteunisa.HomeUtenteUnisaActivity;
 import view.interfacciautenteunisa.MieiPrestitiActivity;
 
 public class LibroPresenter {
-    static final String GenericURL = "http://192.168.1.7:8080/UnisaLIBServer/LibroPresenter";
+    static final String GenericURL = "http://192.168.1.61:8080/UnisaLIBServer/LibroPresenter";
     private AsyncHttpClient client = new AsyncHttpClient();
 
     public void mostraRicercaLibri(boolean is_admin, Context c) {
@@ -252,15 +252,18 @@ public class LibroPresenter {
     public void informazioniAggiuntaLibro() {
         String MYURL = GenericURL + "/informazioni-aggiunta";
         RequestParams params = new RequestParams();
+        System.out.println("qui si");
         client.post(MYURL, params, new JsonHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
                 super.onSuccess(statusCode, headers, response);
+                System.out.println("qui no");
                 System.out.println("" + response);
                 String[] categorie=null;
                 Posizione[] posizioni=null;
                 try {
                     categorie=Libro.fromJsonCategorie(response.getJSONArray("categorie"));
+                    System.out.println("libropresenter: " + categorie.toString());
                     posizioni=Posizione.fromJsonEtic(response.getJSONArray("posizioni"));
                     for(int i=0;i<posizioni.length;++i)
                         System.out.println(posizioni[i].getId());
