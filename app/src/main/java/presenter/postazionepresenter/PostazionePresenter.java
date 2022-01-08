@@ -129,8 +129,8 @@ public class PostazionePresenter {
             if (prenotazione.getPostazione().getId().equals(pos.getId()) && SwitchDate.equalsDate(prenotazione.getData(), date))
                 orariNonDisponibili.add(new Periodo(prenotazione.getOraInizio(), prenotazione.getOraFine()));
         GregorianCalendar currentTime = new GregorianCalendar();
-        for(Periodo p : orariDisponibili)
-            if (SwitchDate.equalsDate(date, currentTime) && currentTime.get(Calendar.HOUR_OF_DAY)>=p.getOraInizio())
+        for (Periodo p : orariDisponibili)
+            if (SwitchDate.equalsDate(date, currentTime) && currentTime.get(Calendar.HOUR_OF_DAY) >= p.getOraInizio())
                 orariNonDisponibili.add(p);
         for (Periodo p : orariNonDisponibili)
             if (orariDisponibili.contains(p))
@@ -142,4 +142,32 @@ public class PostazionePresenter {
 
         return fasceOrarie;
     }
-}
+
+
+   /* public void setBlocco(String idPos) {
+        String MYURL = GenericURL + "/blocca-postazione";
+        RequestParams params;
+        params = new RequestParams();
+        params.put("idPos", idPos);
+
+        client.post(MYURL,params,new JsonHttpResponseHandler() {
+            @Override
+            public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
+                super.onSuccess(statusCode, headers, response);
+                try {
+                    i
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+
+            @Override
+            public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
+                super.onFailure(statusCode, headers, responseString, throwable);
+            }
+        });
+    }*/
+
+
+
+    }
