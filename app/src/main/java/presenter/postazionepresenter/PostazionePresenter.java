@@ -23,6 +23,7 @@ import model.postazionemanagement.Periodo;
 import model.postazionemanagement.Postazione;
 import model.prenotazionemanagement.Prenotazione;
 import utils.SwitchDate;
+import view.interfacciaadmin.ElencoPostazioniAdminActivity;
 import view.interfacciaadmin.RicercaPostazioneAdminActivity;
 import view.interfacciautenteunisa.ElencoPostazioniUtenteActivity;
 import view.interfacciautenteunisa.HomeUtenteUnisaActivity;
@@ -70,7 +71,6 @@ public class PostazionePresenter {
         String MYURL = GenericURL + "/mostra-elenco-postazioni";
         RequestParams params;
         params = new RequestParams();
-        System.out.println(date.get(Calendar.YEAR));
         params.put("anno", date.get(Calendar.YEAR));
         params.put("mese", date.get(Calendar.MONTH));
         params.put("giorno", date.get(Calendar.DATE));
@@ -97,6 +97,32 @@ public class PostazionePresenter {
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
+            }
+
+            @Override
+            public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
+                super.onFailure(statusCode, headers, responseString, throwable);
+                Toast.makeText(HomeUtenteUnisaActivity.getAppContext(), responseString, Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
+    public void mostraElencoPostazioni(Posizione p) {
+        String MYURL = GenericURL + "/mostra-elenco-postazioni-admin";
+        RequestParams params;
+        params = new RequestParams();
+        params.put("posizione", Posizione.toJson(p));
+        client.post(MYURL, params, new JsonHttpResponseHandler() {
+
+            @Override
+            public void onSuccess(int statusCode, Header[] headers, JSONArray response) {
+                super.onSuccess(statusCode, headers, response);
+                ArrayList<Postazione> postazioni = Postazione.fromJson(""+response);
+                Intent i = new Intent();
+                i.setClass(RicercaPostazioneAdminActivity.getAppContext(), ElencoPostazioniAdminActivity.class);
+                i.putExtra("postazioni", Postazione.toJson(postazioni));
+                i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                RicercaPostazioneAdminActivity.getAppContext().startActivity(i);
             }
 
             @Override

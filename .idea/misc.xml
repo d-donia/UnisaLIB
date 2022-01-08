@@ -11,6 +11,10 @@
         <entry key="..\:/Android/UnisaLIB/app/src/main/res/layout/admin_dettagli_libro.xml" value="0.4" />
         <entry key="..\:/Android/UnisaLIB/app/src/main/res/layout/admin_elenco_postazioni.xml" value="0.25" />
         <entry key="..\:/Android/UnisaLIB/app/src/main/res/layout/admin_gestione_libri.xml" value="0.25" />
+        <entry key="..\:/Android/UnisaLIB/app/src/main/res/layout/admin_gestione_postazioni.xml" value="0.19583333333333333" />
+        <entry key="..\:/Android/UnisaLIB/app/src/main/res/layout/admin_home.xml" value="0.19583333333333333" />
+        <entry key="..\:/Android/UnisaLIB/app/src/main/res/layout/admin_ricerca_postazione.xml" value="0.19583333333333333" />
+        <entry key="..\:/Android/UnisaLIB/app/src/main/res/layout/admin_sblocco_postazione.xml" value="0.19583333333333333" />
         <entry key="..\:/Android/UnisaLIB/app/src/main/res/layout/general_login.xml" value="0.25" />
         <entry key="..\:/Android/UnisaLIB/app/src/main/res/layout/mockup01.xml" value="0.12760416666666666" />
         <entry key="..\:/Android/UnisaLIB/app/src/main/res/layout/mockup02.xml" value="0.25" />
@@ -37,13 +41,6 @@
         <entry key="..\:/Users/Utente/AndroidStudioProjects/UnisaLIB/app/src/main/res/layout/mockup10.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/Utente/AndroidStudioProjects/UnisaLIB/app/src/main/res/layout/utente_dettagli_libro.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/Utente/AndroidStudioProjects/UnisaLIB/app/src/main/res/layout/utente_home.xml" value="0.25416666666666665" />
-        <entry key="..\:/Users/W10/AndroidStudioProjects/UnisaLIB11/app/src/main/res/layout/admin_aggiungi_libri.xml" value="0.18125" />
-        <entry key="..\:/Users/W10/AndroidStudioProjects/UnisaLIB11/app/src/main/res/layout/admin_blocco_postazione.xml" value="0.21732522796352582" />
-        <entry key="..\:/Users/W10/AndroidStudioProjects/UnisaLIB11/app/src/main/res/layout/admin_dettagli_libro.xml" value="0.18125" />
-        <entry key="..\:/Users/W10/AndroidStudioProjects/UnisaLIB11/app/src/main/res/layout/admin_gestione_postazioni.xml" value="0.21732522796352582" />
-        <entry key="..\:/Users/W10/AndroidStudioProjects/UnisaLIB11/app/src/main/res/layout/admin_home.xml" value="0.3828571428571429" />
-        <entry key="..\:/Users/W10/AndroidStudioProjects/UnisaLIB11/app/src/main/res/layout/admin_ricerca_postazione.xml" value="0.2857142857142857" />
-        <entry key="..\:/Users/W10/AndroidStudioProjects/UnisaLIB11/app/src/main/res/layout/admin_sblocco_postazione.xml" value="0.21732522796352582" />
       </map>
     </option>
   </component>

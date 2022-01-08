@@ -20,9 +20,15 @@ public class RicercaPostazioneAdminActivity extends Activity {
     public FacadePresenter fp;
     public static Context context;
 
+    public static Context getAppContext() {
+        return context;
+    }
+
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.admin_ricerca_postazione);
+        fp=new FacadePresenter();
+        context=getApplicationContext();
         Spinner bibliotecaSpinner = findViewById(R.id.bibliotecaSpinner);
         Spinner zonaSpinner = findViewById(R.id.zonaSpinner);
         Button cercaButton = findViewById(R.id.cercaButtonAD);
@@ -53,6 +59,17 @@ public class RicercaPostazioneAdminActivity extends Activity {
             @Override
             public void onNothingSelected(AdapterView<?> adapterView) {
 
+            }
+        });
+
+        cercaButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Posizione p = new Posizione();
+                for (Posizione x: posizioni)
+                    if (x.getBiblioteca().equals(bibliotecaSpinner.getSelectedItem().toString()) && x.getZona().equals(zonaSpinner.getSelectedItem().toString()))
+                        p=x;
+                fp.mostraElencoPostazioni(p);
             }
         });
     }

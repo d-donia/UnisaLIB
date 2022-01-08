@@ -113,4 +113,8 @@ public class FacadePresenter {
     public void creaLibro(Libro l) {
         libroPresenter.creaLibro(l);
     }
+
+    public void mostraElencoPostazioni(Posizione p) {
+        postazionePresenter.mostraElencoPostazioni(p);
+    }
 }
