@@ -21,7 +21,7 @@ import view.interfacciautenteunisa.DettagliLibroUtenteUnisaActivity;
 import view.interfacciautenteunisa.ElencoPostazioniUtenteActivity;
 
 public class PrenotazionePresenter {
-    static final String GenericURL="http://192.168.255.1:8080/UnisaLIBServer/PrenotazionePresenter";
+    static final String GenericURL="http://192.168.1.7:8080/UnisaLIBServer/PrenotazionePresenter";
     private AsyncHttpClient client=new AsyncHttpClient();
 
     public void creaPrenotazione(Prenotazione prenotazione) {
@@ -37,6 +37,7 @@ public class PrenotazionePresenter {
                 SharedPreferences.Editor editor = userSession.edit();
                 Utente utenteAggiornato = Utente.fromJson(userSession.getString("Utente", ""));
                 editor.putString("Utente", Utente.toJson(utenteAggiornato)).apply();
+                Toast.makeText(DettagliLibroUtenteUnisaActivity.getAppContext(), "Prenotazione avvenuta con successo.", Toast.LENGTH_LONG).show();
             }
 
             @Override

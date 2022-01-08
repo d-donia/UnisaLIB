@@ -42,9 +42,6 @@ public class GestioneLibroAdminActivity extends Activity {
             @Override
             public void onClick(View v) {
                 fp.informazioniAggiuntaLibro();
-                Intent i=new Intent();
-                i.setClass(getApplicationContext(),AggiungiLibroActivity.class);
-                startActivity(i);
             }
         });
 
