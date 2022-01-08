@@ -32,7 +32,6 @@ public class LibroAdapter extends ArrayAdapter<Libro> {
         TextView isbnTextView = (TextView) v.findViewById(R.id.isbnTV);
 
         Glide.with(v).load(l.getUrlCopertina()).into(copertinaImageView);
-        System.out.println(l.getUrlCopertina());
         titoloTextView.setText(l.getTitolo());
         descrizioneTextView.setText(l.getTitolo());
         isbnTextView.setText(l.getIsbn());
