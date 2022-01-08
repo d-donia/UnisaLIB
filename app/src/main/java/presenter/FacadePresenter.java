@@ -109,4 +109,8 @@ public class FacadePresenter {
     public void informazioniAggiuntaLibro() {
         libroPresenter.informazioniAggiuntaLibro();
     }
+
+    public void creaLibro(Libro l) {
+        libroPresenter.creaLibro(l);
+    }
 }

@@ -18,78 +18,159 @@
         android:layout_margin="5dp">
 
         <EditText
+            android:id="@+id/isbnET"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="10dp"
+            android:layout_margin="7dp"
             android:hint="Codice ISBN" />
 
         <EditText
+            android:id="@+id/titoloET"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="10dp"
+            android:layout_margin="7dp"
             android:hint="Titolo" />
 
         <EditText
+            android:id="@+id/autoreET"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="10dp"
+            android:layout_margin="7dp"
             android:hint="Autore" />
 
 
         <EditText
+            android:id="@+id/editoreET"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="10dp"
+            android:layout_margin="7dp"
             android:hint="Editore" />
-
-        <EditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="10dp"
-            android:hint="Anno di pubblicazione" />
-
-        <EditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="10dp"
-            android:hint="N. copie" />
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:layout_marginRight="10dp"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:layout_margin="7dp">
 
-            <EditText
+            <TextView
                 android:layout_width="0dp"
-                android:layout_height="50dp"
-                android:layout_weight="7"
-                android:layout_margin="10dp"
-                android:hint="File img copertina" />
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Categoria:"
+                android:layout_gravity="center"
+                android:textSize="20sp"/>
 
-            <Button
+            <Spinner
+                android:id="@+id/categoriaALSpinner"
                 android:layout_width="0dp"
-                android:layout_height="50dp"
-                android:layout_weight="3"
-                android:backgroundTint="#D9364F"
-                android:text="Apri"
-                android:textSize="15sp"
-                android:textStyle="italic"
-                android:textColor="@color/white"
-                />
+                android:layout_height="wrap_content"
+                android:layout_weight="2"
+                android:background="@android:drawable/btn_dropdown"
+                android:spinnerMode="dropdown"
+                android:textSize="20sp"/>
 
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:orientation="horizontal"
+            android:layout_margin="7dp">
+
+            <EditText
+                android:id="@+id/annoET"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="3"
+                android:hint="Anno di pubblicazione" />
+
+            <FrameLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"/>
+
+            <EditText
+                android:id="@+id/ncopieET"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="2"
+                android:hint="N. copie" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:orientation="horizontal"
+            android:layout_margin="7dp">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Biblioteca:"
+                android:layout_gravity="center"
+                android:textSize="20sp"/>
+
+            <Spinner
+                android:id="@+id/bibliotecaALSpinner"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="2"
+                android:background="@android:drawable/btn_dropdown"
+                android:spinnerMode="dropdown"
+                android:textSize="20sp"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:orientation="horizontal"
+            android:layout_margin="7dp">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Zona:"
+                android:layout_gravity="center"
+                android:textSize="20sp"/>
+
+            <Spinner
+                android:id="@+id/zonaALSpinner"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="2"
+                android:background="@android:drawable/btn_dropdown"
+                android:spinnerMode="dropdown"
+                android:textSize="20sp"/>
+
+        </LinearLayout>
+
+
+        <EditText
+            android:id="@+id/imgET"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="7dp"
+            android:hint="URL immagine copertina" />
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="50dp"
             android:layout_marginHorizontal="50dp"
-            android:layout_marginVertical="20dp">
+            android:layout_marginVertical="10dp">
 
 
 
         <Button
+            android:id="@+id/aggiungiLibroButton"
             android:layout_width="fill_parent"
             android:layout_height="50dp"
             android:layout_margin="5dp"

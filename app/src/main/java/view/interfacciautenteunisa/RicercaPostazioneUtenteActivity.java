@@ -44,7 +44,6 @@ public class RicercaPostazioneUtenteActivity extends Activity {
         Button cercaButton = findViewById(R.id.cercaButton);
         String p = getIntent().getStringExtra("Posizioni");
         ArrayList<Posizione> posizioni = Posizione.fromJson(p);
-
         //inizializzazione del Biblioteca Spinner
         ArrayList<String> b = new ArrayList<>();
         for (Posizione x: posizioni)
@@ -52,7 +51,6 @@ public class RicercaPostazioneUtenteActivity extends Activity {
                 b.add(x.getBiblioteca());
         String[] biblioteche = b.toArray(new String[0]);
         bibliotecaSpinner.setAdapter(new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, biblioteche));
-
         //inizializzazione del Zona Spinner
         bibliotecaSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -69,7 +67,7 @@ public class RicercaPostazioneUtenteActivity extends Activity {
             }
             @Override
             public void onNothingSelected(AdapterView<?> adapterView) {
-            //
+                //
             }
         });
         datePicker.setMinDate(System.currentTimeMillis() - SECONDINMILLS);
@@ -79,10 +77,9 @@ public class RicercaPostazioneUtenteActivity extends Activity {
             @Override
             public void onClick(View view) {
                 Posizione p = new Posizione();
-                for (Posizione x: posizioni) {
+                for (Posizione x: posizioni)
                     if (x.getBiblioteca().equals(bibliotecaSpinner.getSelectedItem().toString()) && x.getZona().equals(zonaSpinner.getSelectedItem().toString()))
                         p=x;
-                }
                 GregorianCalendar date = new GregorianCalendar(datePicker.getYear(), datePicker.getMonth(), datePicker.getDayOfMonth());
                 fp.mostraElencoPostazioni(p, date);
             }
