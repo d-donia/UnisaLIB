@@ -21,7 +21,7 @@ import view.interfacciautenteunisa.DettagliLibroUtenteUnisaActivity;
 import view.interfacciautenteunisa.ElencoPostazioniUtenteActivity;
 
 public class PrenotazionePresenter {
-    static final String GenericURL="http://192.168.1.61:8080/UnisaLIBServer/PrenotazionePresenter";
+    static final String GenericURL="http://192.168.255.1:8080/UnisaLIBServer/PrenotazionePresenter";
     private AsyncHttpClient client=new AsyncHttpClient();
 
     public void creaPrenotazione(Prenotazione prenotazione) {
@@ -37,28 +37,27 @@ public class PrenotazionePresenter {
                 SharedPreferences.Editor editor = userSession.edit();
                 Utente utenteAggiornato = Utente.fromJson(userSession.getString("Utente", ""));
                 editor.putString("Utente", Utente.toJson(utenteAggiornato)).apply();
-                Toast.makeText(DettagliLibroUtenteUnisaActivity.getAppContext(), "Prenotazione avvenuta con successo.", Toast.LENGTH_LONG).show();
             }
 
             @Override
             public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONObject errorResponse) {
                 super.onFailure(statusCode, headers, throwable, errorResponse);
                 System.out.println("Prestito fallito");
-                Toast.makeText(DettagliLibroUtenteUnisaActivity.getAppContext(), errorResponse.toString() + ". Riprovare più tardi", Toast.LENGTH_LONG).show();
+                Toast.makeText(ElencoPostazioniUtenteActivity.getAppContext(), errorResponse.toString() + ". Riprovare più tardi", Toast.LENGTH_LONG).show();
             }
 
             @Override
             public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONArray errorResponse) {
                 super.onFailure(statusCode, headers, throwable, errorResponse);
                 System.out.println("Prestito fallito");
-                Toast.makeText(DettagliLibroUtenteUnisaActivity.getAppContext(), errorResponse.toString() + ". Riprovare più tardi", Toast.LENGTH_LONG).show();
+                Toast.makeText(ElencoPostazioniUtenteActivity.getAppContext(), errorResponse.toString() + ". Riprovare più tardi", Toast.LENGTH_LONG).show();
             }
 
             @Override
             public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
                 super.onFailure(statusCode, headers, responseString, throwable);
                 System.out.println("Prestito fallito");
-                Toast.makeText(DettagliLibroUtenteUnisaActivity.getAppContext(), responseString + ". Riprovare più tardi", Toast.LENGTH_LONG).show();
+                Toast.makeText(ElencoPostazioniUtenteActivity.getAppContext(), responseString + ". Riprovare più tardi", Toast.LENGTH_LONG).show();
             }
         });
     }
