@@ -35,6 +35,7 @@ public class GestioneLibroAdminActivity extends Activity {
         catch (JsonSyntaxException e){
             e.printStackTrace();
         }
+
         Button addLibro= findViewById(R.id.addButton);
         Button modifyLibro=findViewById(R.id.modifyButton);
 
