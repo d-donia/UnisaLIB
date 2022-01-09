@@ -32,6 +32,8 @@
         <activity android:name="view.interfacciaadmin.AggiungiLibroActivity"/>
         <activity android:name="view.interfacciaadmin.RicercaPostazioneAdminActivity"/>
         <activity android:name="view.interfacciaadmin.ElencoPostazioniAdminActivity"/>
+        <activity android:name="view.interfacciaadmin.BloccoActivity"/>
+        <activity android:name="view.interfacciaadmin.SbloccoActivity"/>
     </application>
 
 </manifest>

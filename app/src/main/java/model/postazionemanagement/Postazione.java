@@ -1,6 +1,7 @@
 package model.postazionemanagement;
 
 import com.google.gson.Gson;
+import com.google.gson.JsonSyntaxException;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -9,7 +10,6 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.Arrays;
 
-import model.libromanagement.Libro;
 import model.posizionemanagement.Posizione;
 
 public class Postazione {
@@ -39,22 +39,33 @@ public class Postazione {
         return gson.toJson(postazioni);
     }
 
-    public static Postazione[] fromJson(JSONArray response) throws JSONException {
+    public static String toJson(Postazione p) {
+        Gson gson = new Gson();
+        return gson.toJson(p);
+    }
+
+    public static Postazione[] fromJsonArray(JSONArray response) throws JSONException {
         ArrayList<Postazione> p=new ArrayList<>();
         for(int i=0;i<response.length();++i)
-            p.add(Postazione.fromJson(response.getJSONObject(i)));
+            p.add(Postazione.fromJsonArray(response.getJSONObject(i)));
         Postazione[] array = new Postazione[p.size()];
         array = p.toArray(array);
         return array;
     }
 
-    public static Postazione fromJson(JSONObject json) throws JSONException {
+    public static Postazione fromJsonArray(JSONObject json) throws JSONException {
         Gson gson = new Gson();
         Postazione p = gson.fromJson(""+json.get("postazione"),Postazione.class);
         return p;
     }
 
-    public static ArrayList<Postazione> fromJson(String json) {
+    public static Postazione fromJson(String json) throws JsonSyntaxException {
+        Gson gson = new Gson();
+        Postazione p = gson.fromJson(json,Postazione.class);
+        return p;
+    }
+
+    public static ArrayList<Postazione> fromJsonArray(String json) {
         Gson gson = new Gson();
         ArrayList<Postazione> postazioni= new ArrayList<>(Arrays.asList(gson.fromJson(json,Postazione[].class)));
         return postazioni;

@@ -30,7 +30,7 @@ import view.interfacciautenteunisa.HomeUtenteUnisaActivity;
 import view.interfacciautenteunisa.RicercaPostazioneUtenteActivity;
 
 public class PostazionePresenter {
-    static final String GenericURL = "http://192.168.255.1:8080/UnisaLIBServer/PostazionePresenter";
+    static final String GenericURL = "http://192.168.1.7:8080/UnisaLIBServer/PostazionePresenter";
     private AsyncHttpClient client = new AsyncHttpClient();
 
     public void mostraRicercaPostazioni(boolean is_admin, Context c) {
@@ -81,7 +81,7 @@ public class PostazionePresenter {
             public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
                 super.onSuccess(statusCode, headers, response);
                 try {
-                    Postazione[] postazioni = Postazione.fromJson(response.getJSONArray("postazioni"));
+                    Postazione[] postazioni = Postazione.fromJsonArray(response.getJSONArray("postazioni"));
                     Prenotazione[] prenotazioni = Prenotazione.fromJson(response.getJSONArray("prenotazioni"));
 
                     Intent i = new Intent();
