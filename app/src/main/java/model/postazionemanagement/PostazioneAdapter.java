@@ -39,7 +39,7 @@ public class PostazioneAdapter extends ArrayAdapter<Postazione> {
         TextView postazioneTV = v.findViewById(R.id.idPostazione);
         Button bloccoButton = v.findViewById(R.id.bloccoButton);
         Button sbloccoButton = v.findViewById(R.id.sbloccoButton);
-        Button cancellaButton = v.findViewById(R.id.cancellaButton);
+        Button cancellaButton = v.findViewById(R.id.cancellaPosButton);
 
         postazioneTV.setText(p.getId());
 

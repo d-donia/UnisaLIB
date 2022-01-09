@@ -7,6 +7,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.Spinner;
 import android.widget.TextView;
 
 import androidx.annotation.Nullable;
@@ -26,37 +27,34 @@ public class DettagliLibroAdminActivity extends Activity {
         setContentView(R.layout.admin_dettagli_libro);
         fp=new FacadePresenter();
 
-        EditText detsTitoloTV= findViewById(R.id.detsTitoloTV);
-        TextView detsISBNTV=findViewById(R.id.detsISBNTV);
-        EditText detsAutoreTV= findViewById(R.id.detsAutoreTV);
-        EditText detsEditoreTV= findViewById(R.id.detsEditoreTV);
-        EditText detsCatTV=findViewById(R.id.detsCatTV);
-        TextView detsRatingTV=findViewById(R.id.detsRatingTV);
-        EditText detsAPTV= findViewById(R.id.detsAPTV);
-        EditText detsCopie=findViewById(R.id.detsCopieTV);
+        EditText detsTitoloET= findViewById(R.id.detsTitoloET);
+        TextView detsISBNTV=findViewById(R.id.detsAdIsbnTV);
+        EditText detsAutoreET= findViewById(R.id.detsAutoreET);
+        EditText detsEditoreET= findViewById(R.id.detsEditoreET);
+        TextView detsRatingTV=findViewById(R.id.detsADRatingTV);
+        EditText detsAPTV= findViewById(R.id.detsAnnoET);
+        EditText detsCopie=findViewById(R.id.detsNcopieET);
+        EditText copertinaET=findViewById(R.id.detsImgET);
 
-        TextView detsPosizioneTV= findViewById(R.id.detsPosizioneTV);
-        ImageView detsCopertinaIV= findViewById(R.id.detsCopertinaIV);
-        Button modificaButton=findViewById(R.id.modificaButton);
-        Button cancellaButton=findViewById(R.id.cancellaButton);
+        Spinner categoriaSP=findViewById(R.id.categoriaDLSpinner);
+        Spinner bibliotecaSP = findViewById(R.id.bibliotecaDLSpinner);
+        Spinner zonaSP=findViewById(R.id.zonaDLSpinner);
+        Button modificaButton=findViewById(R.id.modificaLibroButton);
+        Button cancellaButton=findViewById(R.id.eliminaLibroButton);
         Button listaPrestitiButton=findViewById(R.id.listaPrestitiButton);
 
 
         Intent i = getIntent();
         Libro l = Libro.fromJsonToLibro(i.getStringExtra("Libro"));
 
-        detsTitoloTV.setText(l.getTitolo());
+        detsTitoloET.setText(l.getTitolo());
         detsISBNTV.setText(l.getIsbn());
-        detsAutoreTV.setText(l.getAutore());
-        detsEditoreTV.setText(l.getEditore());
+        detsAutoreET.setText(l.getAutore());
+        detsEditoreET.setText(l.getEditore());
         detsAPTV.setText(l.getAnnoPubbl() + "");
-        detsCatTV.setText(l.getCategoria());
         detsRatingTV.setText(l.getRating()+ "");
-
-        detsPosizioneTV.setText(l.getPosizione().getBiblioteca() + ", " + l.getPosizione().getZona());
-
-        //Settare immagine url utilizzando libreria glide
-        Glide.with(this).load(l.getUrlCopertina()).into(detsCopertinaIV);
+        detsCopie.setText(l.getnCopie()+"");
+        copertinaET.setText(l.getUrlCopertina());
 
         /*modificaButton.setOnClickListener(new View.OnClickListener() {
             @Override
