@@ -1,24 +1,19 @@
 package model.postazionemanagement;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
-
-import com.bumptech.glide.Glide;
 import com.example.unisalib.R;
-
-import java.util.Calendar;
-import java.util.GregorianCalendar;
 import java.util.List;
-
-import model.prestitomanagement.Prestito;
 import presenter.FacadePresenter;
+import view.interfacciaadmin.BloccoActivity;
+import view.interfacciaadmin.ElencoPostazioniAdminActivity;
+import view.interfacciaadmin.SbloccoActivity;
 
 public class PostazioneAdapter extends ArrayAdapter<Postazione> {
     private LayoutInflater inflater;
@@ -43,6 +38,27 @@ public class PostazioneAdapter extends ArrayAdapter<Postazione> {
 
         postazioneTV.setText(p.getId());
 
+        bloccoButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent();
+                i.putExtra("postazione",Postazione.toJson(p));
+                i.setClass(ElencoPostazioniAdminActivity.getAppContext(), BloccoActivity.class);
+                i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                ElencoPostazioniAdminActivity.getAppContext().startActivity(i);
+            }
+        });
+
+        sbloccoButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent();
+                i.putExtra("postazione",Postazione.toJson(p));
+                i.setClass(ElencoPostazioniAdminActivity.getAppContext(), SbloccoActivity.class);
+                i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                ElencoPostazioniAdminActivity.getAppContext().startActivity(i);
+            }
+        });
         return v;
     }
 }

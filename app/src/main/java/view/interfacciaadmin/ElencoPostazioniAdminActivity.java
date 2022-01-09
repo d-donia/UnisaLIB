@@ -33,7 +33,7 @@ public class ElencoPostazioniAdminActivity extends Activity {
         setContentView(R.layout.admin_elenco_postazioni);
         context=getApplicationContext();
         Intent i=getIntent();
-        ArrayList<Postazione> postazioni= Postazione.fromJson(i.getStringExtra("postazioni"));
+        ArrayList<Postazione> postazioni= Postazione.fromJsonArray(i.getStringExtra("postazioni"));
 
         ListView lv = findViewById(R.id.postazioneLV);
 

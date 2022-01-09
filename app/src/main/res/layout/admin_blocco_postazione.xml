@@ -19,6 +19,7 @@
         android:layout_marginHorizontal="30dp">
 
         <TextView
+            android:id="@+id/postazioneTV"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="20sp"
@@ -30,11 +31,11 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
-            <RadioButton android:id="@+id/radio_pirates"
+            <RadioButton android:id="@+id/radioIndet"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Blocco Indeterminato"/>
-            <RadioButton android:id="@+id/radio_ninjas"
+            <RadioButton android:id="@+id/radioDet"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Blocco determinato"/>
@@ -50,31 +51,36 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
+                android:orientation="vertical"
                 android:layout_marginBottom="10dp"
                 android:padding="20dp">
-
-                <EditText
-                    android:layout_width="0dp"
+                <LinearLayout
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_weight="3"
-                    android:layout_gravity="center"
-                    android:hint="Data"/>
+                    android:orientation="horizontal"
+                    android:layout_gravity="center">
+                <EditText
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:layout_marginRight="5dp"
+                    android:hint="Ora inizio"/>
 
                 <EditText
-                    android:layout_width="0dp"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:layout_marginLeft="5dp"
-                    android:layout_gravity="center"
-                    android:hint="Inizio"/>
-
-                <EditText
-                    android:layout_width="0dp"
+                    android:hint="Ora fine"/>
+                </LinearLayout>
+                <DatePicker
+                    android:id="@+id/datePicker"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
                     android:layout_weight="1"
-                    android:layout_gravity="center"
-                    android:hint="Fine"/>
+                    android:datePickerMode="spinner"
+                    android:calendarViewShown="false"/>
 
             </LinearLayout>
 

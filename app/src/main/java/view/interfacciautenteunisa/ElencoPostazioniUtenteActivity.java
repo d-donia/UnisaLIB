@@ -49,7 +49,7 @@ public class ElencoPostazioniUtenteActivity extends Activity {
         TextView posizioneText = findViewById(R.id.posizioneTextView);
         TextView dataText = findViewById(R.id.dataTextView);
         Button confermaButton = findViewById(R.id.confermaPrenotazioneButton);
-        ArrayList<Postazione> postazioni = Postazione.fromJson(getIntent().getStringExtra("postazioni"));
+        ArrayList<Postazione> postazioni = Postazione.fromJsonArray(getIntent().getStringExtra("postazioni"));
         ArrayList<Prenotazione> prenotazioni = Prenotazione.fromJson(getIntent().getStringExtra("prenotazioni"));
         Posizione posizione = Posizione.fromJsonToPosizione(getIntent().getStringExtra("posizione"));
         GregorianCalendar date = new GregorianCalendar(getIntent().getIntExtra("anno", 0),
