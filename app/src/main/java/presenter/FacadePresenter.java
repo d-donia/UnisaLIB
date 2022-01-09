@@ -118,8 +118,8 @@ public class FacadePresenter {
         postazionePresenter.mostraElencoPostazioni(p);
     }
 
-    public void bloccoIndeterminato(Postazione p) {
-        postazionePresenter.bloccoIndeterminato(p);
+    public void bloccoIndeterminato(String idPos) {
+        postazionePresenter.bloccoIndeterminato(idPos);
     }
 
     public void bloccoDeterminato(Postazione p, GregorianCalendar date, int oraInizio, int oraFine) {

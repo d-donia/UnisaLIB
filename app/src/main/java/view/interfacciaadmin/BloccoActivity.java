@@ -74,7 +74,7 @@ public class BloccoActivity extends Activity {
                 }
                 else
                     if(bloccoIRB.isChecked())
-                        fp.bloccoIndeterminato(p);
+                        fp.bloccoIndeterminato(p.getId());
             }
         });
     }

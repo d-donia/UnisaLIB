@@ -24,13 +24,14 @@ import model.postazionemanagement.Postazione;
 import model.prenotazionemanagement.Prenotazione;
 import utils.SwitchDate;
 import view.interfacciaadmin.ElencoPostazioniAdminActivity;
+import view.interfacciaadmin.HomeAdminActivity;
 import view.interfacciaadmin.RicercaPostazioneAdminActivity;
 import view.interfacciautenteunisa.ElencoPostazioniUtenteActivity;
 import view.interfacciautenteunisa.HomeUtenteUnisaActivity;
 import view.interfacciautenteunisa.RicercaPostazioneUtenteActivity;
 
 public class PostazionePresenter {
-    static final String GenericURL = "http://192.168.1.7:8080/UnisaLIBServer/PostazionePresenter";
+    static final String GenericURL = "http://192.168.1.213:8080/UnisaLIBServer/PostazionePresenter";
     private AsyncHttpClient client = new AsyncHttpClient();
 
     public void mostraRicercaPostazioni(boolean is_admin, Context c) {
@@ -62,7 +63,7 @@ public class PostazionePresenter {
             @Override
             public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
                 super.onFailure(statusCode, headers, responseString, throwable);
-                Toast.makeText(HomeUtenteUnisaActivity.getAppContext(), responseString, Toast.LENGTH_SHORT).show();
+                Toast.makeText(c, responseString, Toast.LENGTH_SHORT).show();
             }
         });
     }
@@ -173,15 +174,13 @@ public class PostazionePresenter {
         return fasceOrarie;
     }
 
-    public void bloccoIndeterminato(Postazione p) {
 
-    }
 
     public void bloccoDeterminato(Postazione p, GregorianCalendar date, int oraInizio, int oraFine) {
     }
 
 
-   /* public void setBlocco(String idPos) {
+    public void bloccoIndeterminato(String idPos) {
         String MYURL = GenericURL + "/blocca-postazione";
         RequestParams params;
         params = new RequestParams();
@@ -191,11 +190,7 @@ public class PostazionePresenter {
             @Override
             public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
                 super.onSuccess(statusCode, headers, response);
-                try {
-                    i
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
+                Toast.makeText(HomeAdminActivity.getAppContext(), response.toString(), Toast.LENGTH_SHORT).show();
             }
 
             @Override
@@ -203,7 +198,7 @@ public class PostazionePresenter {
                 super.onFailure(statusCode, headers, responseString, throwable);
             }
         });
-    }*/
+    }
 
 
 

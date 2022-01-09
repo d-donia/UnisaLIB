@@ -1,6 +1,7 @@
 package view.interfacciaadmin;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -19,6 +20,11 @@ import presenter.FacadePresenter;
 public class HomeAdminActivity extends Activity {
     Utente u;
     FacadePresenter fp;
+
+    public static Context getAppContext() {
+        return getAppContext();
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -39,6 +45,7 @@ public class HomeAdminActivity extends Activity {
         mgmtPrenotazioneButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                System.out.println("Sono qui");
                 fp.mostraRicercaPostazioni(u.isAdmin(), getApplicationContext());
             }
         });
