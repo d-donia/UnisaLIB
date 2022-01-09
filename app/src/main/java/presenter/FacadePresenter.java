@@ -117,4 +117,12 @@ public class FacadePresenter {
     public void mostraElencoPostazioni(Posizione p) {
         postazionePresenter.mostraElencoPostazioni(p);
     }
+
+    public void bloccoIndeterminato(Postazione p) {
+        postazionePresenter.bloccoIndeterminato(p);
+    }
+
+    public void bloccoDeterminato(Postazione p, GregorianCalendar date, int oraInizio, int oraFine) {
+        postazionePresenter.bloccoDeterminato(p, date, oraInizio, oraFine);
+    }
 }
