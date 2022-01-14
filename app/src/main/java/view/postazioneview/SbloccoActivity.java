@@ -1,4 +1,4 @@
-package view.interfacciaadmin;
+package view.postazioneview;
 
 import android.app.Activity;
 import android.os.Bundle;

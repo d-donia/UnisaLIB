@@ -1,4 +1,4 @@
-package view.interfacciautenteunisa;
+package view.prestitoview;
 
 import android.app.Activity;
 import android.content.Context;
@@ -17,10 +17,8 @@ import com.example.unisalib.R;
 import java.util.ArrayList;
 
 import model.libromanagement.Libro;
-import model.libromanagement.LibroAdapter;
 import model.prestitomanagement.Prestito;
 import model.prestitomanagement.PrestitoAdapter;
-import model.utentemanagement.Utente;
 import presenter.FacadePresenter;
 
 public class MieiPrestitiActivity extends Activity {

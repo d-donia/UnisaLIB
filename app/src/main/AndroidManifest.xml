@@ -11,7 +11,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.UnisaLIB" >
         <activity
-            android:name="view.interfacciageneral.MainActivity"
+            android:name="view.utenteview.MainActivity"
             android:exported="true" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -19,21 +19,21 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name="view.interfacciautenteunisa.HomeUtenteUnisaActivity" />
-        <activity android:name="view.interfacciaadmin.HomeAdminActivity"/>
-        <activity android:name="view.interfacciageneral.RicercaActivity"/>
-        <activity android:name="view.interfacciageneral.ElencoLibriActivity"/>
-        <activity android:name="view.interfacciautenteunisa.DettagliLibroUtenteUnisaActivity"/>
-        <activity android:name="view.interfacciautenteunisa.RicercaPostazioneUtenteActivity"/>
-        <activity android:name="view.interfacciautenteunisa.ElencoPostazioniUtenteActivity"/>
-        <activity android:name="view.interfacciautenteunisa.MieiPrestitiActivity"/>
-        <activity android:name="view.interfacciaadmin.DettagliLibroAdminActivity"/>
-        <activity android:name="view.interfacciaadmin.GestioneLibroAdminActivity"/>
-        <activity android:name="view.interfacciaadmin.AggiungiLibroActivity"/>
-        <activity android:name="view.interfacciaadmin.RicercaPostazioneAdminActivity"/>
-        <activity android:name="view.interfacciaadmin.ElencoPostazioniAdminActivity"/>
-        <activity android:name="view.interfacciaadmin.BloccoActivity"/>
-        <activity android:name="view.interfacciaadmin.SbloccoActivity"/>
+        <activity android:name="view.utenteview.HomeUtenteUnisaActivity" />
+        <activity android:name="view.utenteview.HomeAdminActivity"/>
+        <activity android:name="view.libroview.RicercaActivity"/>
+        <activity android:name="view.libroview.ElencoLibriActivity"/>
+        <activity android:name="view.libroview.DettagliLibroUtenteUnisaActivity"/>
+        <activity android:name="view.postazioneview.RicercaPostazioneUtenteActivity"/>
+        <activity android:name="view.postazioneview.ElencoPostazioniUtenteActivity"/>
+        <activity android:name="view.prestitoview.MieiPrestitiActivity"/>
+        <activity android:name="view.libroview.DettagliLibroAdminActivity"/>
+        <activity android:name="view.libroview.GestioneLibroAdminActivity"/>
+        <activity android:name="view.libroview.AggiungiLibroActivity"/>
+        <activity android:name="view.postazioneview.RicercaPostazioneAdminActivity"/>
+        <activity android:name="view.postazioneview.ElencoPostazioniAdminActivity"/>
+        <activity android:name="view.postazioneview.BloccoActivity"/>
+        <activity android:name="view.postazioneview.SbloccoActivity"/>
     </application>
 
 </manifest>

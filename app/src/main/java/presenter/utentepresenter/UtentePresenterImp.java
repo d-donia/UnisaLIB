@@ -16,9 +16,9 @@ import org.json.JSONObject;
 
 import cz.msebera.android.httpclient.Header;
 import model.utentemanagement.Utente;
-import view.interfacciaadmin.HomeAdminActivity;
-import view.interfacciageneral.MainActivity;
-import view.interfacciautenteunisa.HomeUtenteUnisaActivity;
+import view.utenteview.HomeAdminActivity;
+import view.utenteview.MainActivity;
+import view.utenteview.HomeUtenteUnisaActivity;
 
 public class UtentePresenterImp implements UtentePresenter{
 

@@ -1,4 +1,4 @@
-package view.interfacciageneral;
+package view.utenteview;
 
 import androidx.appcompat.app.AppCompatActivity;
 

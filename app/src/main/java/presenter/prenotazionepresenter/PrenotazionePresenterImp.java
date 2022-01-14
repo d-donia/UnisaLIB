@@ -16,7 +16,7 @@ import cz.msebera.android.httpclient.Header;
 import model.postazionemanagement.Postazione;
 import model.prenotazionemanagement.Prenotazione;
 import model.utentemanagement.Utente;
-import view.interfacciautenteunisa.ElencoPostazioniUtenteActivity;
+import view.postazioneview.ElencoPostazioniUtenteActivity;
 
 public class PrenotazionePresenterImp implements PrenotazionePresenter{
     static final String GenericURL="http://192.168.1.5:8080/UnisaLIBServer/PrenotazionePresenter";

@@ -1,28 +1,19 @@
-package view.interfacciaadmin;
+package view.postazioneview;
 
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.view.View;
-import android.widget.AdapterView;
 import android.widget.ListView;
 
 import androidx.annotation.Nullable;
-import androidx.preference.PreferenceManager;
 
 import com.example.unisalib.R;
 
 import java.util.ArrayList;
 
-import model.libromanagement.Libro;
 import model.postazionemanagement.Postazione;
 import model.postazionemanagement.PostazioneAdapter;
-import model.prestitomanagement.Prestito;
-import model.prestitomanagement.PrestitoAdapter;
-import presenter.FacadePresenter;
-import view.interfacciautenteunisa.MieiPrestitiActivity;
 
 public class ElencoPostazioniAdminActivity extends Activity {
     private static Context context;

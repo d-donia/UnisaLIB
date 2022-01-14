@@ -11,9 +11,9 @@ import android.widget.TextView;
 import com.example.unisalib.R;
 import java.util.List;
 import presenter.FacadePresenter;
-import view.interfacciaadmin.BloccoActivity;
-import view.interfacciaadmin.ElencoPostazioniAdminActivity;
-import view.interfacciaadmin.SbloccoActivity;
+import view.postazioneview.BloccoActivity;
+import view.postazioneview.ElencoPostazioniAdminActivity;
+import view.postazioneview.SbloccoActivity;
 
 public class PostazioneAdapter extends ArrayAdapter<Postazione> {
     private LayoutInflater inflater;

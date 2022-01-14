@@ -20,8 +20,8 @@ import java.util.ArrayList;
 import cz.msebera.android.httpclient.Header;
 import model.prestitomanagement.Prestito;
 import model.utentemanagement.Utente;
-import view.interfacciautenteunisa.DettagliLibroUtenteUnisaActivity;
-import view.interfacciautenteunisa.MieiPrestitiActivity;
+import view.libroview.DettagliLibroUtenteUnisaActivity;
+import view.prestitoview.MieiPrestitiActivity;
 
 public class PrestitoPresenterImp implements PrestitoPresenter{
     static final String GenericURL="http://192.168.255.1:8080/UnisaLIBServer/PrestitoPresenter";

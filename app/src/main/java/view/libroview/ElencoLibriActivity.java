@@ -1,4 +1,4 @@
-package view.interfacciageneral;
+package view.libroview;
 
 import android.app.Activity;
 import android.content.Context;

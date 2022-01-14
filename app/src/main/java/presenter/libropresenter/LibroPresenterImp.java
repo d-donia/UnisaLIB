@@ -1,8 +1,6 @@
 package presenter.libropresenter;
 
 import android.content.Context;
-import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.widget.Toast;
@@ -23,15 +21,13 @@ import cz.msebera.android.httpclient.Header;
 import model.libromanagement.Libro;
 import model.posizionemanagement.Posizione;
 import model.utentemanagement.Utente;
-import view.interfacciaadmin.AggiungiLibroActivity;
-import view.interfacciaadmin.DettagliLibroAdminActivity;
-import view.interfacciaadmin.GestioneLibroAdminActivity;
-import view.interfacciageneral.ElencoLibriActivity;
-import view.interfacciageneral.RicercaActivity;
-import view.interfacciautenteunisa.DettagliLibroUtenteUnisaActivity;
-import view.interfacciautenteunisa.ElencoPostazioniUtenteActivity;
-import view.interfacciautenteunisa.HomeUtenteUnisaActivity;
-import view.interfacciautenteunisa.MieiPrestitiActivity;
+import view.libroview.AggiungiLibroActivity;
+import view.libroview.DettagliLibroAdminActivity;
+import view.libroview.GestioneLibroAdminActivity;
+import view.libroview.ElencoLibriActivity;
+import view.libroview.RicercaActivity;
+import view.libroview.DettagliLibroUtenteUnisaActivity;
+import view.utenteview.HomeUtenteUnisaActivity;
 
 public class LibroPresenterImp implements LibroPresenter {static final String GenericURL = "http://192.168.255.1:8080/UnisaLIBServer/LibroPresenter";
     private AsyncHttpClient client = new AsyncHttpClient();

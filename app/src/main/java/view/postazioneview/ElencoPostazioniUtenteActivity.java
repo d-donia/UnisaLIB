@@ -1,4 +1,4 @@
-package view.interfacciautenteunisa;
+package view.postazioneview;
 
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -17,20 +17,16 @@ import android.widget.Toast;
 import androidx.preference.PreferenceManager;
 
 import com.example.unisalib.R;
-import com.google.gson.JsonSyntaxException;
 
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 
 import model.posizionemanagement.Posizione;
-import model.postazionemanagement.Periodo;
 import model.postazionemanagement.Postazione;
 import model.prenotazionemanagement.Prenotazione;
-import model.prestitomanagement.Prestito;
 import model.utentemanagement.Utente;
 import presenter.FacadePresenter;
-import utils.SwitchDate;
 
 public class ElencoPostazioniUtenteActivity extends Activity {
     public FacadePresenter fp = new FacadePresenter();

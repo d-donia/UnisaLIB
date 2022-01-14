@@ -1,6 +1,7 @@
-package view.interfacciaadmin;
+package view.postazioneview;
 
 import android.app.Activity;
+import android.content.Context;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -23,11 +24,14 @@ public class BloccoActivity extends Activity {
     public final long SECONDINMILLS = 1000;
     public final long WEEKINMILLS = 604800000;
     private FacadePresenter fp;
+    private static Context context;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.admin_blocco_postazione);
         fp=new FacadePresenter();
+        context=getApplicationContext();
         Postazione p=Postazione.fromJson(getIntent().getStringExtra("postazione"));
         TextView postazioneTV=findViewById(R.id.postazioneTV);
         postazioneTV.setText("Postazione "+p.getId());
@@ -77,5 +81,9 @@ public class BloccoActivity extends Activity {
                         fp.bloccoIndeterminato(p.getId());
             }
         });
+    }
+
+    public static Context getAppContext() {
+        return context;
     }
 }

@@ -23,12 +23,13 @@ import model.postazionemanagement.Periodo;
 import model.postazionemanagement.Postazione;
 import model.prenotazionemanagement.Prenotazione;
 import utils.SwitchDate;
-import view.interfacciaadmin.ElencoPostazioniAdminActivity;
-import view.interfacciaadmin.HomeAdminActivity;
-import view.interfacciaadmin.RicercaPostazioneAdminActivity;
-import view.interfacciautenteunisa.ElencoPostazioniUtenteActivity;
-import view.interfacciautenteunisa.HomeUtenteUnisaActivity;
-import view.interfacciautenteunisa.RicercaPostazioneUtenteActivity;
+import view.postazioneview.BloccoActivity;
+import view.postazioneview.ElencoPostazioniAdminActivity;
+import view.utenteview.HomeAdminActivity;
+import view.postazioneview.RicercaPostazioneAdminActivity;
+import view.postazioneview.ElencoPostazioniUtenteActivity;
+import view.utenteview.HomeUtenteUnisaActivity;
+import view.postazioneview.RicercaPostazioneUtenteActivity;
 
 public class PostazionePresenterImp implements PostazionePresenter{
     static final String GenericURL = "http://192.168.1.5:8080/UnisaLIBServer/PostazionePresenter";
@@ -190,12 +191,27 @@ public class PostazionePresenterImp implements PostazionePresenter{
             @Override
             public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
                 super.onSuccess(statusCode, headers, response);
-                Toast.makeText(HomeAdminActivity.getAppContext(), response.toString(), Toast.LENGTH_SHORT).show();
+                try {
+                    Toast.makeText(BloccoActivity.getAppContext(), response.get("messaggio").toString(), Toast.LENGTH_SHORT).show();
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
             }
 
             @Override
             public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
                 super.onFailure(statusCode, headers, responseString, throwable);
+                Toast.makeText(BloccoActivity.getAppContext(), responseString, Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONObject errorResponse) {
+                super.onFailure(statusCode, headers, throwable, errorResponse);
+                try {
+                    Toast.makeText(BloccoActivity.getAppContext(), errorResponse.get("messaggio").toString(), Toast.LENGTH_SHORT).show();
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
             }
         });
     }
