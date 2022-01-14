@@ -1,32 +1,28 @@
 package presenter;
 
 import android.content.Context;
-import android.content.Context;
-
 import java.util.ArrayList;
 import java.util.GregorianCalendar;
-
 import model.libromanagement.Libro;
 import model.posizionemanagement.Posizione;
-import model.postazionemanagement.Periodo;
-import model.postazionemanagement.Postazione;
+import model.postazionemanagement.*;
 import model.prenotazionemanagement.Prenotazione;
 import model.prestitomanagement.Prestito;
 import model.utentemanagement.Utente;
-import presenter.libropresenter.LibroPresenter;
-import presenter.posizionepresenter.PosizionePresenter;
-import presenter.postazionepresenter.PostazionePresenter;
-import presenter.prenotazionepresenter.PrenotazionePresenter;
-import presenter.prestitopresenter.PrestitoPresenter;
-import presenter.utentepresenter.UtentePresenter;
+import presenter.libropresenter.*;
+import presenter.posizionepresenter.*;
+import presenter.postazionepresenter.*;
+import presenter.prenotazionepresenter.*;
+import presenter.prestitopresenter.*;
+import presenter.utentepresenter.*;
 
 public class FacadePresenter {
-    private UtentePresenter utentePresenter = new UtentePresenter();
-    private LibroPresenter libroPresenter= new LibroPresenter();
-    private PosizionePresenter posizionePresenter= new PosizionePresenter();
-    private PostazionePresenter postazionePresenter = new PostazionePresenter();
-    private PrenotazionePresenter prenotazionePresenter = new PrenotazionePresenter();
-    private PrestitoPresenter prestitoPresenter = new PrestitoPresenter();
+    private UtentePresenter utentePresenter = new UtentePresenterImp();
+    private LibroPresenter libroPresenter= new LibroPresenterImp();
+    private PosizionePresenter posizionePresenter= new PosizionePresenterImp();
+    private PostazionePresenter postazionePresenter = new PostazionePresenterImp();
+    private PrenotazionePresenter prenotazionePresenter = new PrenotazionePresenterImp();
+    private PrestitoPresenter prestitoPresenter = new PrestitoPresenterImp();
 
     public void login(String email, String password){
         utentePresenter.login(email, password);
@@ -50,13 +46,9 @@ public class FacadePresenter {
         prestitoPresenter.mostraMieiPrestiti(c);
     }
 
-    public void rimuoviLibroFromInteressi(Libro l, Utente u) {
-        libroPresenter.rimuoviLibroFromInteressi(l,u);
-}
+    public void rimuoviLibroFromInteressi(Libro l, Utente u) { libroPresenter.rimuoviLibroFromInteressi(l,u); }
 
-    public void aggiungiLibroToInteressi(Libro l, Utente u) {
-        libroPresenter.aggiungiLibroFromInteressi(l,u);
-    }
+    public void aggiungiLibroToInteressi(Libro l, Utente u) { libroPresenter.aggiungiLibroFromInteressi(l,u); }
 
     public void attivaPrestito(Prestito p){}
 
@@ -84,13 +76,9 @@ public class FacadePresenter {
             libroPresenter.ricercaLibriCategoria(categoria);
     }
 
-    public void mostraDettagliLibro(Context c, Libro libro) {
-        libroPresenter.mostraDettagliLibro(c, libro);
-    }
+    public void mostraDettagliLibro(Context c, Libro libro) { libroPresenter.mostraDettagliLibro(c, libro);}
 
-    public void mostraElencoPostazioni(Posizione p, GregorianCalendar date) {
-        postazionePresenter.mostraElencoPostazioni(p, date);
-    }
+    public void mostraElencoPostazioni(Posizione p, GregorianCalendar date) { postazionePresenter.mostraElencoPostazioni(p, date); }
 
     public ArrayList<String> mostraOrariDisponibili(ArrayList<Postazione> postazioni, String idPos, ArrayList<Prenotazione> prenotazioni, GregorianCalendar date){
         return postazionePresenter.mostraOrariDisponibili(postazioni, idPos, prenotazioni,date);

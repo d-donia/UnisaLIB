@@ -1,4 +1,4 @@
 package presenter.posizionepresenter;
 
-public class PosizionePresenter {
+public interface PosizionePresenter {
 }
