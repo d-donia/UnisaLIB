@@ -65,7 +65,7 @@ public class DettagliLibroUtenteUnisaActivity extends Activity {
         interesseButton=findViewById(R.id.interesseButton);
 
         Intent i = getIntent();
-        Libro l = Libro.fromJsonToLibro(i.getStringExtra("Libro"));
+        Libro l = Libro.fromJsonToLibro(i.getStringExtra("libro"));
 
         detsTitoloTV.setText(l.getTitolo());
         detsISBNTV.setText(l.getIsbn());

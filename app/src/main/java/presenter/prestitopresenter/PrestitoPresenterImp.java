@@ -52,21 +52,21 @@ public class PrestitoPresenterImp implements PrestitoPresenter{
             public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONObject errorResponse) {
                 super.onFailure(statusCode, headers, throwable, errorResponse);
                 System.out.println("Prestito fallito");
-                Toast.makeText(DettagliLibroUtenteUnisaActivity.getAppContext(), errorResponse.toString() + ". Riprovare più tardi", Toast.LENGTH_LONG).show();
+                Toast.makeText(DettagliLibroUtenteUnisaActivity.getAppContext(), errorResponse.toString(), Toast.LENGTH_LONG).show();
             }
 
             @Override
             public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONArray errorResponse) {
                 super.onFailure(statusCode, headers, throwable, errorResponse);
                 System.out.println("Prestito fallito");
-                Toast.makeText(DettagliLibroUtenteUnisaActivity.getAppContext(), errorResponse.toString() + ". Riprovare più tardi", Toast.LENGTH_LONG).show();
+                Toast.makeText(DettagliLibroUtenteUnisaActivity.getAppContext(), errorResponse.toString(), Toast.LENGTH_LONG).show();
             }
 
             @Override
             public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
                 super.onFailure(statusCode, headers, responseString, throwable);
                 System.out.println("Prestito fallito");
-                Toast.makeText(DettagliLibroUtenteUnisaActivity.getAppContext(), responseString + ". Riprovare più tardi", Toast.LENGTH_LONG).show();
+                Toast.makeText(DettagliLibroUtenteUnisaActivity.getAppContext(), responseString, Toast.LENGTH_LONG).show();
             }
         });
     }

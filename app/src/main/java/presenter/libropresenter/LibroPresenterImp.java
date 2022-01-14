@@ -189,6 +189,7 @@ public class LibroPresenterImp implements LibroPresenter {static final String Ge
 
         } else {
             i.setClass(c, DettagliLibroUtenteUnisaActivity.class);
+            i.putExtra("libro", Libro.toJson(l));
             i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             c.startActivity(i);
         }
