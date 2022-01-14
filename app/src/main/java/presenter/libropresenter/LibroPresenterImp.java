@@ -33,8 +33,7 @@ import view.interfacciautenteunisa.ElencoPostazioniUtenteActivity;
 import view.interfacciautenteunisa.HomeUtenteUnisaActivity;
 import view.interfacciautenteunisa.MieiPrestitiActivity;
 
-public class LibroPresenterImp implements LibroPresenter {
-    static final String GenericURL = "http://192.168.1.5:8080/UnisaLIBServer/LibroPresenter";
+public class LibroPresenterImp implements LibroPresenter {static final String GenericURL = "http://192.168.255.1:8080/UnisaLIBServer/LibroPresenter";
     private AsyncHttpClient client = new AsyncHttpClient();
 
     public void mostraRicercaLibri(boolean is_admin, Context c) {
@@ -150,13 +149,50 @@ public class LibroPresenterImp implements LibroPresenter {
         Intent i = new Intent();
 
         if (u.isAdmin()) {
-            i.setClass(c, DettagliLibroAdminActivity.class);
-            i.putExtra("Libro", Libro.toJson(l));
-            i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-            c.startActivity(i);
+            String MYURL = GenericURL + "/dettagli-libro-admin";
+            RequestParams params = new RequestParams();
+            client.post(MYURL, params, new JsonHttpResponseHandler() {
+                @Override
+                public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
+                    super.onSuccess(statusCode, headers, response);
+                    String[] categorie=null;
+                    Posizione[] posizioni=null;
+                    try {
+                        categorie=Libro.fromJsonCategorie(response.getJSONArray("categorie"));
+                        posizioni=Posizione.fromJsonEtic(response.getJSONArray("posizioni"));
+                        Intent i=new Intent();
+                        i.setClass(c, DettagliLibroAdminActivity.class);
+                        i.putExtra("categorie", Libro.toJsonCategorie(new ArrayList<>(Arrays.asList(categorie))));
+                        i.putExtra("posizioni", Posizione.toJson(new ArrayList<>(Arrays.asList(posizioni))));
+                        i.putExtra("libro", Libro.toJson(l));
+                        i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                        c.startActivity(i);
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                }
+
+                @Override
+                public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONObject errorResponse) {
+                    super.onFailure(statusCode, headers, throwable, errorResponse);
+                    Toast.makeText(HomeUtenteUnisaActivity.getAppContext(), errorResponse.toString(), Toast.LENGTH_SHORT).show();
+                }
+
+                @Override
+                public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONArray errorResponse) {
+                    super.onFailure(statusCode, headers, throwable, errorResponse);
+                    Toast.makeText(HomeUtenteUnisaActivity.getAppContext(), errorResponse.toString(), Toast.LENGTH_SHORT).show();
+                }
+
+                @Override
+                public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
+                    super.onFailure(statusCode, headers, responseString, throwable);
+                    Toast.makeText(HomeUtenteUnisaActivity.getAppContext(), responseString, Toast.LENGTH_SHORT).show();
+                }
+            });
+
         } else {
             i.setClass(c, DettagliLibroUtenteUnisaActivity.class);
-            i.putExtra("Libro", Libro.toJson(l));
             i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             c.startActivity(i);
         }

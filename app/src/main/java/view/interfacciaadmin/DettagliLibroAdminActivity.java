@@ -4,6 +4,8 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -14,6 +16,8 @@ import androidx.annotation.Nullable;
 
 import com.bumptech.glide.Glide;
 import com.example.unisalib.R;
+
+import java.util.ArrayList;
 
 import model.libromanagement.Libro;
 import model.posizionemanagement.Posizione;
@@ -45,7 +49,7 @@ public class DettagliLibroAdminActivity extends Activity {
 
 
         Intent i = getIntent();
-        Libro l = Libro.fromJsonToLibro(i.getStringExtra("Libro"));
+        Libro l = Libro.fromJsonToLibro(i.getStringExtra("libro"));
 
         detsTitoloET.setText(l.getTitolo());
         detsISBNTV.setText(l.getIsbn());
@@ -55,6 +59,71 @@ public class DettagliLibroAdminActivity extends Activity {
         detsRatingTV.setText(l.getRating()+ "");
         detsCopie.setText(l.getnCopie()+"");
         copertinaET.setText(l.getUrlCopertina());
+
+        String pos = getIntent().getStringExtra("posizioni");
+        System.out.println(pos);
+        ArrayList<Posizione> posizioni = Posizione.fromJson(pos);
+        String cat = getIntent().getStringExtra("categorie");
+        String[] categorie = Libro.fromJsonToCategorie(cat);
+        System.out.println("aggiungilibroactivity: " + categorie.toString());
+        //inizializzazione del Categoria Spinner
+        categoriaSP.setAdapter(new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, categorie));
+        int defaultCat=0;
+        for(int j=0; j<categoriaSP.getAdapter().getCount(); j++){
+            String categoria= (String) categoriaSP.getItemAtPosition(j);
+            if(categoria.equals(l.getCategoria())) {
+                defaultCat = j;
+                break;
+            }
+        }
+        categoriaSP.setSelection(defaultCat);
+
+
+        //inizializzazione del Biblioteca Spinner
+        ArrayList<String> b = new ArrayList<>();
+        for (Posizione x: posizioni)
+            if (!b.contains(x.getBiblioteca()))
+                b.add(x.getBiblioteca());
+        String[] biblioteche = b.toArray(new String[0]);
+        bibliotecaSP.setAdapter(new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, biblioteche));
+        int defaultBiblio=0;
+        for(int j=0; j<bibliotecaSP.getAdapter().getCount(); j++){
+            String biblio= (String) bibliotecaSP.getItemAtPosition(j);
+            if(biblio.equals(l.getPosizione().getBiblioteca())) {
+                defaultBiblio = j;
+                break;
+            }
+        }
+        bibliotecaSP.setSelection(defaultBiblio);
+
+        //inizializzazione del Zona Spinner
+        bibliotecaSP.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
+                ArrayList<String> z = new ArrayList<>();
+                String selected = parentView.getSelectedItem().toString();
+                for (Posizione x: posizioni) {
+                    if (x.getBiblioteca().equals(selected))
+                        z.add(x.getZona());
+                }
+                System.out.println(z);
+                String[] zone = z.toArray(new String[0]);
+                zonaSP.setAdapter(new ArrayAdapter<>(getApplicationContext(), android.R.layout.simple_spinner_dropdown_item, zone));
+                int defaultZona=0;
+                for(int j=0; j<zonaSP.getAdapter().getCount(); j++){
+                    String zona= (String) zonaSP.getItemAtPosition(j);
+                    if(zona.equals(l.getPosizione().getZona())) {
+                        defaultZona = j;
+                        break;
+                    }
+                }
+                zonaSP.setSelection(defaultZona);
+            }
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+                //
+            }
+        });
 
         /*modificaButton.setOnClickListener(new View.OnClickListener() {
             @Override

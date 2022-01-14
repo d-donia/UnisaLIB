@@ -95,6 +95,8 @@ public class PrestitoAdapter extends ArrayAdapter<Prestito> {
                                 try {
                                     int voto = Integer.parseInt(votoET.getText().toString());
                                     String commento = commentoET.getText().toString();
+                                    if(commento.equals(""))
+                                        commento=null;
                                     fp.valutaPrestito(p, voto, commento);
                                 }
                                 catch (NumberFormatException ex){
