@@ -3,6 +3,7 @@ package view.libroview;
 import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
+import android.text.InputFilter;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -15,10 +16,13 @@ import androidx.annotation.Nullable;
 import com.example.unisalib.R;
 
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.GregorianCalendar;
 
 import model.libromanagement.Libro;
 import model.posizionemanagement.Posizione;
 import presenter.FacadePresenter;
+import utils.InputFilterMinMax;
 
 public class AggiungiLibroActivity extends Activity {
     public FacadePresenter fp;
@@ -41,6 +45,12 @@ public class AggiungiLibroActivity extends Activity {
         Spinner bibliotecaSpinner = findViewById(R.id.bibliotecaALSpinner);
         Spinner zonaSpinner = findViewById(R.id.zonaALSpinner);
         Button aggiungiLibroButton = findViewById(R.id.aggiungiLibroButton);
+
+        GregorianCalendar gc = new GregorianCalendar();
+        InputFilter filter = new InputFilterMinMax(0, gc.get(Calendar.YEAR));
+        annoET.setFilters(new InputFilter[]{filter});
+
+
 
         String pos = getIntent().getStringExtra("posizioni");
         System.out.println(pos);
