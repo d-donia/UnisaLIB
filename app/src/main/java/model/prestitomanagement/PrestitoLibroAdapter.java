@@ -15,7 +15,7 @@ import java.util.GregorianCalendar;
 import java.util.List;
 
 public class PrestitoLibroAdapter extends ArrayAdapter<Prestito> {
-    private LayoutInflater inflater;
+    private LayoutInflater inflater ;
     public PrestitoLibroAdapter(Context context, int resource, List<Prestito> objects) {
         super(context, resource, objects);
         inflater = LayoutInflater.from(context);
