@@ -129,7 +129,7 @@ public class PostazionePresenterImp implements PostazionePresenter{
             @Override
             public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
                 super.onFailure(statusCode, headers, responseString, throwable);
-                Toast.makeText(HomeUtenteUnisaActivity.getAppContext(), responseString, Toast.LENGTH_SHORT).show();
+                Toast.makeText(RicercaPostazioneAdminActivity.getAppContext(), responseString, Toast.LENGTH_SHORT).show();
             }
         });
     }
@@ -142,9 +142,7 @@ public class PostazionePresenterImp implements PostazionePresenter{
                 pos = p;
 
         ArrayList<Periodo> orariDisponibili = new ArrayList<>();
-        for (int i = 9; i < 18; i += 2) {
-            if (i == 13)
-                i++;
+        for (int i = 9; i < 19; i += 2) {
             orariDisponibili.add(new Periodo(i, i + 2));
         }
 
@@ -177,6 +175,7 @@ public class PostazionePresenterImp implements PostazionePresenter{
 
     public void bloccoDeterminato(Postazione p, GregorianCalendar date, int oraInizio, int oraFine) {
         String MYURL=GenericURL+"/blocco-determinato";
+        System.out.println(MYURL);
         RequestParams params=new RequestParams();
         params.put("idPos",p.getId());
         params.put("periodo",Periodo.toJson(new Periodo(0,oraInizio,oraFine,date)));
@@ -199,6 +198,8 @@ public class PostazionePresenterImp implements PostazionePresenter{
             @Override
             public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
                 super.onFailure(statusCode, headers, responseString, throwable);
+                Toast.makeText(BloccoActivity.getAppContext(),responseString,Toast.LENGTH_SHORT).show();
+
             }
 
             @Override

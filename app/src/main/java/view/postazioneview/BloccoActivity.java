@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.DatePicker;
@@ -38,16 +39,25 @@ public class BloccoActivity extends Activity {
         postazioneTV.setText("Postazione "+p.getId());
         RadioButton bloccoIRB=findViewById(R.id.radioIndet);
         RadioButton bloccoDRB=findViewById(R.id.radioDet);
+        bloccoDRB.setChecked(true);
         DatePicker dp=findViewById(R.id.datePickerBlocco);
         dp.setMinDate(System.currentTimeMillis() - SECONDINMILLS);
         dp.setMaxDate(System.currentTimeMillis() + WEEKINMILLS);
+        TextView oraInizioText=findViewById(R.id.oraInizioTV);
+        TextView oraFineText=findViewById(R.id.oraFineTV);
         Spinner edOraInizio=findViewById(R.id.oraInizioSpinner);
         Spinner edOraFine=findViewById(R.id.oraFineSpinner);
+        Integer[] orariInizio={9,11,13,15,17};
+        Integer[] orariFine={11,13,15,17,19};
+        edOraInizio.setAdapter(new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, orariInizio));
+        edOraFine.setAdapter(new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, orariFine));
         Button bBlocco=findViewById(R.id.buttonBlocco);
         bloccoIRB.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if(isChecked) {
+                    oraInizioText.setVisibility(View.GONE);
+                    oraFineText.setVisibility(View.GONE);
                     dp.setVisibility(View.GONE);
                     edOraFine.setVisibility(View.GONE);
                     edOraInizio.setVisibility(View.GONE);
@@ -58,6 +68,8 @@ public class BloccoActivity extends Activity {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if (isChecked) {
+                    oraInizioText.setVisibility(View.VISIBLE);
+                    oraFineText.setVisibility(View.VISIBLE);
                     dp.setVisibility(View.VISIBLE);
                     edOraFine.setVisibility(View.VISIBLE);
                     edOraInizio.setVisibility(View.VISIBLE);
