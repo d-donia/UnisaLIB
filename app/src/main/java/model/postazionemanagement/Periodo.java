@@ -1,5 +1,7 @@
 package model.postazionemanagement;
 
+import com.google.gson.Gson;
+
 import java.util.GregorianCalendar;
 import java.util.Objects;
 
@@ -63,5 +65,10 @@ public class Periodo {
         if (o == null || getClass() != o.getClass()) return false;
         Periodo periodo = (Periodo) o;
         return id == periodo.id && oraInizio == periodo.oraInizio && oraFine == periodo.oraFine && Objects.equals(data, periodo.data);
+    }
+
+    public static String toJson(Periodo p) {
+        Gson gson = new Gson();
+        return gson.toJson(p);
     }
 }

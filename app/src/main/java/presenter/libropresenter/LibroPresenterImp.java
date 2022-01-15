@@ -29,7 +29,8 @@ import view.libroview.RicercaActivity;
 import view.libroview.DettagliLibroUtenteUnisaActivity;
 import view.utenteview.HomeUtenteUnisaActivity;
 
-public class LibroPresenterImp implements LibroPresenter {static final String GenericURL = "http://192.168.255.1:8080/UnisaLIBServer/LibroPresenter";
+public class LibroPresenterImp implements LibroPresenter {
+    static final String GenericURL = "http://192.168.1.5:8080/UnisaLIBServer/LibroPresenter";
     private AsyncHttpClient client = new AsyncHttpClient();
 
     public void mostraRicercaLibri(boolean is_admin, Context c) {

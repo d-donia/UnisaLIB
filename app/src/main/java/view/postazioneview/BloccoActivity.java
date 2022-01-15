@@ -9,6 +9,7 @@ import android.widget.CompoundButton;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.RadioButton;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -40,8 +41,8 @@ public class BloccoActivity extends Activity {
         DatePicker dp=findViewById(R.id.datePickerBlocco);
         dp.setMinDate(System.currentTimeMillis() - SECONDINMILLS);
         dp.setMaxDate(System.currentTimeMillis() + WEEKINMILLS);
-        EditText edOraInizio=findViewById(R.id.oraInizioBlocco);
-        EditText edOraFine=findViewById(R.id.oraFineBlocco);
+        Spinner edOraInizio=findViewById(R.id.oraInizioSpinner);
+        Spinner edOraFine=findViewById(R.id.oraFineSpinner);
         Button bBlocco=findViewById(R.id.buttonBlocco);
         bloccoIRB.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
@@ -68,8 +69,8 @@ public class BloccoActivity extends Activity {
             public void onClick(View v) {
                 if(bloccoDRB.isChecked()) {
                     try {
-                        int oraFine = Integer.parseInt(edOraFine.getText().toString());
-                        int oraInizio = Integer.parseInt(edOraInizio.getText().toString());
+                        int oraFine = Integer.parseInt( edOraFine.getSelectedItem().toString());
+                        int oraInizio = Integer.parseInt(edOraInizio.getSelectedItem().toString());
                         GregorianCalendar date = new GregorianCalendar(dp.getYear(), dp.getMonth(), dp.getDayOfMonth());
                         fp.bloccoDeterminato(p,date,oraInizio,oraFine);
                     }catch(Exception e) {

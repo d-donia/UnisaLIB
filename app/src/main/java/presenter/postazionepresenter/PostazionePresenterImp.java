@@ -179,10 +179,37 @@ public class PostazionePresenterImp implements PostazionePresenter{
         String MYURL=GenericURL+"/blocco-determinato";
         RequestParams params=new RequestParams();
         params.put("idPos",p.getId());
+        params.put("periodo",Periodo.toJson(new Periodo(0,oraInizio,oraFine,date)));
+        client.post(MYURL,params,new JsonHttpResponseHandler(){
+            @Override
+            public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
+                super.onSuccess(statusCode, headers, response);
+                try {
+                    Toast.makeText(BloccoActivity.getAppContext(),response.get("messaggio").toString(),Toast.LENGTH_SHORT).show();
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+
+            @Override
+            public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONObject errorResponse) {
+                super.onFailure(statusCode, headers, throwable, errorResponse);
+            }
+
+            @Override
+            public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
+                super.onFailure(statusCode, headers, responseString, throwable);
+            }
+
+            @Override
+            public void onSuccess(int statusCode, Header[] headers, String responseString) {
+                super.onSuccess(statusCode, headers, responseString);
+            }
+        });
     }
 
     public void bloccoIndeterminato(String idPos) {
-        String MYURL = GenericURL + "/blocca-postazione";
+        String MYURL = GenericURL + "/blocco-indeterminato";
         RequestParams params;
         params = new RequestParams();
         params.put("idPos", idPos);
