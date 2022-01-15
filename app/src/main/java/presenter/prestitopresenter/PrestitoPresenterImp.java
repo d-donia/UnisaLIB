@@ -20,8 +20,10 @@ import java.util.ArrayList;
 import cz.msebera.android.httpclient.Header;
 import model.prestitomanagement.Prestito;
 import model.utentemanagement.Utente;
+import view.libroview.DettagliLibroAdminActivity;
 import view.libroview.DettagliLibroUtenteUnisaActivity;
 import view.prestitoview.MieiPrestitiActivity;
+import view.prestitoview.PrestitiLibroActivity;
 
 public class PrestitoPresenterImp implements PrestitoPresenter{
     static final String GenericURL="http://192.168.255.1:8080/UnisaLIBServer/PrestitoPresenter";
@@ -167,6 +169,43 @@ public class PrestitoPresenterImp implements PrestitoPresenter{
             @Override
             public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
                 super.onFailure(statusCode, headers, responseString, throwable);
+            }
+        });
+    }
+
+    @Override
+    public void mostraPrestitiLibro(String isbn) {
+        String MYURL= GenericURL + "/lista-prestiti-libro";
+        RequestParams params;
+        params = new RequestParams();
+        params.put("libro", isbn);
+        client.post(MYURL, params, new JsonHttpResponseHandler(){
+            @Override
+            public void onSuccess(int statusCode, Header[] headers, JSONArray response) {
+                super.onSuccess(statusCode, headers, response);
+                Intent i = new Intent();
+                i.setClass(DettagliLibroAdminActivity.getAppContext(), PrestitiLibroActivity.class);
+                i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                i.putExtra("prestiti",""+response);
+                DettagliLibroAdminActivity.getAppContext().startActivity(i);
+            }
+
+            @Override
+            public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONObject errorResponse) {
+                super.onFailure(statusCode, headers, throwable, errorResponse);
+                Toast.makeText(DettagliLibroAdminActivity.getAppContext(), errorResponse.toString(), Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONArray errorResponse) {
+                super.onFailure(statusCode, headers, throwable, errorResponse);
+                Toast.makeText(DettagliLibroAdminActivity.getAppContext(), errorResponse.toString(), Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
+                super.onFailure(statusCode, headers, responseString, throwable);
+                Toast.makeText(DettagliLibroAdminActivity.getAppContext(), responseString, Toast.LENGTH_SHORT).show();
             }
         });
     }

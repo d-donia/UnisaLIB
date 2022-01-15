@@ -1,6 +1,7 @@
 package view.libroview;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -25,10 +26,12 @@ import presenter.FacadePresenter;
 
 public class DettagliLibroAdminActivity extends Activity {
     private FacadePresenter fp;
+    private static Context context;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.admin_dettagli_libro);
+        context=getApplicationContext();
         fp=new FacadePresenter();
 
         EditText detsTitoloET= findViewById(R.id.detsTitoloET);
@@ -125,6 +128,13 @@ public class DettagliLibroAdminActivity extends Activity {
             }
         });
 
+        listaPrestitiButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                fp.mostraPrestitiLibro(l.getIsbn());
+            }
+        });
+
         /*modificaButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -146,5 +156,9 @@ public class DettagliLibroAdminActivity extends Activity {
                 fp.modificaLibro()
             }
         });*/
+    }
+
+    public static Context getAppContext() {
+        return context;
     }
 }

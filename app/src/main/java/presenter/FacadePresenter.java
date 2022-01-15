@@ -113,4 +113,8 @@ public class FacadePresenter {
     public void bloccoDeterminato(Postazione p, GregorianCalendar date, int oraInizio, int oraFine) {
         postazionePresenter.bloccoDeterminato(p, date, oraInizio, oraFine);
     }
+
+    public void mostraPrestitiLibro(String isbn) {
+        prestitoPresenter.mostraPrestitiLibro(isbn);
+    }
 }

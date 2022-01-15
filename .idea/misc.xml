@@ -33,6 +33,8 @@
         <entry key="..\:/Users/Utente/AndroidStudioProjects/UnisaLIB/app/src/main/res/layout/admin_aggiungi_libri.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/Utente/AndroidStudioProjects/UnisaLIB/app/src/main/res/layout/admin_dettagli_libro.xml" value="0.128125" />
         <entry key="..\:/Users/Utente/AndroidStudioProjects/UnisaLIB/app/src/main/res/layout/admin_home.xml" value="0.25416666666666665" />
+        <entry key="..\:/Users/Utente/AndroidStudioProjects/UnisaLIB/app/src/main/res/layout/admin_prestiti_libro.xml" value="0.25416666666666665" />
+        <entry key="..\:/Users/Utente/AndroidStudioProjects/UnisaLIB/app/src/main/res/layout/admin_prestito_element.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/Utente/AndroidStudioProjects/UnisaLIB/app/src/main/res/layout/general_elenco_libri.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/Utente/AndroidStudioProjects/UnisaLIB/app/src/main/res/layout/general_login.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/Utente/AndroidStudioProjects/UnisaLIB/app/src/main/res/layout/libro_element.xml" value="0.25416666666666665" />
@@ -40,8 +42,10 @@
         <entry key="..\:/Users/Utente/AndroidStudioProjects/UnisaLIB/app/src/main/res/layout/mockup09.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/Utente/AndroidStudioProjects/UnisaLIB/app/src/main/res/layout/mockup10.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/Utente/AndroidStudioProjects/UnisaLIB/app/src/main/res/layout/postazione_element.xml" value="0.12916666666666668" />
+        <entry key="..\:/Users/Utente/AndroidStudioProjects/UnisaLIB/app/src/main/res/layout/prestito_element.xml" value="0.16259057971014493" />
         <entry key="..\:/Users/Utente/AndroidStudioProjects/UnisaLIB/app/src/main/res/layout/utente_dettagli_libro.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/Utente/AndroidStudioProjects/UnisaLIB/app/src/main/res/layout/utente_home.xml" value="0.25416666666666665" />
+        <entry key="..\:/Users/Utente/AndroidStudioProjects/UnisaLIB/app/src/main/res/layout/utente_miei_prestiti.xml" value="0.16259057971014493" />
         <entry key="..\:/Users/W10/AndroidStudioProjects/UnisaLIB3/app/src/main/res/layout/admin_aggiungi_libri.xml" value="0.31145833333333334" />
         <entry key="..\:/Users/W10/AndroidStudioProjects/UnisaLIB3/app/src/main/res/layout/admin_blocco_postazione.xml" value="0.31145833333333334" />
       </map>

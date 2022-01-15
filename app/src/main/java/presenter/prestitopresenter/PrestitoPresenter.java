@@ -10,4 +10,6 @@ public interface PrestitoPresenter {
     void mostraMieiPrestiti(Context c);
 
     void valutaPrestito(Prestito p, int voto, String commento);
+
+    void mostraPrestitiLibro(String isbn);
 }
