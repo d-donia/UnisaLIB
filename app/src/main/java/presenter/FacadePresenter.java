@@ -50,7 +50,9 @@ public class FacadePresenter {
 
     public void aggiungiLibroToInteressi(Libro l, Utente u) { libroPresenter.aggiungiLibroFromInteressi(l,u); }
 
-    public void attivaPrestito(Prestito p){}
+    public void attivaPrestito(Prestito p){
+        prestitoPresenter.attivaPrestito(p);
+    }
 
     public void cercaPrestitiperLibro(String isbn){}
 
@@ -116,5 +118,9 @@ public class FacadePresenter {
 
     public void mostraPrestitiLibro(String isbn) {
         prestitoPresenter.mostraPrestitiLibro(isbn);
+    }
+
+    public void concludiPrestito(Prestito p, GregorianCalendar date) {
+        prestitoPresenter.concludiPrestito(p, date);
     }
 }

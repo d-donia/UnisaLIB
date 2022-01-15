@@ -7,6 +7,7 @@ import android.widget.Toast;
 
 import androidx.preference.PreferenceManager;
 
+import com.example.unisalib.R;
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.JsonHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
@@ -16,6 +17,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.GregorianCalendar;
 
 import cz.msebera.android.httpclient.Header;
 import model.prestitomanagement.Prestito;
@@ -26,7 +28,7 @@ import view.prestitoview.MieiPrestitiActivity;
 import view.prestitoview.PrestitiLibroActivity;
 
 public class PrestitoPresenterImp implements PrestitoPresenter{
-    static final String GenericURL="http://192.168.1.5:8080/UnisaLIBServer/PrestitoPresenter";
+    static final String GenericURL="http://192.168.255.1:8080/UnisaLIBServer/PrestitoPresenter";
     private AsyncHttpClient client=new AsyncHttpClient();
     public void creaPrestito(Prestito p) {
         String MYURL=GenericURL + "/crea-prestito";
@@ -206,6 +208,96 @@ public class PrestitoPresenterImp implements PrestitoPresenter{
             public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
                 super.onFailure(statusCode, headers, responseString, throwable);
                 Toast.makeText(DettagliLibroAdminActivity.getAppContext(), responseString, Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
+    @Override
+    public void attivaPrestito(Prestito p) {
+        String MYURL=GenericURL + "/attiva-prestito";
+        RequestParams params;
+        params= new RequestParams();
+        params.put("prestito", Prestito.toJson(p));
+        client.post(MYURL, params, new JsonHttpResponseHandler(){
+            @Override
+            public void onSuccess(int statusCode, Header[] headers, JSONArray response) {
+                super.onSuccess(statusCode, headers, response);
+                Intent i = new Intent();
+                i.setClass(PrestitiLibroActivity.getAppContext(), PrestitiLibroActivity.class);
+                i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK| Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                i.putExtra("prestiti",""+response);
+                PrestitiLibroActivity.getAppContext().startActivity(i);
+            }
+
+            @Override
+            public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONObject errorResponse) {
+                super.onFailure(statusCode, headers, throwable, errorResponse);
+                Toast.makeText(PrestitiLibroActivity.getAppContext(), errorResponse.toString(), Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONArray errorResponse) {
+                super.onFailure(statusCode, headers, throwable, errorResponse);
+                Toast.makeText(PrestitiLibroActivity.getAppContext(), errorResponse.toString(), Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
+                super.onFailure(statusCode, headers, responseString, throwable);
+                Toast.makeText(PrestitiLibroActivity.getAppContext(), responseString, Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
+    @Override
+    public void concludiPrestito(Prestito p, GregorianCalendar date) {
+        String MYURL=GenericURL + "/concludi-prestito";
+        RequestParams params;
+        params= new RequestParams();
+        System.out.println("DataC: " + date);
+
+        Prestito p_concluso= new Prestito.PrestitoBuilder().
+                utente(p.getUtente()).
+                libro(p.getLibro()).
+                dataInizio(p.getDataInizio()).
+                dataFine(p.getDataFine()).
+                dataConsegna(date).
+                attivo(p.isAttivo()).
+                build();
+
+        System.out.println("DataPrestitoC: " + p_concluso.getDataConsegna());
+
+
+        params.put("prestito", Prestito.toJson(p_concluso));
+        client.post(MYURL, params, new JsonHttpResponseHandler(){
+            @Override
+            public void onSuccess(int statusCode, Header[] headers, JSONArray response) {
+                super.onSuccess(statusCode, headers, response);
+                Intent i = new Intent();
+                ArrayList<Prestito> prestiti = Prestito.fromJson(response.toString());
+                i.setClass(PrestitiLibroActivity.getAppContext(), PrestitiLibroActivity.class);
+                i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                i.putExtra("prestiti", "" + response);
+                i.putExtra("message", "Conclusione eseguita con successo");
+                PrestitiLibroActivity.getAppContext().startActivity(i);
+            }
+
+            @Override
+            public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONObject errorResponse) {
+                super.onFailure(statusCode, headers, throwable, errorResponse);
+                Toast.makeText(PrestitiLibroActivity.getAppContext(), errorResponse.toString(), Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONArray errorResponse) {
+                super.onFailure(statusCode, headers, throwable, errorResponse);
+                Toast.makeText(PrestitiLibroActivity.getAppContext(), errorResponse.toString(), Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
+                super.onFailure(statusCode, headers, responseString, throwable);
+                Toast.makeText(PrestitiLibroActivity.getAppContext(), responseString, Toast.LENGTH_SHORT).show();
             }
         });
     }
