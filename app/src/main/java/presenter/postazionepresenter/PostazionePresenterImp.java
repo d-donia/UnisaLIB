@@ -142,7 +142,9 @@ public class PostazionePresenterImp implements PostazionePresenter{
                 pos = p;
 
         ArrayList<Periodo> orariDisponibili = new ArrayList<>();
-        for (int i = 9; i < 19; i += 2) {
+        for (int i = 9; i < 18; i += 2) {
+            if(i==13)
+                ++i;
             orariDisponibili.add(new Periodo(i, i + 2));
         }
 

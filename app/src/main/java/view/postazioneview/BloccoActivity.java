@@ -47,8 +47,8 @@ public class BloccoActivity extends Activity {
         TextView oraFineText=findViewById(R.id.oraFineTV);
         Spinner edOraInizio=findViewById(R.id.oraInizioSpinner);
         Spinner edOraFine=findViewById(R.id.oraFineSpinner);
-        Integer[] orariInizio={9,11,13,15,17};
-        Integer[] orariFine={11,13,15,17,19};
+        Integer[] orariInizio={9,11,14,16};
+        Integer[] orariFine={11,13,16,18};
         edOraInizio.setAdapter(new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, orariInizio));
         edOraFine.setAdapter(new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, orariFine));
         Button bBlocco=findViewById(R.id.buttonBlocco);
