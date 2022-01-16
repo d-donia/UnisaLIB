@@ -120,4 +120,8 @@ public class FacadePresenter {
     public void concludiPrestito(Prestito p, GregorianCalendar date) {
         prestitoPresenter.concludiPrestito(p, date);
     }
+
+    public void cercaBlocchi(String id) {
+        postazionePresenter.cercaBlocchi(id);
+    }
 }

@@ -60,15 +60,7 @@ public class PostazioneAdapter extends ArrayAdapter<Postazione> {
         sbloccoButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                SharedPreferences postazione = PreferenceManager.getDefaultSharedPreferences(ElencoPostazioniAdminActivity.getAppContext());
-                SharedPreferences.Editor editor = postazione.edit();
-                editor.putString("postazione", Postazione.toJson(p));
-                editor.commit();
-                Intent i = new Intent();
-                i.putExtra("postazione",Postazione.toJson(p));
-                i.setClass(ElencoPostazioniAdminActivity.getAppContext(), SbloccoActivity.class);
-                i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                ElencoPostazioniAdminActivity.getAppContext().startActivity(i);
+                fp.cercaBlocchi(p.getId());
             }
         });
         return v;

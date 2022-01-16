@@ -62,7 +62,6 @@ public class GestionePostazioneAdminActivity extends Activity {
             e.printStackTrace();
         }
 
-
         modificaButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

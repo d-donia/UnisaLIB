@@ -2,7 +2,10 @@ package presenter.postazionepresenter;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.widget.Toast;
+
+import androidx.preference.PreferenceManager;
 
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.JsonHttpResponseHandler;
@@ -33,7 +36,7 @@ import view.utenteview.HomeUtenteUnisaActivity;
 import view.postazioneview.RicercaPostazioneUtenteActivity;
 
 public class PostazionePresenterImp implements PostazionePresenter{
-    static final String GenericURL = "http://192.168.1.213:8080/UnisaLIBServer/PostazionePresenter";
+    static final String GenericURL = "http://192.168.1.5:8080/UnisaLIBServer/PostazionePresenter";
     private AsyncHttpClient client = new AsyncHttpClient();
 
     public void mostraRicercaPostazioni(boolean is_admin, Context c) {
@@ -227,6 +230,51 @@ public class PostazionePresenterImp implements PostazionePresenter{
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
+            }
+
+            @Override
+            public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
+                super.onFailure(statusCode, headers, responseString, throwable);
+                Toast.makeText(BloccoActivity.getAppContext(), responseString, Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONObject errorResponse) {
+                super.onFailure(statusCode, headers, throwable, errorResponse);
+                try {
+                    Toast.makeText(BloccoActivity.getAppContext(), errorResponse.get("messaggio").toString(), Toast.LENGTH_SHORT).show();
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+    }
+
+    @Override
+    public void cercaBlocchi(String id) {
+        String MYURL = GenericURL + "/cerca-blocchi";
+        RequestParams params;
+        params = new RequestParams();
+        params.put("idPos", id);
+
+        client.post(MYURL,params,new JsonHttpResponseHandler() {
+            @Override
+            public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
+                super.onSuccess(statusCode, headers, response);
+                SharedPreferences postazione = PreferenceManager.getDefaultSharedPreferences(ElencoPostazioniAdminActivity.getAppContext());
+                SharedPreferences.Editor editor = postazione.edit();
+                try {
+                    System.out.println(""+response);
+                    Postazione pos=Postazione.fromJsonArray(response);
+                    editor.putString("postazione", Postazione.toJson(pos));
+                    editor.commit();
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+                Intent i = new Intent();
+                i.setClass(ElencoPostazioniAdminActivity.getAppContext(), SbloccoActivity.class);
+                i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                ElencoPostazioniAdminActivity.getAppContext().startActivity(i);
             }
 
             @Override

@@ -22,4 +22,5 @@ public interface PostazionePresenter {
 
     void bloccoIndeterminato(String idPos);
 
+    void cercaBlocchi(String id);
 }

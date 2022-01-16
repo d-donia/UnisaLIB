@@ -22,7 +22,7 @@ import view.utenteview.HomeUtenteUnisaActivity;
 
 public class UtentePresenterImp implements UtentePresenter{
 
-    static final String GenericURL="http://192.168.1.213:8080/UnisaLIBServer/UtentePresenter";
+    static final String GenericURL="http://192.168.1.5:8080/UnisaLIBServer/UtentePresenter";
     private AsyncHttpClient client=new AsyncHttpClient();
     public void login(String email, String password) {
         String MYURL=GenericURL+"/login";
