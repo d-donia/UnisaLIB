@@ -25,6 +25,7 @@ import model.prenotazionemanagement.Prenotazione;
 import utils.SwitchDate;
 import view.postazioneview.BloccoActivity;
 import view.postazioneview.ElencoPostazioniAdminActivity;
+import view.postazioneview.SbloccoActivity;
 import view.utenteview.HomeAdminActivity;
 import view.postazioneview.RicercaPostazioneAdminActivity;
 import view.postazioneview.ElencoPostazioniUtenteActivity;
@@ -32,7 +33,7 @@ import view.utenteview.HomeUtenteUnisaActivity;
 import view.postazioneview.RicercaPostazioneUtenteActivity;
 
 public class PostazionePresenterImp implements PostazionePresenter{
-    static final String GenericURL = "http://192.168.1.5:8080/UnisaLIBServer/PostazionePresenter";
+    static final String GenericURL = "http://192.168.1.213:8080/UnisaLIBServer/PostazionePresenter";
     private AsyncHttpClient client = new AsyncHttpClient();
 
     public void mostraRicercaPostazioni(boolean is_admin, Context c) {
@@ -239,6 +240,41 @@ public class PostazionePresenterImp implements PostazionePresenter{
                 super.onFailure(statusCode, headers, throwable, errorResponse);
                 try {
                     Toast.makeText(BloccoActivity.getAppContext(), errorResponse.get("messaggio").toString(), Toast.LENGTH_SHORT).show();
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+    }
+
+    public void sbloccoPostazione(String idPos) {
+        String MYURL = GenericURL + "/sblocca-postazione";
+        RequestParams params;
+        params = new RequestParams();
+        params.put("idPos", idPos);
+
+        client.post(MYURL,params,new JsonHttpResponseHandler() {
+            @Override
+            public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
+                super.onSuccess(statusCode, headers, response);
+                try {
+                    Toast.makeText(SbloccoActivity.getAppContext(), response.get("messaggio").toString(), Toast.LENGTH_SHORT).show();
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+
+            @Override
+            public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
+                super.onFailure(statusCode, headers, responseString, throwable);
+                Toast.makeText(SbloccoActivity.getAppContext(), responseString, Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONObject errorResponse) {
+                super.onFailure(statusCode, headers, throwable, errorResponse);
+                try {
+                    Toast.makeText(SbloccoActivity.getAppContext(), errorResponse.get("messaggio").toString(), Toast.LENGTH_SHORT).show();
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }

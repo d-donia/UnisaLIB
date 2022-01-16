@@ -56,11 +56,8 @@ public class FacadePresenter {
 
     public void cercaPrestitiperLibro(String isbn){}
 
-    public void bloccaPostazione(int pID){}
 
-    public void bloccaPostazione(int pID, Periodo p){}
-
-    public void sbloccaPostazione(int pID, Periodo p){}
+    public void sbloccaPostazione(String idPOS, Periodo p){}
 
     public void cercaPostazione(int pID){}
 
