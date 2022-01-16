@@ -29,7 +29,7 @@ public class GestionePostazioneAdminActivity extends Activity {
         setContentView(R.layout.admin_gestione_postazioni);
         fp=new FacadePresenter();
         context=getApplicationContext();
-        ImageButton userIB=findViewById(R.id.gestioneLibroIB);
+        ImageButton userIB=findViewById(R.id.gestionePostIB);
         userIB.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
