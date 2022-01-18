@@ -54,16 +54,9 @@ public class FacadePresenter {
         prestitoPresenter.attivaPrestito(p);
     }
 
-    public void cercaPrestitiperLibro(String isbn){}
+    public void sbloccaPostazione(String idPos, Periodo p){postazionePresenter.sbloccaPostazione(idPos,p);}
 
-
-    public void sbloccaPostazione(String idPOS, Periodo p){}
-
-    public void cercaPostazione(int pID){}
-
-    public void cercaPostazioni(Posizione po, GregorianCalendar d){}
-
-    public void cercaPostazioni(Posizione po){}
+    public void sbloccaPostazione(String idPos){postazionePresenter.sbloccaPostazione(idPos);}
 
     public void mostraRicercaPostazioni(boolean is_admin, Context c) { postazionePresenter.mostraRicercaPostazioni(is_admin, c); }
 
@@ -101,8 +94,8 @@ public class FacadePresenter {
         libroPresenter.creaLibro(l);
     }
 
-    public void mostraElencoPostazioni(Posizione p) {
-        postazionePresenter.mostraElencoPostazioni(p);
+    public void mostraElencoPostazioni(Context c, Posizione p) {
+        postazionePresenter.mostraElencoPostazioni(c,p);
     }
 
     public void bloccoIndeterminato(String idPos) {

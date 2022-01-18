@@ -7,6 +7,7 @@ import android.widget.Toast;
 
 import androidx.preference.PreferenceManager;
 
+import com.google.gson.JsonSyntaxException;
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.JsonHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
@@ -113,7 +114,7 @@ public class PostazionePresenterImp implements PostazionePresenter{
         });
     }
 
-    public void mostraElencoPostazioni(Posizione p) {
+    public void mostraElencoPostazioni(Context c, Posizione p) {
         String MYURL = GenericURL + "/mostra-elenco-postazioni-admin";
         RequestParams params;
         params = new RequestParams();
@@ -125,10 +126,10 @@ public class PostazionePresenterImp implements PostazionePresenter{
                 super.onSuccess(statusCode, headers, response);
                 ArrayList<Postazione> postazioni = Postazione.fromJsonArray(""+response);
                 Intent i = new Intent();
-                i.setClass(RicercaPostazioneAdminActivity.getAppContext(), ElencoPostazioniAdminActivity.class);
+                i.setClass(c, ElencoPostazioniAdminActivity.class);
                 i.putExtra("postazioni", Postazione.toJson(postazioni));
-                i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                RicercaPostazioneAdminActivity.getAppContext().startActivity(i);
+                i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                c.startActivity(i);
             }
             @Override
             public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
@@ -264,17 +265,20 @@ public class PostazionePresenterImp implements PostazionePresenter{
                 SharedPreferences postazione = PreferenceManager.getDefaultSharedPreferences(ElencoPostazioniAdminActivity.getAppContext());
                 SharedPreferences.Editor editor = postazione.edit();
                 try {
-                    System.out.println(""+response);
                     Postazione pos=Postazione.fromJsonArray(response);
-                    editor.putString("postazione", Postazione.toJson(pos));
-                    editor.commit();
+                    if((!pos.getBlocchi().isEmpty()) || pos.isDisponibile()==false) {
+                        editor.putString("postazione", Postazione.toJson(pos)).commit();
+                        Intent i = new Intent();
+                        i.setClass(ElencoPostazioniAdminActivity.getAppContext(), SbloccoActivity.class);
+                        i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                        ElencoPostazioniAdminActivity.getAppContext().startActivity(i);
+                    }
+                    else
+                        Toast.makeText(ElencoPostazioniAdminActivity.getAppContext(), "Non sono presenti blocchi", Toast.LENGTH_SHORT).show();
                 } catch (JSONException e) {
                     e.printStackTrace();
+                    Toast.makeText(ElencoPostazioniAdminActivity.getAppContext(), "Errore", Toast.LENGTH_SHORT).show();
                 }
-                Intent i = new Intent();
-                i.setClass(ElencoPostazioniAdminActivity.getAppContext(), SbloccoActivity.class);
-                i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                ElencoPostazioniAdminActivity.getAppContext().startActivity(i);
             }
 
             @Override
@@ -295,7 +299,7 @@ public class PostazionePresenterImp implements PostazionePresenter{
         });
     }
 
-    public void sbloccoPostazione(String idPos) {
+    public void sbloccaPostazione(String idPos) {
         String MYURL = GenericURL + "/sblocca-postazione";
         RequestParams params;
         params = new RequestParams();
@@ -306,9 +310,66 @@ public class PostazionePresenterImp implements PostazionePresenter{
             public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
                 super.onSuccess(statusCode, headers, response);
                 try {
-                    Toast.makeText(SbloccoActivity.getAppContext(), response.get("messaggio").toString(), Toast.LENGTH_SHORT).show();
+                    SharedPreferences userSession = PreferenceManager.getDefaultSharedPreferences(SbloccoActivity.getAppContext());
+                    Postazione p=null;
+                    try {
+                        p= Postazione.fromJson(userSession.getString("postazione", ""));
+                    }
+                    catch (JsonSyntaxException e){
+                        e.printStackTrace();
+                    }
+                    mostraElencoPostazioni(SbloccoActivity.getAppContext(),p.getPosizione());
+                    Toast.makeText(ElencoPostazioniAdminActivity.getAppContext(), response.get("messaggio").toString(), Toast.LENGTH_SHORT).show();
                 } catch (JSONException e) {
                     e.printStackTrace();
+                    Toast.makeText(SbloccoActivity.getAppContext(), "Errore", Toast.LENGTH_SHORT).show();
+
+                }
+            }
+
+            @Override
+            public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
+                super.onFailure(statusCode, headers, responseString, throwable);
+                Toast.makeText(SbloccoActivity.getAppContext(), responseString, Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONObject errorResponse) {
+                super.onFailure(statusCode, headers, throwable, errorResponse);
+                try {
+                    Toast.makeText(SbloccoActivity.getAppContext(), errorResponse.get("messaggio").toString(), Toast.LENGTH_SHORT).show();
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+    }
+
+    public void sbloccaPostazione(String idPos, Periodo periodo) {
+        String MYURL = GenericURL + "/sblocca-postazione-periodo";
+        RequestParams params;
+        params = new RequestParams();
+        params.put("idPos", idPos);
+        params.put("periodo",Periodo.toJson(periodo));
+
+        client.post(MYURL,params,new JsonHttpResponseHandler() {
+            @Override
+            public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
+                super.onSuccess(statusCode, headers, response);
+                try {
+                    SharedPreferences userSession = PreferenceManager.getDefaultSharedPreferences(SbloccoActivity.getAppContext());
+                    Postazione p=null;
+                    try {
+                        p= Postazione.fromJson(userSession.getString("postazione", ""));
+                    }
+                    catch (JsonSyntaxException e){
+                        e.printStackTrace();
+                    }
+                    mostraElencoPostazioni(SbloccoActivity.getAppContext(),p.getPosizione());
+                    Toast.makeText(ElencoPostazioniAdminActivity.getAppContext(), response.get("messaggio").toString(), Toast.LENGTH_SHORT).show();
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                    Toast.makeText(SbloccoActivity.getAppContext(), "Errore", Toast.LENGTH_SHORT).show();
                 }
             }
 

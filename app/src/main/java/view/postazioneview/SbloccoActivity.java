@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.preference.PreferenceManager;
@@ -26,7 +27,7 @@ import presenter.FacadePresenter;
 public class SbloccoActivity extends Activity {
     private FacadePresenter fp;
     private static Context context;
-
+    private Postazione p=null;
     public static Context getAppContext() {
         return context;
     }
@@ -35,8 +36,8 @@ public class SbloccoActivity extends Activity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         context = getApplicationContext();
+        fp=new FacadePresenter();
         setContentView(R.layout.admin_sblocco_postazione);
-        Postazione p=null;
         SharedPreferences userSession = PreferenceManager.getDefaultSharedPreferences(this);
         try {
             p= Postazione.fromJson(userSession.getString("postazione", ""));
@@ -52,7 +53,6 @@ public class SbloccoActivity extends Activity {
             lv.setAdapter(postazioneBloccoAdapter);
 
             for (Periodo periodo: p.getBlocchi()) {
-                System.out.println(p.getId()+"ok");
                 postazioneBloccoAdapter.add(periodo);
             }
         }
@@ -61,7 +61,7 @@ public class SbloccoActivity extends Activity {
             sblocca.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-
+                    fp.sbloccaPostazione(p.getId());
                 }
             });
         }

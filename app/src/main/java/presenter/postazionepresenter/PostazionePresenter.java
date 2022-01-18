@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.GregorianCalendar;
 
 import model.posizionemanagement.Posizione;
+import model.postazionemanagement.Periodo;
 import model.postazionemanagement.Postazione;
 import model.prenotazionemanagement.Prenotazione;
 
@@ -14,7 +15,7 @@ public interface PostazionePresenter {
 
     void mostraElencoPostazioni(Posizione p, GregorianCalendar date);
 
-    void mostraElencoPostazioni(Posizione p);
+    void mostraElencoPostazioni(Context c, Posizione p);
 
     ArrayList<String> mostraOrariDisponibili(ArrayList<Postazione> postazioni, String idPos, ArrayList<Prenotazione> prenotazioni, GregorianCalendar date);
 
@@ -23,4 +24,8 @@ public interface PostazionePresenter {
     void bloccoIndeterminato(String idPos);
 
     void cercaBlocchi(String id);
+
+    void sbloccaPostazione(String idPos);
+
+    void sbloccaPostazione(String idPos, Periodo periodo);
 }

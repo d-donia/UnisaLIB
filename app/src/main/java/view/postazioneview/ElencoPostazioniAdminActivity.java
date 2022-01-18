@@ -25,7 +25,6 @@ public class ElencoPostazioniAdminActivity extends Activity {
         context=getApplicationContext();
         Intent i=getIntent();
         ArrayList<Postazione> postazioni= Postazione.fromJsonArray(i.getStringExtra("postazioni"));
-
         ListView lv = findViewById(R.id.postazioneLV);
 
 
