@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 import model.posizionemanagement.Posizione;
+import model.utentemanagement.Utente;
 
 public class Postazione {
     private String id;

@@ -35,6 +35,7 @@
         <activity android:name="view.postazioneview.BloccoActivity"/>
         <activity android:name="view.postazioneview.SbloccoActivity"/>
         <activity android:name="view.prestitoview.PrestitiLibroActivity"/>
+        <activity android:name="view.postazioneview.GestionePostazioneAdminActivity"/>
     </application>
 
 </manifest>

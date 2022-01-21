@@ -69,7 +69,7 @@ public class RicercaPostazioneAdminActivity extends Activity {
                 for (Posizione x: posizioni)
                     if (x.getBiblioteca().equals(bibliotecaSpinner.getSelectedItem().toString()) && x.getZona().equals(zonaSpinner.getSelectedItem().toString()))
                         p=x;
-                fp.mostraElencoPostazioni(p);
+                fp.mostraElencoPostazioni(RicercaPostazioneAdminActivity.getAppContext(),p);
             }
         });
     }

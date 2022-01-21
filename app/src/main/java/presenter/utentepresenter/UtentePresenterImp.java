@@ -37,7 +37,7 @@ public class UtentePresenterImp implements UtentePresenter{
                 super.onSuccess(statusCode, headers, response);
                 Utente u= null;
                 try {
-                    u = Utente.fromJson(response);
+                    u =Utente.fromJson(response);
 
                     //Salvataggio utente loggato in shared preferences come oggetto json
                     SharedPreferences userSession = PreferenceManager.getDefaultSharedPreferences(MainActivity.getAppContext());
