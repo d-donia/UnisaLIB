@@ -29,9 +29,6 @@ public class PrestitiLibroActivity extends Activity {
         setContentView(R.layout.admin_prestiti_libro);
         context = getApplicationContext();
 
-        FacadePresenter fp=new FacadePresenter();
-
-        SharedPreferences userSession = PreferenceManager.getDefaultSharedPreferences(this);
         Intent i=getIntent();
         ArrayList<Prestito> prestitiLibro=Prestito.fromJson(i.getStringExtra("prestiti"));
         String message = i.getStringExtra("message");

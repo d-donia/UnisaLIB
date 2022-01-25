@@ -7,6 +7,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.os.Environment;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
@@ -49,7 +50,7 @@ public class DettagliLibroUtenteUnisaActivity extends Activity {
         catch (JsonSyntaxException e){
             e.printStackTrace();
         }
-
+        
         TextView detsTitoloTV= findViewById(R.id.detsTitoloTV);
         TextView detsISBNTV=findViewById(R.id.detsISBNTV);
         TextView detsAutoreTV= findViewById(R.id.detsAutoreTV);
