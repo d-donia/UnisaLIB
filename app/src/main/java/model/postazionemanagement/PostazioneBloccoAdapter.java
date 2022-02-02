@@ -48,7 +48,7 @@ public class PostazioneBloccoAdapter extends ArrayAdapter<Periodo> {
         Date data = p.getData().getTime();
         DateFormat df = DateFormat.getDateInstance();
         tvData.setText(df.format(data));
-        tvOrario.setText(p.getOraFine() +" - "+p.getOraFine());
+        tvOrario.setText(p.getOraInizio() +" - "+p.getOraFine());
         sblocco.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

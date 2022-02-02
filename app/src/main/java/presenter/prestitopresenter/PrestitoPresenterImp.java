@@ -86,6 +86,7 @@ public class PrestitoPresenterImp implements PrestitoPresenter{
             @Override
             public void onSuccess(int statusCode, Header[] headers, JSONArray response) {
                 super.onSuccess(statusCode, headers, response);
+                System.out.println(response);
                 Intent i = new Intent();
                 i.setClass(c, MieiPrestitiActivity.class);
                 i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);

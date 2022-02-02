@@ -1,5 +1,6 @@
 package model.libromanagement;
 
+import android.app.PendingIntent;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;

@@ -31,7 +31,6 @@ public class MieiPrestitiActivity extends Activity {
         context=getApplicationContext();
         FacadePresenter fp=new FacadePresenter();
 
-        SharedPreferences userSession = PreferenceManager.getDefaultSharedPreferences(this);
         Intent i=getIntent();
         ArrayList<Prestito> prestitiUtente=Prestito.fromJson(i.getStringExtra("prestiti"));
 
@@ -42,6 +41,7 @@ public class MieiPrestitiActivity extends Activity {
 
         lv.setAdapter(prestitoAdapter);
         for (Prestito p:prestitiUtente) {
+            System.out.println(p.getLibro().getIsbn());
             prestitoAdapter.add(p);
         }
 

@@ -181,39 +181,44 @@ public class PostazionePresenterImp implements PostazionePresenter{
     }
 
     public void bloccoDeterminato(Postazione p, GregorianCalendar date, int oraInizio, int oraFine) {
-        String MYURL=GenericURL+"/blocco-determinato";
-        System.out.println(MYURL);
-        RequestParams params=new RequestParams();
-        params.put("idPos",p.getId());
-        params.put("periodo",Periodo.toJson(new Periodo(0,oraInizio,oraFine,date)));
-        client.post(MYURL,params,new JsonHttpResponseHandler(){
-            @Override
-            public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
-                super.onSuccess(statusCode, headers, response);
-                try {
-                    Toast.makeText(BloccoActivity.getAppContext(),response.get("messaggio").toString(),Toast.LENGTH_SHORT).show();
-                } catch (JSONException e) {
-                    e.printStackTrace();
+        if(oraFine>oraInizio) {
+            String MYURL = GenericURL + "/blocco-determinato";
+            RequestParams params = new RequestParams();
+            params.put("idPos", p.getId());
+            params.put("periodo", Periodo.toJson(new Periodo(0, oraInizio, oraFine, date)));
+            client.post(MYURL, params, new JsonHttpResponseHandler() {
+                @Override
+                public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
+                    super.onSuccess(statusCode, headers, response);
+                    try {
+                        Toast.makeText(BloccoActivity.getAppContext(), response.get("messaggio").toString(), Toast.LENGTH_SHORT).show();
+                    } catch (JSONException e) {
+                        Toast.makeText(BloccoActivity.getAppContext(), "Errore visualizzazione messaggio", Toast.LENGTH_SHORT).show();
+                    }
                 }
-            }
 
-            @Override
-            public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONObject errorResponse) {
-                super.onFailure(statusCode, headers, throwable, errorResponse);
-            }
+                @Override
+                public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONObject errorResponse) {
+                    super.onFailure(statusCode, headers, throwable, errorResponse);
+                }
 
-            @Override
-            public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
-                super.onFailure(statusCode, headers, responseString, throwable);
-                Toast.makeText(BloccoActivity.getAppContext(),responseString,Toast.LENGTH_SHORT).show();
+                @Override
+                public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
+                    super.onFailure(statusCode, headers, responseString, throwable);
+                    Toast.makeText(BloccoActivity.getAppContext(), responseString, Toast.LENGTH_SHORT).show();
 
-            }
+                }
 
-            @Override
-            public void onSuccess(int statusCode, Header[] headers, String responseString) {
-                super.onSuccess(statusCode, headers, responseString);
-            }
-        });
+                @Override
+                public void onSuccess(int statusCode, Header[] headers, String responseString) {
+                    super.onSuccess(statusCode, headers, responseString);
+                }
+            });
+        }
+        else{
+            Toast.makeText(BloccoActivity.getAppContext(), "Ora fine deve essere maggiore di ora inizio", Toast.LENGTH_SHORT).show();
+        }
+
     }
 
     public void bloccoIndeterminato(String idPos) {
@@ -346,48 +351,52 @@ public class PostazionePresenterImp implements PostazionePresenter{
     }
 
     public void sbloccaPostazione(String idPos, Periodo periodo) {
-        String MYURL = GenericURL + "/sblocca-postazione-periodo";
-        RequestParams params;
-        params = new RequestParams();
-        params.put("idPos", idPos);
-        params.put("periodo",Periodo.toJson(periodo));
+        if (periodo.getOraFine() > periodo.getOraInizio()) {
+            String MYURL = GenericURL + "/sblocca-postazione-periodo";
+            RequestParams params;
+            params = new RequestParams();
+            params.put("idPos", idPos);
+            params.put("periodo", Periodo.toJson(periodo));
 
-        client.post(MYURL,params,new JsonHttpResponseHandler() {
-            @Override
-            public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
-                super.onSuccess(statusCode, headers, response);
-                try {
-                    SharedPreferences userSession = PreferenceManager.getDefaultSharedPreferences(SbloccoActivity.getAppContext());
-                    Postazione p=null;
+            client.post(MYURL, params, new JsonHttpResponseHandler() {
+                @Override
+                public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
+                    super.onSuccess(statusCode, headers, response);
                     try {
-                        p= Postazione.fromJson(userSession.getString("postazione", ""));
+                        SharedPreferences userSession = PreferenceManager.getDefaultSharedPreferences(SbloccoActivity.getAppContext());
+                        Postazione p = null;
+                        try {
+                            p = Postazione.fromJson(userSession.getString("postazione", ""));
+                        } catch (JsonSyntaxException e) {
+                            e.printStackTrace();
+                        }
+                        mostraElencoPostazioni(SbloccoActivity.getAppContext(), p.getPosizione());
+                        Toast.makeText(ElencoPostazioniAdminActivity.getAppContext(), response.get("messaggio").toString(), Toast.LENGTH_SHORT).show();
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                        Toast.makeText(SbloccoActivity.getAppContext(), "Errore", Toast.LENGTH_SHORT).show();
                     }
-                    catch (JsonSyntaxException e){
+                }
+
+                @Override
+                public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
+                    super.onFailure(statusCode, headers, responseString, throwable);
+                    Toast.makeText(SbloccoActivity.getAppContext(), responseString, Toast.LENGTH_SHORT).show();
+                }
+
+                @Override
+                public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONObject errorResponse) {
+                    super.onFailure(statusCode, headers, throwable, errorResponse);
+                    try {
+                        Toast.makeText(SbloccoActivity.getAppContext(), errorResponse.get("messaggio").toString(), Toast.LENGTH_SHORT).show();
+                    } catch (JSONException e) {
                         e.printStackTrace();
                     }
-                    mostraElencoPostazioni(SbloccoActivity.getAppContext(),p.getPosizione());
-                    Toast.makeText(ElencoPostazioniAdminActivity.getAppContext(), response.get("messaggio").toString(), Toast.LENGTH_SHORT).show();
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                    Toast.makeText(SbloccoActivity.getAppContext(), "Errore", Toast.LENGTH_SHORT).show();
                 }
-            }
-
-            @Override
-            public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
-                super.onFailure(statusCode, headers, responseString, throwable);
-                Toast.makeText(SbloccoActivity.getAppContext(), responseString, Toast.LENGTH_SHORT).show();
-            }
-
-            @Override
-            public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONObject errorResponse) {
-                super.onFailure(statusCode, headers, throwable, errorResponse);
-                try {
-                    Toast.makeText(SbloccoActivity.getAppContext(), errorResponse.get("messaggio").toString(), Toast.LENGTH_SHORT).show();
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-            }
-        });
+            });
+        }
+        else{
+            Toast.makeText(SbloccoActivity.getAppContext(), "Ora fine deve essere maggiore di ora inizio", Toast.LENGTH_SHORT).show();
+        }
     }
 }

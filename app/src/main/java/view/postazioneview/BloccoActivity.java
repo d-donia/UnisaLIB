@@ -96,6 +96,7 @@ public class BloccoActivity extends Activity {
         });
     }
 
+
     public static Context getAppContext() {
         return context;
     }
