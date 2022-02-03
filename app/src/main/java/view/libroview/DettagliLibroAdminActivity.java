@@ -18,6 +18,7 @@ import androidx.annotation.Nullable;
 import com.bumptech.glide.Glide;
 import com.example.unisalib.R;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 
 import model.libromanagement.Libro;
@@ -59,7 +60,9 @@ public class DettagliLibroAdminActivity extends Activity {
         detsAutoreET.setText(l.getAutore());
         detsEditoreET.setText(l.getEditore());
         detsAPTV.setText(l.getAnnoPubbl() + "");
-        detsRatingTV.setText(l.getRating()+ "");
+
+        DecimalFormat df = new DecimalFormat("#.#");
+        detsRatingTV.setText(df.format(l.getRating())+ "");
         detsCopie.setText(l.getnCopie()+"");
         copertinaET.setText(l.getUrlCopertina());
 

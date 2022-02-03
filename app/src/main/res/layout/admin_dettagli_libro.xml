@@ -288,6 +288,7 @@
                     android:layout_margin="5dp"
                     android:layout_weight="1"
                     android:backgroundTint="#146DDA"
+                    android:textColor="@color/white"
                     android:text="Modifica"
                     android:textSize="20sp" />
 
@@ -299,6 +300,7 @@
                     android:layout_margin="5dp"
                     android:layout_weight="1"
                     android:backgroundTint="#D9364F"
+                    android:textColor="@color/white"
                     android:text="Elimina"
                     android:textSize="20sp" />
 
@@ -312,6 +314,7 @@
                 android:layout_margin="5dp"
                 android:layout_weight="1"
                 android:backgroundTint="#146DDA"
+                android:textColor="@color/white"
                 android:text="Lista Prestiti"
                 android:textSize="20sp" />
 
