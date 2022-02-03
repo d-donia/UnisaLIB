@@ -1,32 +1,24 @@
 package view.utenteview;
 
 
-import static androidx.test.espresso.Espresso.onData;
-import static androidx.test.espresso.Espresso.onView;
-import static androidx.test.espresso.Espresso.pressBack;
-import static androidx.test.espresso.action.ViewActions.click;
-import static androidx.test.espresso.action.ViewActions.closeSoftKeyboard;
-import static androidx.test.espresso.action.ViewActions.replaceText;
-import static androidx.test.espresso.action.ViewActions.scrollTo;
-import static androidx.test.espresso.assertion.ViewAssertions.matches;
-import static androidx.test.espresso.matcher.ViewMatchers.isDisplayed;
-import static androidx.test.espresso.matcher.ViewMatchers.withClassName;
-import static androidx.test.espresso.matcher.ViewMatchers.withId;
-import static androidx.test.espresso.matcher.ViewMatchers.withParent;
-import static androidx.test.espresso.matcher.ViewMatchers.withText;
-import static org.hamcrest.Matchers.allOf;
-import static org.hamcrest.Matchers.anything;
-import static org.hamcrest.Matchers.is;
-
-import android.view.View;
-import android.view.ViewGroup;
-import android.view.ViewParent;
-
 import androidx.test.espresso.DataInteraction;
 import androidx.test.espresso.ViewInteraction;
 import androidx.test.filters.LargeTest;
 import androidx.test.rule.ActivityTestRule;
 import androidx.test.runner.AndroidJUnit4;
+
+import android.view.View;
+import android.view.ViewGroup;
+import android.view.ViewParent;
+
+import static androidx.test.InstrumentationRegistry.getInstrumentation;
+import static androidx.test.espresso.Espresso.onData;
+import static androidx.test.espresso.Espresso.onView;
+import static androidx.test.espresso.Espresso.pressBack;
+import static androidx.test.espresso.Espresso.openActionBarOverflowOrOptionsMenu;
+import static androidx.test.espresso.action.ViewActions.*;
+import static androidx.test.espresso.assertion.ViewAssertions.*;
+import static androidx.test.espresso.matcher.ViewMatchers.*;
 
 import com.example.unisalib.R;
 
@@ -38,17 +30,21 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
+import static org.hamcrest.Matchers.allOf;
+import static org.hamcrest.Matchers.anything;
+import static org.hamcrest.Matchers.is;
+
 import java.util.concurrent.TimeUnit;
 
 @LargeTest
 @RunWith(AndroidJUnit4.class)
-public class BloccoIndeterminatoTest {
+public class AggiungiLibroTest {
 
     @Rule
     public ActivityTestRule<MainActivity> mActivityTestRule = new ActivityTestRule<>(MainActivity.class);
 
     @Test
-    public void bloccoIndeterminatoTest() throws InterruptedException {
+    public void aggiungiLibroTest() throws InterruptedException {
         ViewInteraction appCompatEditText = onView(
                 allOf(withId(R.id.emailText),
                         childAtPosition(
@@ -79,110 +75,128 @@ public class BloccoIndeterminatoTest {
                         isDisplayed()));
         materialButton.perform(click());
 
-        TimeUnit.SECONDS.sleep(4);
+        TimeUnit.SECONDS.sleep(3);
 
         ViewInteraction button = onView(
-                allOf(withId(R.id.mgmtPrenotazioneButton), withText("Gestione Posti"),
+                allOf(withId(R.id.mgmtPrestitoButton), withText("Gestione Libri"),
                         childAtPosition(
                                 childAtPosition(
                                         withClassName(is("android.widget.LinearLayout")),
                                         4),
-                                1),
+                                0),
                         isDisplayed()));
         button.perform(click());
 
         TimeUnit.SECONDS.sleep(3);
 
-        ViewInteraction button2 = onView(
-                allOf(withId(R.id.modificaPostButton), withText("Modifica Postazioni"),
+        ViewInteraction button3 = onView(
+                allOf(withId(R.id.addButton), withText("Aggiungi Libri"),
+                        childAtPosition(
+                                childAtPosition(
+                                        withClassName(is("android.widget.LinearLayout")),
+                                        4),
+                                0),
+                        isDisplayed()));
+        button3.perform(click());
+
+        ViewInteraction editText = onView(
+                allOf(withId(R.id.isbnET),
+                        childAtPosition(
+                                childAtPosition(
+                                        withClassName(is("android.widget.LinearLayout")),
+                                        0),
+                                0)));
+        editText.perform(scrollTo(), replaceText("123456789X"), closeSoftKeyboard());
+
+        ViewInteraction editText2 = onView(
+                allOf(withId(R.id.titoloET),
+                        childAtPosition(
+                                childAtPosition(
+                                        withClassName(is("android.widget.LinearLayout")),
+                                        0),
+                                1)));
+        editText2.perform(scrollTo(), replaceText("Progetto IS"), closeSoftKeyboard());
+
+        ViewInteraction editText7 = onView(
+                allOf(withId(R.id.autoreET),
+                        childAtPosition(
+                                childAtPosition(
+                                        withClassName(is("android.widget.LinearLayout")),
+                                        0),
+                                2)));
+        editText7.perform(scrollTo(), replaceText("Somma"), closeSoftKeyboard());
+
+        ViewInteraction editText11 = onView(
+                allOf(withId(R.id.editoreET),
+                        childAtPosition(
+                                childAtPosition(
+                                        withClassName(is("android.widget.LinearLayout")),
+                                        0),
+                                3)));
+        editText11.perform(scrollTo(), replaceText("Rascato"), closeSoftKeyboard());
+
+        ViewInteraction editText12 = onView(
+                allOf(withId(R.id.annoET),
+                        childAtPosition(
+                                childAtPosition(
+                                        withClassName(is("android.widget.LinearLayout")),
+                                        5),
+                                0)));
+        editText12.perform(scrollTo(), replaceText("2022"), closeSoftKeyboard());
+
+        ViewInteraction editText13 = onView(
+                allOf(withId(R.id.ncopieET),
+                        childAtPosition(
+                                childAtPosition(
+                                        withClassName(is("android.widget.LinearLayout")),
+                                        5),
+                                2)));
+        editText13.perform(scrollTo(), replaceText("5"), closeSoftKeyboard());
+
+        ViewInteraction editText14 = onView(
+                allOf(withId(R.id.imgET),
+                        childAtPosition(
+                                childAtPosition(
+                                        withClassName(is("android.widget.LinearLayout")),
+                                        0),
+                                8)));
+        editText14.perform(scrollTo(), replaceText("http://adasdasd.jpg"), closeSoftKeyboard());
+
+        ViewInteraction button4 = onView(
+                allOf(withId(R.id.aggiungiLibroButton), withText("Aggiungi"),
+                        childAtPosition(
+                                childAtPosition(
+                                        withClassName(is("android.widget.LinearLayout")),
+                                        9),
+                                0)));
+        button4.perform(scrollTo(), click());
+
+        TimeUnit.SECONDS.sleep(3);
+
+        pressBack();
+
+        ViewInteraction button5 = onView(
+                allOf(withId(R.id.modifyButton), withText("Modifica Libri"),
                         childAtPosition(
                                 childAtPosition(
                                         withClassName(is("android.widget.LinearLayout")),
                                         4),
                                 1),
                         isDisplayed()));
-        button2.perform(click());
+        button5.perform(click());
 
         TimeUnit.SECONDS.sleep(3);
 
-        ViewInteraction spinner = onView(
-                allOf(withId(R.id.zonaSpinner),
+        ViewInteraction searchAutoComplete = onView(
+                allOf(withClassName(is("android.widget.SearchView$SearchAutoComplete")),
                         childAtPosition(
-                                childAtPosition(
-                                        withClassName(is("android.widget.LinearLayout")),
-                                        0),
-                                3),
-                        isDisplayed()));
-        spinner.perform(click());
-
-        DataInteraction checkedTextView = onData(anything())
-                .inAdapterView(childAtPosition(
-                        withClassName(is("android.widget.PopupWindow$PopupBackgroundView")),
-                        0))
-                .atPosition(4);
-        checkedTextView.perform(click());
-
-        ViewInteraction button3 = onView(
-                allOf(withId(R.id.cercaButtonAD), withText("Cerca"),
-                        childAtPosition(
-                                childAtPosition(
-                                        withClassName(is("android.widget.LinearLayout")),
-                                        0),
-                                4),
-                        isDisplayed()));
-        button3.perform(click());
-
-        TimeUnit.SECONDS.sleep(3);
-
-        ViewInteraction button4 = onView(
-                allOf(withId(R.id.bloccoButton), withText("Blocca"),
-                        childAtPosition(
-                                childAtPosition(
-                                        withClassName(is("android.widget.LinearLayout")),
-                                        1),
+                                allOf(withClassName(is("android.widget.LinearLayout")),
+                                        childAtPosition(
+                                                withClassName(is("android.widget.LinearLayout")),
+                                                1)),
                                 0),
                         isDisplayed()));
-        button4.perform(click());
-
-        TimeUnit.SECONDS.sleep(3);
-
-        ViewInteraction radioButton = onView(
-                allOf(withId(R.id.radioIndet), withText("Blocco Indeterminato"),
-                        childAtPosition(
-                                childAtPosition(
-                                        withClassName(is("android.widget.LinearLayout")),
-                                        1),
-                                0)));
-        radioButton.perform(scrollTo(), click());
-
-        ViewInteraction button5 = onView(
-                allOf(withId(R.id.buttonBlocco), withText("Blocca"),
-                        childAtPosition(
-                                childAtPosition(
-                                        withClassName(is("android.widget.LinearLayout")),
-                                        2),
-                                1)));
-        button5.perform(scrollTo(), click());
-
-        pressBack();
-
-        ViewInteraction button6 = onView(
-                allOf(withId(R.id.sbloccoButton), withText("Sblocca"),
-                        childAtPosition(
-                                childAtPosition(
-                                        withClassName(is("android.widget.LinearLayout")),
-                                        1),
-                                1),
-                        isDisplayed()));
-        button6.perform(click());
-
-        TimeUnit.SECONDS.sleep(3);
-
-        ViewInteraction button7 = onView(
-                allOf(withId(R.id.sbloccaButton), withText("SBLOCCA"),
-                        withParent(withParent(IsInstanceOf.<View>instanceOf(android.widget.LinearLayout.class))),
-                        isDisplayed()));
-        button7.check(matches(isDisplayed()));
+        searchAutoComplete.perform(replaceText("Progetto IS"), closeSoftKeyboard());
     }
 
     private static Matcher<View> childAtPosition(

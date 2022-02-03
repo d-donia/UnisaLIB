@@ -6,12 +6,9 @@ import static androidx.test.espresso.Espresso.onView;
 import static androidx.test.espresso.action.ViewActions.click;
 import static androidx.test.espresso.action.ViewActions.closeSoftKeyboard;
 import static androidx.test.espresso.action.ViewActions.replaceText;
-import static androidx.test.espresso.action.ViewActions.scrollTo;
-import static androidx.test.espresso.assertion.ViewAssertions.matches;
 import static androidx.test.espresso.matcher.ViewMatchers.isDisplayed;
 import static androidx.test.espresso.matcher.ViewMatchers.withClassName;
 import static androidx.test.espresso.matcher.ViewMatchers.withId;
-import static androidx.test.espresso.matcher.ViewMatchers.withParent;
 import static androidx.test.espresso.matcher.ViewMatchers.withText;
 import static org.hamcrest.Matchers.allOf;
 import static org.hamcrest.Matchers.anything;
@@ -35,14 +32,13 @@ import com.example.unisalib.R;
 import org.hamcrest.Description;
 import org.hamcrest.Matcher;
 import org.hamcrest.TypeSafeMatcher;
-import org.hamcrest.core.IsInstanceOf;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import java.util.GregorianCalendar;
-import java.util.concurrent.TimeUnit;
 
+import model.libromanagement.Libro;
 import model.prestitomanagement.Prestito;
 import model.utentemanagement.Utente;
 import utils.SwitchDate;
@@ -50,13 +46,13 @@ import view.libroview.DettagliLibroUtenteUnisaActivity;
 
 @LargeTest
 @RunWith(AndroidJUnit4.class)
-public class PrestitoTest {
+public class AggiungiInteresseTest {
 
     @Rule
     public ActivityTestRule<MainActivity> mActivityTestRule = new ActivityTestRule<>(MainActivity.class);
 
     @Test
-    public void prestitoTest() throws InterruptedException {
+    public void aggiungiInteresseTest() {
         ViewInteraction appCompatEditText = onView(
                 allOf(withId(R.id.emailText),
                         childAtPosition(
@@ -87,8 +83,6 @@ public class PrestitoTest {
                         isDisplayed()));
         materialButton.perform(click());
 
-        TimeUnit.SECONDS.sleep(3);
-
         ViewInteraction button = onView(
                 allOf(withId(R.id.svcPrestitoButton), withText("Prestito Libri"),
                         childAtPosition(
@@ -99,8 +93,6 @@ public class PrestitoTest {
                         isDisplayed()));
         button.perform(click());
 
-        TimeUnit.SECONDS.sleep(3);
-
         DataInteraction linearLayout = onData(anything())
                 .inAdapterView(allOf(withId(R.id.mylistview),
                         childAtPosition(
@@ -109,72 +101,29 @@ public class PrestitoTest {
                 .atPosition(6);
         linearLayout.perform(click());
 
-        TimeUnit.SECONDS.sleep(3);
-
         DataInteraction relativeLayout = onData(anything())
                 .inAdapterView(allOf(withId(R.id.libriLV),
                         childAtPosition(
                                 withClassName(is("android.widget.LinearLayout")),
                                 0)))
-                .atPosition(1);
+                .atPosition(0);
         relativeLayout.perform(click());
 
-        TimeUnit.SECONDS.sleep(3);
-
-        ViewInteraction button2 = onView(
-                allOf(withId(R.id.prestitoButton), withText("PRESTITO"),
+        ViewInteraction imageButton = onView(
+                allOf(withId(R.id.interesseButton),
                         childAtPosition(
                                 childAtPosition(
                                         withClassName(is("android.widget.LinearLayout")),
                                         4),
-                                0),
-                        isDisplayed()));
-        button2.perform(click());
-
-        ViewInteraction button3 = onView(
-                allOf(withId(android.R.id.button1), withText("SI"),
-                        childAtPosition(
-                                childAtPosition(
-                                        withClassName(is("android.widget.ScrollView")),
-                                        0),
-                                3)));
-        button3.perform(scrollTo(), click());
-
-        TimeUnit.SECONDS.sleep(3);
-
-        ViewInteraction imageButton = onView(
-                allOf(withId(R.id.menuLibroIB),
-                        childAtPosition(
-                                childAtPosition(
-                                        withClassName(is("android.widget.LinearLayout")),
-                                        0),
-                                0),
+                                1),
                         isDisplayed()));
         imageButton.perform(click());
-
-        ViewInteraction textView = onView(
-                allOf(withId(android.R.id.title), withText("Miei Prestiti"),
-                        childAtPosition(
-                                childAtPosition(
-                                        withId(android.R.id.content),
-                                        0),
-                                0),
-                        isDisplayed()));
-        textView.perform(click());
-
-        TimeUnit.SECONDS.sleep(3);
-
-        ViewInteraction textView2 = onView(
-                allOf(withId(R.id.libroTV), withText("Classical Mythology, 0195153448"),
-                        withParent(withParent(IsInstanceOf.<View>instanceOf(android.widget.LinearLayout.class))),
-                        isDisplayed()));
-        textView2.check(matches(withText("Classical Mythology, 0195153448")));
 
         SharedPreferences userSession = PreferenceManager.getDefaultSharedPreferences(DettagliLibroUtenteUnisaActivity.getAppContext());
         Utente u=Utente.fromJson(userSession.getString("Utente",null));
         boolean trovato=false;
-        for(Prestito pr:u.getPrestiti()){
-            if(pr.getLibro().getIsbn().equals("0195153448") && SwitchDate.equalsDate(pr.getDataInizio(),new GregorianCalendar())) {
+        for(Libro l:u.getInteressi()){
+            if(l.getIsbn().equals("0002005018")) {
                 trovato=true;
             }
         }

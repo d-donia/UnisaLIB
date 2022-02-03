@@ -82,7 +82,7 @@ public class BloccoDeterminatoTest {
         TimeUnit.SECONDS.sleep(3);
 
         ViewInteraction button = onView(
-                allOf(withId(R.id.mgmtPrenotazioneButton), withText("Gestione Postazioni"),
+                allOf(withId(R.id.mgmtPrenotazioneButton), withText("Gestione Posti"),
                         childAtPosition(
                                 childAtPosition(
                                         withClassName(is("android.widget.LinearLayout")),

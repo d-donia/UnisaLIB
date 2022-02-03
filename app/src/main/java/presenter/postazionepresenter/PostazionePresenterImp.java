@@ -37,7 +37,7 @@ import view.utenteview.HomeUtenteUnisaActivity;
 import view.postazioneview.RicercaPostazioneUtenteActivity;
 
 public class PostazionePresenterImp implements PostazionePresenter{
-    static final String GenericURL = "http://192.168.255.1:8080/UnisaLIBServer/PostazionePresenter";
+    static final String GenericURL = "http://192.168.1.5:8080/UnisaLIBServer/PostazionePresenter";
     private AsyncHttpClient client = new AsyncHttpClient();
 
     public void mostraRicercaPostazioni(boolean is_admin, Context c) {
