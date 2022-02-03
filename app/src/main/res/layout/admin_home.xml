@@ -44,6 +44,7 @@
             android:backgroundTint="#146DDA"
             android:drawableLeft="@drawable/bookstack"
             android:text="Gestione Libri"
+            android:textColor="@color/white"
             android:textSize="13sp"  />
 
         <Button
@@ -55,6 +56,7 @@
             android:backgroundTint="#146DDA"
             android:drawableLeft="@drawable/desk"
             android:text="Gestione Posti"
+            android:textColor="@color/white"
             android:textSize="13sp" />
 
     </LinearLayout>
