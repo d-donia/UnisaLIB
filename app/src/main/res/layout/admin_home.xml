@@ -44,7 +44,7 @@
             android:backgroundTint="#146DDA"
             android:drawableLeft="@drawable/bookstack"
             android:text="Gestione Libri"
-            android:textSize="13sp" />
+            android:textSize="13sp"  />
 
         <Button
             android:id="@+id/mgmtPrenotazioneButton"
