@@ -51,6 +51,7 @@
             android:layout_margin="5dp"
             android:layout_weight="1"
             android:backgroundTint="#146DDA"
+            android:textColor="@color/white"
             android:text="Cerca"
             android:textSize="20sp" />
 
