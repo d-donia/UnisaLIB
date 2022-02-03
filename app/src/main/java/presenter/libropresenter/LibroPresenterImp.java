@@ -335,28 +335,32 @@ public class LibroPresenterImp implements LibroPresenter {
             @Override
             public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
                 super.onSuccess(statusCode, headers, response);
-                Toast.makeText(AggiungiLibroActivity.getAppContext(), "Crazione Libro avvenuta con successo.", Toast.LENGTH_LONG).show();
+                try {
+                    Toast.makeText(AggiungiLibroActivity.getAppContext(), ""+response.get("messaggio"), Toast.LENGTH_LONG).show();
+                } catch (JSONException e) {
+                    Toast.makeText(AggiungiLibroActivity.getAppContext(), "Errore riceazione messaggio, salvataggio avvenuto", Toast.LENGTH_LONG).show();
+                }
             }
 
             @Override
             public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONObject errorResponse) {
                 super.onFailure(statusCode, headers, throwable, errorResponse);
                 System.out.println("Crea Libro fallito");
-                Toast.makeText(AggiungiLibroActivity.getAppContext(), errorResponse.toString() + ". Riprovare più tardi", Toast.LENGTH_LONG).show();
+                Toast.makeText(AggiungiLibroActivity.getAppContext(), errorResponse.toString(), Toast.LENGTH_LONG).show();
             }
 
             @Override
             public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONArray errorResponse) {
                 super.onFailure(statusCode, headers, throwable, errorResponse);
                 System.out.println("Crea Libro fallito");
-                Toast.makeText(AggiungiLibroActivity.getAppContext(), errorResponse.toString() + ". Riprovare più tardi", Toast.LENGTH_LONG).show();
+                Toast.makeText(AggiungiLibroActivity.getAppContext(), errorResponse.toString(), Toast.LENGTH_LONG).show();
             }
 
             @Override
             public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
                 super.onFailure(statusCode, headers, responseString, throwable);
                 System.out.println("Crea Libro fallito");
-                Toast.makeText(AggiungiLibroActivity.getAppContext(), responseString + ". Riprovare più tardi", Toast.LENGTH_LONG).show();
+                Toast.makeText(AggiungiLibroActivity.getAppContext(), responseString, Toast.LENGTH_LONG).show();
             }
         });
     }
