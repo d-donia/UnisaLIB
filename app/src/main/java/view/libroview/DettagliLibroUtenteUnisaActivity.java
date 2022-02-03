@@ -24,6 +24,7 @@ import com.bumptech.glide.Glide;
 import com.example.unisalib.R;
 import com.google.gson.JsonSyntaxException;
 
+import java.text.DecimalFormat;
 import java.util.GregorianCalendar;
 
 import model.libromanagement.Libro;
@@ -74,7 +75,9 @@ public class DettagliLibroUtenteUnisaActivity extends Activity {
         detsEditoreTV.setText(l.getEditore());
         detsAPTV.setText(l.getAnnoPubbl() + "");
         detsCatTV.setText(l.getCategoria());
-        detsRatingTV.setText(l.getRating()+ "");
+
+        DecimalFormat df = new DecimalFormat("#.#");
+        detsRatingTV.setText(df.format(l.getRating()) + "");
 
         detsPosizioneTV.setText(l.getPosizione().getBiblioteca() + ", " + l.getPosizione().getZona());
 
