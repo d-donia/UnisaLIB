@@ -54,7 +54,7 @@
             android:layout_weight="1"
             android:backgroundTint="#146DDA"
             android:drawableLeft="@drawable/desk"
-            android:text="Gestione Postazioni"
+            android:text="Gestione Posti"
             android:textSize="13sp" />
 
     </LinearLayout>

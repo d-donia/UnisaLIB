@@ -34,7 +34,7 @@ public class LibroAdapter extends ArrayAdapter<Libro> {
 
         Glide.with(v).load(l.getUrlCopertina()).into(copertinaImageView);
         titoloTextView.setText(l.getTitolo());
-        descrizioneTextView.setText(l.getTitolo());
+        descrizioneTextView.setText(l.getAutore()+", " + l.getAnnoPubbl() + ", " + l.getEditore());
         isbnTextView.setText(l.getIsbn());
 
         copertinaImageView.setTag(position);

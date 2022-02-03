@@ -54,7 +54,7 @@
             android:layout_weight="1"
             android:backgroundTint="#146DDA"
             android:drawableLeft="@drawable/desk"
-            android:text="Prenota Postazioni"
+            android:text="Prenota Posto"
             android:textSize="13sp" />
 
     </LinearLayout>
