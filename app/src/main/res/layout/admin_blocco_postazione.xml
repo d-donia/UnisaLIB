@@ -65,17 +65,18 @@
                     <TextView
                         android:id="@+id/oraFineTV"
                         android:layout_width="0dp"
-                        android:layout_height="40dp"
+                        android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:gravity="center_vertical|right"
                         android:text="Ora Inizio:"
+                        android:layout_gravity="center"
                         android:textSize="18dp"/>
 
                     <Spinner
                         android:id="@+id/oraInizioSpinner"
                         android:layout_width="0dp"
                         android:layout_height="40dp"
-                        android:layout_weight="1"
+                        android:layout_weight="2"
+                        android:layout_gravity="center"
                         android:background="@android:drawable/btn_dropdown"
                         android:spinnerMode="dropdown"
                         android:textSize="20dp"
@@ -84,18 +85,18 @@
                     <TextView
                         android:id="@+id/oraInizioTV"
                         android:layout_width="0dp"
-                        android:layout_height="40dp"
+                        android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:gravity="center_vertical|right"
                         android:text="Ora Fine:"
                         android:textSize="18dp"
+                        android:layout_marginLeft="10dp"
                         android:layout_gravity="center"/>
 
                     <Spinner
                         android:id="@+id/oraFineSpinner"
                         android:layout_width="0dp"
                         android:layout_height="40dp"
-                        android:layout_weight="1"
+                        android:layout_weight="2"
                         android:background="@android:drawable/btn_dropdown"
                         android:spinnerMode="dropdown"
                         android:textSize="20dp"
@@ -119,6 +120,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:backgroundTint="#146DDA"
+                android:textColor="@color/white"
                 android:text="Blocca"
                 android:textSize="20dp" />
 
