@@ -80,30 +80,35 @@ public class ElencoPostazioniUtenteActivity extends Activity {
                 Postazione pos = new Postazione();
                 for (Postazione p : postazioni)
                     if (p.getId().equals(postazioneSpinner.getSelectedItem().toString()))
-                        pos=p;
-                String orarioSelected = orarioSpinner.getSelectedItem().toString();
-                int oraInizio = Integer.parseInt(orarioSelected.substring(0, (orarioSelected.indexOf("-")-1)));
-                int oraFine = Integer.parseInt(orarioSelected.substring(orarioSelected.indexOf("-")+2));
-                Prenotazione pre = new Prenotazione(date, oraInizio, oraFine, u, pos);
+                        pos = p;
+                if (orarioSpinner.getSelectedItem() != null) {
+                    String orarioSelected = orarioSpinner.getSelectedItem().toString();
+                    int oraInizio = Integer.parseInt(orarioSelected.substring(0, (orarioSelected.indexOf("-") - 1)));
+                    int oraFine = Integer.parseInt(orarioSelected.substring(orarioSelected.indexOf("-") + 2));
+                    Prenotazione pre = new Prenotazione(date, oraInizio, oraFine, u, pos);
 
-                AlertDialog confermaPrestito = new AlertDialog.Builder(ElencoPostazioniUtenteActivity.this).
-                        setTitle("Conferma prenotazione").
-                        setMessage("Sicuro di voler prenotare la postazione " + pos.getId() + " dalle ore " + pre.getOraInizio() + " alle ore " + pre.getOraFine() + "?").
-                        setPositiveButton(R.string.si, new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                                dialog.cancel();
-                                fp.creaPrenotazione(pre);
-                            }
-                        }).
-                        setNegativeButton(R.string.no, new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                                dialog.cancel();
-                            }
-                        }).show();
+                    AlertDialog confermaPrestito = new AlertDialog.Builder(ElencoPostazioniUtenteActivity.this).
+                            setTitle("Conferma prenotazione").
+                            setMessage("Sicuro di voler prenotare la postazione " + pos.getId() + " dalle ore " + pre.getOraInizio() + " alle ore " + pre.getOraFine() + "?").
+                            setPositiveButton(R.string.si, new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+                                    dialog.cancel();
+                                    fp.creaPrenotazione(pre);
+                                }
+                            }).
+                            setNegativeButton(R.string.no, new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+                                    dialog.cancel();
+                                }
+                            }).show();
+                }
+                else
+                    Toast.makeText(getApplicationContext(), "Impossibile eseguire la prenotazione", Toast.LENGTH_SHORT).show();
             }
         });
+
     }
 
     public static Context getAppContext() {
