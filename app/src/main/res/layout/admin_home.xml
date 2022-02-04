@@ -44,7 +44,8 @@
             android:backgroundTint="#146DDA"
             android:drawableLeft="@drawable/bookstack"
             android:text="Gestione Libri"
-            android:textSize="13sp" />
+            android:textColor="@color/white"
+            android:textSize="13sp"  />
 
         <Button
             android:id="@+id/mgmtPrenotazioneButton"
@@ -54,7 +55,8 @@
             android:layout_weight="1"
             android:backgroundTint="#146DDA"
             android:drawableLeft="@drawable/desk"
-            android:text="Gestione Postazioni"
+            android:text="Gestione Posti"
+            android:textColor="@color/white"
             android:textSize="13sp" />
 
     </LinearLayout>

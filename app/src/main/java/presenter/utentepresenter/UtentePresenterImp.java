@@ -30,7 +30,6 @@ public class UtentePresenterImp implements UtentePresenter{
         params=new RequestParams();
         params.put("email",email);
         params.put("pass",password);
-        System.out.println(MYURL);
         client.post(MYURL,params, new JsonHttpResponseHandler(){
             @Override
             public void onSuccess(int statusCode, Header[] headers, JSONObject response) {

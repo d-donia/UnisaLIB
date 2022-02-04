@@ -51,8 +51,7 @@
                 android:backgroundTint="#146DDA"
                 android:text="Sblocca"
                 android:textColor="@color/white"
-                android:textSize="10dp"
-                android:textAlignment="textStart"/>
+                android:textSize="10dp"/>
         </LinearLayout>
     </LinearLayout>
 

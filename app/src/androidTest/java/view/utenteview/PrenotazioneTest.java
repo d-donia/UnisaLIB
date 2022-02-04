@@ -1,32 +1,27 @@
 package view.utenteview;
 
 
-import static androidx.test.espresso.Espresso.onData;
-import static androidx.test.espresso.Espresso.onView;
-import static androidx.test.espresso.Espresso.pressBack;
-import static androidx.test.espresso.action.ViewActions.click;
-import static androidx.test.espresso.action.ViewActions.closeSoftKeyboard;
-import static androidx.test.espresso.action.ViewActions.replaceText;
-import static androidx.test.espresso.action.ViewActions.scrollTo;
-import static androidx.test.espresso.assertion.ViewAssertions.matches;
-import static androidx.test.espresso.matcher.ViewMatchers.isDisplayed;
-import static androidx.test.espresso.matcher.ViewMatchers.withClassName;
-import static androidx.test.espresso.matcher.ViewMatchers.withId;
-import static androidx.test.espresso.matcher.ViewMatchers.withParent;
-import static androidx.test.espresso.matcher.ViewMatchers.withText;
-import static org.hamcrest.Matchers.allOf;
-import static org.hamcrest.Matchers.anything;
-import static org.hamcrest.Matchers.is;
-
-import android.view.View;
-import android.view.ViewGroup;
-import android.view.ViewParent;
-
+import androidx.preference.PreferenceManager;
 import androidx.test.espresso.DataInteraction;
 import androidx.test.espresso.ViewInteraction;
 import androidx.test.filters.LargeTest;
 import androidx.test.rule.ActivityTestRule;
 import androidx.test.runner.AndroidJUnit4;
+
+import android.content.SharedPreferences;
+import android.util.Log;
+import android.view.View;
+import android.view.ViewGroup;
+import android.view.ViewParent;
+
+import static androidx.test.InstrumentationRegistry.getInstrumentation;
+import static androidx.test.espresso.Espresso.onData;
+import static androidx.test.espresso.Espresso.onView;
+import static androidx.test.espresso.Espresso.pressBack;
+import static androidx.test.espresso.Espresso.openActionBarOverflowOrOptionsMenu;
+import static androidx.test.espresso.action.ViewActions.*;
+import static androidx.test.espresso.assertion.ViewAssertions.*;
+import static androidx.test.espresso.matcher.ViewMatchers.*;
 
 import com.example.unisalib.R;
 
@@ -38,15 +33,29 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
+import static org.hamcrest.Matchers.allOf;
+import static org.hamcrest.Matchers.anything;
+import static org.hamcrest.Matchers.is;
+import static org.junit.Assert.assertTrue;
+
+import java.util.GregorianCalendar;
+import java.util.concurrent.TimeUnit;
+
+import model.prenotazionemanagement.Prenotazione;
+import model.utentemanagement.Utente;
+import utils.SwitchDate;
+import view.libroview.DettagliLibroUtenteUnisaActivity;
+import view.postazioneview.ElencoPostazioniUtenteActivity;
+
 @LargeTest
 @RunWith(AndroidJUnit4.class)
-public class BloccoTest {
+public class PrenotazioneTest {
 
     @Rule
     public ActivityTestRule<MainActivity> mActivityTestRule = new ActivityTestRule<>(MainActivity.class);
 
     @Test
-    public void bloccoTest() {
+    public void prenotazione2Test() throws InterruptedException {
         ViewInteraction appCompatEditText = onView(
                 allOf(withId(R.id.emailText),
                         childAtPosition(
@@ -55,7 +64,7 @@ public class BloccoTest {
                                         3),
                                 0),
                         isDisplayed()));
-        appCompatEditText.perform(replaceText("admin@unisa.it"), closeSoftKeyboard());
+        appCompatEditText.perform(replaceText("s.celentano16@studenti.unisa.it"), closeSoftKeyboard());
 
         ViewInteraction appCompatEditText2 = onView(
                 allOf(withId(R.id.passwordText),
@@ -65,7 +74,7 @@ public class BloccoTest {
                                         3),
                                 1),
                         isDisplayed()));
-        appCompatEditText2.perform(replaceText("AdminAD1?"), closeSoftKeyboard());
+        appCompatEditText2.perform(replaceText("s.cele"), closeSoftKeyboard());
 
         ViewInteraction materialButton = onView(
                 allOf(withId(R.id.loginButton), withText("Login"),
@@ -77,8 +86,10 @@ public class BloccoTest {
                         isDisplayed()));
         materialButton.perform(click());
 
+        TimeUnit.SECONDS.sleep(3);
+
         ViewInteraction button = onView(
-                allOf(withId(R.id.mgmtPrenotazioneButton), withText("Gestione Postazioni"),
+                allOf(withId(R.id.svcPrenotazioneButton), withText("Prenota Postazioni"),
                         childAtPosition(
                                 childAtPosition(
                                         withClassName(is("android.widget.LinearLayout")),
@@ -87,43 +98,15 @@ public class BloccoTest {
                         isDisplayed()));
         button.perform(click());
 
-        ViewInteraction button2 = onView(
-                allOf(withId(R.id.modificaPostButton), withText("Modifica Postazioni"),
-                        childAtPosition(
-                                childAtPosition(
-                                        withClassName(is("android.widget.LinearLayout")),
-                                        4),
-                                1),
-                        isDisplayed()));
-        button2.perform(click());
-
-        ViewInteraction button3 = onView(
-                allOf(withId(R.id.cercaButtonAD), withText("Cerca"),
-                        childAtPosition(
-                                childAtPosition(
-                                        withClassName(is("android.widget.LinearLayout")),
-                                        0),
-                                4),
-                        isDisplayed()));
-        button3.perform(click());
-
-        ViewInteraction button4 = onView(
-                allOf(withId(R.id.bloccoButton), withText("Blocca"),
-                        childAtPosition(
-                                childAtPosition(
-                                        withClassName(is("android.widget.LinearLayout")),
-                                        1),
-                                0),
-                        isDisplayed()));
-        button4.perform(click());
+        TimeUnit.SECONDS.sleep(3);
 
         ViewInteraction spinner = onView(
-                allOf(withId(R.id.oraInizioSpinner),
+                allOf(withId(R.id.bibliotecaSpinner),
                         childAtPosition(
                                 childAtPosition(
-                                        withId(R.id.bloccoDeterminato),
+                                        withClassName(is("android.widget.LinearLayout")),
                                         0),
-                                1),
+                                0),
                         isDisplayed()));
         spinner.perform(click());
 
@@ -131,16 +114,28 @@ public class BloccoTest {
                 .inAdapterView(childAtPosition(
                         withClassName(is("android.widget.PopupWindow$PopupBackgroundView")),
                         0))
-                .atPosition(1);
+                .atPosition(2);
         checkedTextView.perform(click());
 
-        ViewInteraction spinner2 = onView(
-                allOf(withId(R.id.oraFineSpinner),
+        ViewInteraction button2 = onView(
+                allOf(withId(R.id.cercaButton), withText("Cerca"),
                         childAtPosition(
                                 childAtPosition(
-                                        withId(R.id.bloccoDeterminato),
+                                        withClassName(is("android.widget.LinearLayout")),
                                         0),
                                 3),
+                        isDisplayed()));
+        button2.perform(click());
+
+        TimeUnit.SECONDS.sleep(3);
+
+        ViewInteraction spinner2 = onView(
+                allOf(withId(R.id.orarioSpinner),
+                        childAtPosition(
+                                childAtPosition(
+                                        withClassName(is("android.widget.LinearLayout")),
+                                        4),
+                                1),
                         isDisplayed()));
         spinner2.perform(click());
 
@@ -151,36 +146,36 @@ public class BloccoTest {
                 .atPosition(1);
         checkedTextView2.perform(click());
 
-        ViewInteraction button5 = onView(
-                allOf(withId(R.id.buttonBlocco), withText("Blocca"),
+        ViewInteraction button3 = onView(
+                allOf(withId(R.id.confermaPrenotazioneButton), withText("Conferma"),
                         childAtPosition(
                                 childAtPosition(
-                                        withClassName(is("android.widget.LinearLayout")),
-                                        2),
-                                1)));
-        button5.perform(scrollTo(), click());
+                                        withClassName(is("android.widget.RelativeLayout")),
+                                        0),
+                                6),
+                        isDisplayed()));
+        button3.perform(click());
 
-        pressBack();
-
-        ViewInteraction button6 = onView(
-                allOf(withId(R.id.sbloccoButton), withText("Sblocca"),
+        ViewInteraction button4 = onView(
+                allOf(withId(android.R.id.button1), withText("SI"),
                         childAtPosition(
                                 childAtPosition(
-                                        withClassName(is("android.widget.LinearLayout")),
-                                        1),
-                                1),
-                        isDisplayed()));
-        button6.perform(click());
+                                        withClassName(is("android.widget.ScrollView")),
+                                        0),
+                                3)));
+        button4.perform(scrollTo(), click());
 
-        ViewInteraction linearLayout = onView(
-                allOf(withParent(withParent(IsInstanceOf.<View>instanceOf(android.widget.LinearLayout.class))),
-                        isDisplayed()));
-        linearLayout.check(matches(isDisplayed()));
+        TimeUnit.SECONDS.sleep(3);
 
-        ViewInteraction linearLayout2 = onView(
-                allOf(withParent(withParent(IsInstanceOf.<View>instanceOf(android.widget.LinearLayout.class))),
-                        isDisplayed()));
-        linearLayout2.check(matches(isDisplayed()));
+        SharedPreferences userSession = PreferenceManager.getDefaultSharedPreferences(ElencoPostazioniUtenteActivity.getAppContext());
+        Utente u=Utente.fromJson(userSession.getString("Utente",null));
+        boolean trovato=false;
+        for(Prenotazione pren:u.getPrenotazioni()){
+            if(pren.getPostazione().getId().equals("A1")) {
+                trovato=true;
+            }
+        }
+        assertTrue(trovato);
     }
 
     private static Matcher<View> childAtPosition(

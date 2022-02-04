@@ -10,6 +10,7 @@ import com.loopj.android.http.JsonHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
 
 import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import cz.msebera.android.httpclient.Header;
@@ -31,12 +32,16 @@ public class PrenotazionePresenterImp implements PrenotazionePresenter{
             @Override
             public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
                 super.onSuccess(statusCode, headers, response);
-                Postazione posPrenotazione=prenotazione.getPostazione();
                 SharedPreferences userSession = PreferenceManager.getDefaultSharedPreferences(ElencoPostazioniUtenteActivity.getAppContext());
                 SharedPreferences.Editor editor = userSession.edit();
-                Utente utenteAggiornato = Utente.fromJson(userSession.getString("Utente", ""));
-                editor.putString("Utente", Utente.toJson(utenteAggiornato)).apply();
-                Toast.makeText(ElencoPostazioniUtenteActivity.getAppContext(), "Prenotazione avvenuta con successo", Toast.LENGTH_SHORT).show();
+                Utente utenteAggiornato = null;
+                try {
+                    utenteAggiornato = Utente.fromJson(response);
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+                editor.putString("Utente", Utente.toJson(utenteAggiornato)).commit();
+                Toast.makeText(ElencoPostazioniUtenteActivity.getAppContext(), "Prenotazione avvenuta con successo ok", Toast.LENGTH_SHORT).show();
             }
 
             @Override

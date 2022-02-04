@@ -35,8 +35,7 @@
                 android:backgroundTint="#D9364F"
                 android:text="Blocca"
                 android:textColor="@color/white"
-                android:textSize="10dp"
-                android:textAlignment="textStart"/>
+                android:textSize="10dp"/>
 
             <Button
                 android:id="@+id/sbloccoButton"
@@ -46,8 +45,7 @@
                 android:backgroundTint="#146DDA"
                 android:text="Sblocca"
                 android:textColor="@color/white"
-                android:textSize="10dp"
-                android:textAlignment="textStart"/>
+                android:textSize="10dp"/>
 
             <Button
                 android:id="@+id/cancellaPosButton"
@@ -57,8 +55,7 @@
                 android:backgroundTint="#D9364F"
                 android:text="Cancella"
                 android:textColor="@color/white"
-                android:textSize="10dp"
-                android:textAlignment="textStart"/>
+                android:textSize="10dp"/>
         </LinearLayout>
 
     </LinearLayout>

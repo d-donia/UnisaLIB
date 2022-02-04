@@ -43,6 +43,7 @@
             android:layout_weight="1"
             android:backgroundTint="#146DDA"
             android:drawableLeft="@drawable/bookstack"
+            android:textColor="@color/white"
             android:text="Prestito Libri"
             android:textSize="13sp" />
 
@@ -53,8 +54,9 @@
             android:layout_margin="4dp"
             android:layout_weight="1"
             android:backgroundTint="#146DDA"
+            android:textColor="@color/white"
             android:drawableLeft="@drawable/desk"
-            android:text="Prenota Postazioni"
+            android:text="Prenota Posto"
             android:textSize="13sp" />
 
     </LinearLayout>
@@ -65,6 +67,7 @@
         android:layout_marginLeft="15dp"
         android:layout_marginRight="15dp"
         android:backgroundTint="#D9364F"
+        android:textColor="@color/white"
         android:text="Chiedi al Bibliotecario"
         android:textSize="13sp" />
 
