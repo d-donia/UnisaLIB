@@ -55,7 +55,7 @@ public class PrenotazioneTest {
     public ActivityTestRule<MainActivity> mActivityTestRule = new ActivityTestRule<>(MainActivity.class);
 
     @Test
-    public void prenotazione2Test() throws InterruptedException {
+    public void prenotazioneTest() throws InterruptedException {
         ViewInteraction appCompatEditText = onView(
                 allOf(withId(R.id.emailText),
                         childAtPosition(
@@ -172,6 +172,130 @@ public class PrenotazioneTest {
         boolean trovato=false;
         for(Prenotazione pren:u.getPrenotazioni()){
             if(pren.getPostazione().getId().equals("A1")) {
+                trovato=true;
+            }
+        }
+        assertTrue(trovato);
+    }
+
+    @Test
+    public void prenotazioneFallitaTest() throws InterruptedException {
+        ViewInteraction appCompatEditText = onView(
+                allOf(withId(R.id.emailText),
+                        childAtPosition(
+                                childAtPosition(
+                                        withClassName(is("android.widget.LinearLayout")),
+                                        3),
+                                0),
+                        isDisplayed()));
+        appCompatEditText.perform(replaceText("p.somma11@studenti.unisa.it"), closeSoftKeyboard());
+
+        ViewInteraction appCompatEditText2 = onView(
+                allOf(withId(R.id.passwordText),
+                        childAtPosition(
+                                childAtPosition(
+                                        withClassName(is("android.widget.LinearLayout")),
+                                        3),
+                                1),
+                        isDisplayed()));
+        appCompatEditText2.perform(replaceText("p.somma"), closeSoftKeyboard());
+
+        ViewInteraction materialButton = onView(
+                allOf(withId(R.id.loginButton), withText("Login"),
+                        childAtPosition(
+                                childAtPosition(
+                                        withClassName(is("android.widget.LinearLayout")),
+                                        3),
+                                2),
+                        isDisplayed()));
+        materialButton.perform(click());
+
+        TimeUnit.SECONDS.sleep(3);
+
+        ViewInteraction button = onView(
+                allOf(withId(R.id.svcPrenotazioneButton), withText("Prenota Posto"),
+                        childAtPosition(
+                                childAtPosition(
+                                        withClassName(is("android.widget.LinearLayout")),
+                                        4),
+                                1),
+                        isDisplayed()));
+        button.perform(click());
+
+        TimeUnit.SECONDS.sleep(3);
+
+        ViewInteraction spinner = onView(
+                allOf(withId(R.id.bibliotecaSpinner),
+                        childAtPosition(
+                                childAtPosition(
+                                        withClassName(is("android.widget.LinearLayout")),
+                                        0),
+                                0),
+                        isDisplayed()));
+        spinner.perform(click());
+
+        DataInteraction checkedTextView = onData(anything())
+                .inAdapterView(childAtPosition(
+                        withClassName(is("android.widget.PopupWindow$PopupBackgroundView")),
+                        0))
+                .atPosition(2);
+        checkedTextView.perform(click());
+
+        ViewInteraction button2 = onView(
+                allOf(withId(R.id.cercaButton), withText("Cerca"),
+                        childAtPosition(
+                                childAtPosition(
+                                        withClassName(is("android.widget.LinearLayout")),
+                                        0),
+                                3),
+                        isDisplayed()));
+        button2.perform(click());
+
+        TimeUnit.SECONDS.sleep(3);
+
+        ViewInteraction spinner2 = onView(
+                allOf(withId(R.id.orarioSpinner),
+                        childAtPosition(
+                                childAtPosition(
+                                        withClassName(is("android.widget.LinearLayout")),
+                                        4),
+                                1),
+                        isDisplayed()));
+        spinner2.perform(click());
+
+        DataInteraction checkedTextView2 = onData(anything())
+                .inAdapterView(childAtPosition(
+                        withClassName(is("android.widget.PopupWindow$PopupBackgroundView")),
+                        0))
+                .atPosition(1);
+        checkedTextView2.perform(click());
+
+        ViewInteraction button3 = onView(
+                allOf(withId(R.id.confermaPrenotazioneButton), withText("Conferma"),
+                        childAtPosition(
+                                childAtPosition(
+                                        withClassName(is("android.widget.RelativeLayout")),
+                                        0),
+                                6),
+                        isDisplayed()));
+        button3.perform(click());
+
+        ViewInteraction button4 = onView(
+                allOf(withId(android.R.id.button1), withText("SI"),
+                        childAtPosition(
+                                childAtPosition(
+                                        withClassName(is("android.widget.ScrollView")),
+                                        0),
+                                3)));
+        button4.perform(scrollTo(), click());
+
+        TimeUnit.SECONDS.sleep(3);
+
+        SharedPreferences userSession = PreferenceManager.getDefaultSharedPreferences(ElencoPostazioniUtenteActivity.getAppContext());
+        Utente u=Utente.fromJson(userSession.getString("Utente",null));
+        boolean trovato=false;
+        for(Prenotazione pren:u.getPrenotazioni()){
+            if(!(pren.getPostazione().getId().equals("A1") && SwitchDate.equalsDate(pren.getData(),new GregorianCalendar()))) {
                 trovato=true;
             }
         }

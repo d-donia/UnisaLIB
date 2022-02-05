@@ -47,6 +47,7 @@ public class BloccoDeterminatoTest {
     @Rule
     public ActivityTestRule<MainActivity> mActivityTestRule = new ActivityTestRule<>(MainActivity.class);
 
+    //cambiare data prima di avviare
     @Test
     public void bloccoDeterminatoTest() throws InterruptedException {
         ViewInteraction appCompatEditText = onView(
@@ -187,10 +188,10 @@ public class BloccoDeterminatoTest {
         TimeUnit.SECONDS.sleep(3);
 
         ViewInteraction textView = onView(
-                allOf(withId(R.id.tvDataId), withText("Feb 3, 2022"),
+                allOf(withId(R.id.tvDataId), withText("Feb 4, 2022"),
                         withParent(withParent(IsInstanceOf.<View>instanceOf(android.widget.LinearLayout.class))),
                         isDisplayed()));
-        textView.check(matches(withText("Feb 3, 2022")));
+        textView.check(matches(withText("Feb 4, 2022")));
 
         ViewInteraction textView2 = onView(
                 allOf(withId(R.id.tvOrarioId), withText("9 - 11"),

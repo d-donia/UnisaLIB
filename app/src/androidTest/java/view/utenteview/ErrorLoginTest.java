@@ -53,7 +53,7 @@ public class ErrorLoginTest {
                                         3),
                                 0),
                         isDisplayed()));
-        appCompatEditText.perform(replaceText("p.somma11@studenti.unisa.it"), closeSoftKeyboard());
+        appCompatEditText.perform(replaceText("m.bianchi10@studenti.unisa.it"), closeSoftKeyboard());
         TimeUnit.SECONDS.sleep(4);
 
         ViewInteraction appCompatEditText2 = onView(
@@ -64,7 +64,7 @@ public class ErrorLoginTest {
                                         3),
                                 1),
                         isDisplayed()));
-        appCompatEditText2.perform(replaceText("p.somma"), closeSoftKeyboard());
+        appCompatEditText2.perform(replaceText("m.bianchi"), closeSoftKeyboard());
         TimeUnit.SECONDS.sleep(4);
 
         ViewInteraction materialButton = onView(
