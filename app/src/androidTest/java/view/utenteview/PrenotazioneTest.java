@@ -86,10 +86,10 @@ public class PrenotazioneTest {
                         isDisplayed()));
         materialButton.perform(click());
 
-        TimeUnit.SECONDS.sleep(3);
+        TimeUnit.SECONDS.sleep(4);
 
         ViewInteraction button = onView(
-                allOf(withId(R.id.svcPrenotazioneButton), withText("Prenota Postazioni"),
+                allOf(withId(R.id.svcPrenotazioneButton), withText("Prenota Posto"),
                         childAtPosition(
                                 childAtPosition(
                                         withClassName(is("android.widget.LinearLayout")),
