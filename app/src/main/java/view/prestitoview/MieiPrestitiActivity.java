@@ -41,7 +41,6 @@ public class MieiPrestitiActivity extends Activity {
 
         lv.setAdapter(prestitoAdapter);
         for (Prestito p:prestitiUtente) {
-            System.out.println(p.getLibro().getIsbn());
             prestitoAdapter.add(p);
         }
 

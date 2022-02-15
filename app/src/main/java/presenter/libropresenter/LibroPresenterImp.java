@@ -30,7 +30,7 @@ import view.libroview.DettagliLibroUtenteUnisaActivity;
 import view.utenteview.HomeUtenteUnisaActivity;
 
 public class LibroPresenterImp implements LibroPresenter {
-    static final String GenericURL = "http://192.168.1.12:8080/UnisaLIBServer/LibroPresenter";
+    static final String GenericURL = "http://192.168.255.1:8080/UnisaLIBServer/LibroPresenter";
     private AsyncHttpClient client = new AsyncHttpClient();
 
     public void mostraRicercaLibri(boolean is_admin, Context c) {
@@ -71,7 +71,6 @@ public class LibroPresenterImp implements LibroPresenter {
             @Override
             public void onSuccess(int statusCode, Header[] headers, JSONArray response) {
                 super.onSuccess(statusCode, headers, response);
-                System.out.println(""+response);
                 Libro[] libri = Libro.fromJson(response);
 
                 Intent i = new Intent();
@@ -205,7 +204,6 @@ public class LibroPresenterImp implements LibroPresenter {
             @Override
             public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
                 super.onSuccess(statusCode, headers, response);
-                System.out.println("" + response);
                 try {
                     Utente utente= Utente.fromJson(response);
                     if(utente!=null) {
@@ -248,7 +246,6 @@ public class LibroPresenterImp implements LibroPresenter {
             @Override
             public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
                 super.onSuccess(statusCode, headers, response);
-                System.out.println("" + response);
                 try {
                     Utente utente = Utente.fromJson(response);
                     if(utente!=null){
@@ -345,21 +342,18 @@ public class LibroPresenterImp implements LibroPresenter {
             @Override
             public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONObject errorResponse) {
                 super.onFailure(statusCode, headers, throwable, errorResponse);
-                System.out.println("Crea Libro fallito");
                 Toast.makeText(AggiungiLibroActivity.getAppContext(), errorResponse.toString(), Toast.LENGTH_LONG).show();
             }
 
             @Override
             public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONArray errorResponse) {
                 super.onFailure(statusCode, headers, throwable, errorResponse);
-                System.out.println("Crea Libro fallito");
                 Toast.makeText(AggiungiLibroActivity.getAppContext(), errorResponse.toString(), Toast.LENGTH_LONG).show();
             }
 
             @Override
             public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
                 super.onFailure(statusCode, headers, responseString, throwable);
-                System.out.println("Crea Libro fallito");
                 Toast.makeText(AggiungiLibroActivity.getAppContext(), responseString, Toast.LENGTH_LONG).show();
             }
         });

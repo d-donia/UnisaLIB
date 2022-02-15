@@ -63,7 +63,6 @@ public class PostazioneAdapter extends ArrayAdapter<Postazione> {
         sbloccoButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                System.out.println(p.getId());
                 fp.cercaBlocchi(p.getId());
             }
         });

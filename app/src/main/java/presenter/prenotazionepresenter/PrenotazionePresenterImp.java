@@ -20,7 +20,7 @@ import model.utentemanagement.Utente;
 import view.postazioneview.ElencoPostazioniUtenteActivity;
 
 public class PrenotazionePresenterImp implements PrenotazionePresenter{
-    static final String GenericURL="http://192.168.1.12:8080/UnisaLIBServer/PrenotazionePresenter";
+    static final String GenericURL="http://192.168.255.1:8080/UnisaLIBServer/PrenotazionePresenter";
     private AsyncHttpClient client=new AsyncHttpClient();
 
     public void creaPrenotazione(Prenotazione prenotazione) {
@@ -47,21 +47,18 @@ public class PrenotazionePresenterImp implements PrenotazionePresenter{
             @Override
             public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONObject errorResponse) {
                 super.onFailure(statusCode, headers, throwable, errorResponse);
-                System.out.println("Prestito fallito");
                 Toast.makeText(ElencoPostazioniUtenteActivity.getAppContext(), errorResponse.toString() + ". Riprovare più tardi", Toast.LENGTH_LONG).show();
             }
 
             @Override
             public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONArray errorResponse) {
                 super.onFailure(statusCode, headers, throwable, errorResponse);
-                System.out.println("Prestito fallito");
                 Toast.makeText(ElencoPostazioniUtenteActivity.getAppContext(), errorResponse.toString() + ". Riprovare più tardi", Toast.LENGTH_LONG).show();
             }
 
             @Override
             public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
                 super.onFailure(statusCode, headers, responseString, throwable);
-                System.out.println("Prestito fallito");
                 Toast.makeText(ElencoPostazioniUtenteActivity.getAppContext(), responseString + ". Riprovare più tardi", Toast.LENGTH_LONG).show();
             }
         });

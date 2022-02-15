@@ -32,7 +32,6 @@ public class ElencoPostazioniAdminActivity extends Activity {
 
         lv.setAdapter(postazioneAdapter);
         for (Postazione p:postazioni) {
-            System.out.println(p.getId()+"ok");
             postazioneAdapter.add(p);
         }
     }

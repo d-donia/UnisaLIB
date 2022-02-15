@@ -115,11 +115,9 @@ public class PrestitoAdapter extends ArrayAdapter<Prestito> {
 
         int voto=p.getVoto();
         if(dataConsegna!=null){
-            System.out.println("Voto:" +voto);
             if(voto!=0){
                 prestitoRatingTV.setText(p.getVoto()+"");
                 prestitoRatingTV.setVisibility(View.VISIBLE);
-                System.out.println("CommentTV: " + p.getCommento());
                 if(p.getCommento()!=null)
                     commentoTV.setText(p.getCommento());
                 else{
@@ -137,7 +135,6 @@ public class PrestitoAdapter extends ArrayAdapter<Prestito> {
             }
         }
         else{
-            System.out.println("Voto:" + voto);
             valutaButton.setVisibility(View.GONE);
             prestitoRatingTV.setVisibility(View.GONE);
             prestitoStarIV.setVisibility(View.GONE);

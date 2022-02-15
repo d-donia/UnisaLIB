@@ -46,7 +46,6 @@ public class HomeUtenteUnisaActivity extends Activity {
         userIB.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                System.out.println("ciao");
                 PopupMenu popupMenu=new PopupMenu(HomeUtenteUnisaActivity.this, userIB);
                 popupMenu.getMenuInflater().inflate(R.menu.utente_menu, popupMenu.getMenu());
                 popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
