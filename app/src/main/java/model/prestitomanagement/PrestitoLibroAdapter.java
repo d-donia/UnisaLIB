@@ -22,7 +22,10 @@ import java.util.List;
 
 import presenter.FacadePresenter;
 import utils.InputFilterMinMax;
-
+/**
+ * Questa classe si occupa di creare un Adapter per inserire i Prestiti
+ * e le email degli utenti in un ListView
+ */
 public class PrestitoLibroAdapter extends ArrayAdapter<Prestito> {
     private LayoutInflater inflater ;
     private FacadePresenter fp;

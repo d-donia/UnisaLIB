@@ -15,7 +15,12 @@ import org.json.JSONObject;
 import model.libromanagement.Libro;
 import model.prenotazionemanagement.Prenotazione;
 import model.prestitomanagement.Prestito;
-
+/**
+ * Questa classe definisce un Utente. Un utente è identificato da un email, ha una password,
+ * un nome, un cognome, una matricola, genere ed età.
+ * Inoltre ci sono due valori che specificano se l'utente è un amministratore o è un nuovo utente,
+ * ha una lista di interessi, una lista di prestiti e una lista di prenotazioni
+ */
 public class Utente implements Serializable {
     private String email, password, nome, cognome, matricola, genere;
     private int eta;
@@ -67,7 +72,12 @@ public class Utente implements Serializable {
     public ArrayList<Prenotazione> getPrenotazioni() {
         return prenotazioni;
     }
-
+    /**
+     * Questa classe definisce un UtenteBuilder. Un UtenteBuilder ha un'email, una password, un nome,
+     * un cognome, una matricola, il genere, l'età, un valore che indica se l'utente è un admin o un nuovo utente,
+     * una lista di interessi, una lista di prestiti e una lista di prenotazioni.
+     * Settato questi valori ritorna un oggetto di tipo Utente
+     */
     public static class UtenteBuilder{
         private String email, password, nome, cognome, matricola, genere;
         private int eta;
@@ -75,7 +85,11 @@ public class Utente implements Serializable {
         private ArrayList<Libro> interessi;
         private ArrayList<Prestito> prestiti;
         private ArrayList<Prenotazione> prenotazioni;
-
+        /**
+         * Setta il parametro nell'oggetto UtenteBuilder
+         * @param email l'identificativo dell'oggetto Utente
+         * @return oggetto di tipo UtenteBuilder con email settata
+         */
         public UtenteBuilder email(String email){
             this.email=email;
             return this;
@@ -125,7 +139,11 @@ public class Utente implements Serializable {
             this.interessi=interessi;
             return this;
         }
-
+        /**
+         * Setta il parametro nell'oggetto UtenteBuilder
+         * @param prestiti lista contenente i prestiti
+         * @return oggetto di tipo UtenteBuilder con lista di prestiti settato
+         */
         public UtenteBuilder prestiti(ArrayList<Prestito> prestiti){
             this.prestiti=prestiti;
             return this;
@@ -142,7 +160,10 @@ public class Utente implements Serializable {
 
 
     }
-
+    /**
+     * Crea un nuovo Utente settando gli opportuni parametri ottenuti dall'UtenteBuilder passato come argomento
+     * @param ub UtenteBuilder da cui si estraggono i valori precedentemente settati
+     */
     private Utente(UtenteBuilder ub){
         this.email=ub.email;
         this.password=ub.password;

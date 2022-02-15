@@ -26,7 +26,10 @@ import view.utenteview.MainActivity;
 public class PostazioneAdapter extends ArrayAdapter<Postazione> {
     private LayoutInflater inflater;
     private FacadePresenter fp;
-
+    /**
+     * Questa classe si occupa di creare un Adapter per inserire le Postazioni
+     * con i propri valori in un ListView
+     */
     public PostazioneAdapter(Context context, int resource, List<Postazione> objects) {
         super(context, resource, objects);
         inflater=LayoutInflater.from(context);

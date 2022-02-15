@@ -28,7 +28,10 @@ import utils.InputFilterMinMax;
 public class PrestitoAdapter extends ArrayAdapter<Prestito> {
     private LayoutInflater inflater;
     private FacadePresenter fp;
-
+    /**
+     * Questa classe si occupa di creare un Adapter per inserire i Prestiti
+     * con i propri valori in un ListView
+     */
     public PrestitoAdapter(Context context, int resource, List<Prestito> objects) {
         super(context, resource, objects);
         inflater=LayoutInflater.from(context);

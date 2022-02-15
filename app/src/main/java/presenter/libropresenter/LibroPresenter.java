@@ -4,7 +4,10 @@ import android.content.Context;
 
 import model.libromanagement.Libro;
 import model.utentemanagement.Utente;
-
+/**
+ * Questa interfaccia definisce le operazioni relative
+ * alla gestione dei libri
+ */
 public interface LibroPresenter {
 
     void mostraRicercaLibri(boolean is_admin, Context c);

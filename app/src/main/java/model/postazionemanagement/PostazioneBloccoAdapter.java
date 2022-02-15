@@ -30,7 +30,10 @@ import view.postazioneview.SbloccoActivity;
 public class PostazioneBloccoAdapter extends ArrayAdapter<Periodo> {
     private LayoutInflater inflater;
     private FacadePresenter fp;
-
+    /**
+     * Questa classe si occupa di creare un Adapter per inserire le i blocchi
+     * delle postazioni in un ListView
+     */
     public PostazioneBloccoAdapter(Context context, int resource, List<Periodo> objects) {
         super(context, resource, objects);
         inflater=LayoutInflater.from(context);

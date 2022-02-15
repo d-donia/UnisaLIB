@@ -13,7 +13,9 @@ import com.bumptech.glide.Glide;
 import com.example.unisalib.R;
 
 import java.util.List;
-
+/**
+ * Questa classe si occupa di creare un Adapter per inserire i Libri con i propri valori in un listview
+ */
 public class LibroAdapter extends ArrayAdapter<Libro> {
     private LayoutInflater inflater;
     public LibroAdapter(Context context, int resource, List<Libro> objects) {
