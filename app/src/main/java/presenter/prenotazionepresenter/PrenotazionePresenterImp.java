@@ -20,7 +20,7 @@ import model.utentemanagement.Utente;
 import view.postazioneview.ElencoPostazioniUtenteActivity;
 
 public class PrenotazionePresenterImp implements PrenotazionePresenter{
-    static final String GenericURL="http://192.168.1.12:8080/UnisaLIBServer/PrenotazionePresenter";
+    static final String GenericURL="http://192.168.1.5:8080/UnisaLIBServer/PrenotazionePresenter";
     private AsyncHttpClient client=new AsyncHttpClient();
 
     public void creaPrenotazione(Prenotazione prenotazione) {
