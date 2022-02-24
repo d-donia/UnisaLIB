@@ -139,7 +139,6 @@ public class DettagliLibroUtenteUnisaActivity extends Activity {
         menuButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                System.out.println("ciao");
                 PopupMenu popupMenu=new PopupMenu(DettagliLibroUtenteUnisaActivity.this, menuButton);
                 popupMenu.getMenuInflater().inflate(R.menu.utente_menu, popupMenu.getMenu());
                 popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {

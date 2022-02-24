@@ -51,7 +51,6 @@ public class RicercaPostazioneAdminActivity extends Activity {
                     if (x.getBiblioteca().equals(selected))
                         z.add(x.getZona());
                 }
-                System.out.println(z);
                 String[] zone = z.toArray(new String[0]);
                 zonaSpinner.setAdapter(new ArrayAdapter<>(getApplicationContext(),android.R.layout.simple_spinner_dropdown_item, zone));
             }

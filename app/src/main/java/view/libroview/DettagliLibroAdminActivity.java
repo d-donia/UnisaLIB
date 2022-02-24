@@ -67,11 +67,9 @@ public class DettagliLibroAdminActivity extends Activity {
         copertinaET.setText(l.getUrlCopertina());
 
         String pos = getIntent().getStringExtra("posizioni");
-        System.out.println(pos);
         ArrayList<Posizione> posizioni = Posizione.fromJson(pos);
         String cat = getIntent().getStringExtra("categorie");
         String[] categorie = Libro.fromJsonToCategorie(cat);
-        System.out.println("aggiungilibroactivity: " + categorie.toString());
         //inizializzazione del Categoria Spinner
         categoriaSP.setAdapter(new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, categorie));
         int defaultCat=0;
@@ -112,7 +110,6 @@ public class DettagliLibroAdminActivity extends Activity {
                     if (x.getBiblioteca().equals(selected))
                         z.add(x.getZona());
                 }
-                System.out.println(z);
                 String[] zone = z.toArray(new String[0]);
                 zonaSP.setAdapter(new ArrayAdapter<>(getApplicationContext(), android.R.layout.simple_spinner_dropdown_item, zone));
                 int defaultZona=0;
