@@ -86,6 +86,7 @@ public class AggiungiLibroTest {
                                 0),
                         isDisplayed()));
         button3.perform(click());
+        TimeUnit.SECONDS.sleep(3);
 
         ViewInteraction editText = onView(
                 allOf(withId(R.id.isbnET),
@@ -186,8 +187,10 @@ public class AggiungiLibroTest {
                         isDisplayed()));
         searchAutoComplete.perform(replaceText("Progetto IS"), closeSoftKeyboard());
 
+        TimeUnit.SECONDS.sleep(3);
+
         ViewInteraction searchAutoComplete2 = onView(
-                allOf(withClassName(is("android.widget.SearchView$SearchAutoComplete")), withText("Piccolo"),
+                allOf(withClassName(is("android.widget.SearchView$SearchAutoComplete")), withText("Progetto IS"),
                         childAtPosition(
                                 allOf(withClassName(is("android.widget.LinearLayout")),
                                         childAtPosition(
@@ -196,6 +199,7 @@ public class AggiungiLibroTest {
                                 0),
                         isDisplayed()));
         searchAutoComplete2.perform(pressImeActionButton());
+        TimeUnit.SECONDS.sleep(3);
 
         ViewInteraction textView2 = onView(
                 allOf(withId(R.id.titoloTV), withText("Progetto IS"),
