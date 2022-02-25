@@ -24,7 +24,6 @@ import static org.hamcrest.Matchers.allOf;
 import static org.hamcrest.Matchers.is;
 import java.util.concurrent.TimeUnit;
 
-
 @LargeTest
 @RunWith(AndroidJUnit4.class)
 public class AggiungiLibroTest {
